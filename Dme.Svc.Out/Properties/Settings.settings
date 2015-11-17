@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Dme.Svc.Out.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SbisOutputFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\temp\snt\out</Value>
+    </Setting>
+    <Setting Name="Mx1FileNameFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">МХ1_{0}.xml</Value>
+    </Setting>
+    <Setting Name="ActAccFileNameFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">АктПриемки_{0}.xml</Value>
+    </Setting>
+    <Setting Name="RecipientID" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

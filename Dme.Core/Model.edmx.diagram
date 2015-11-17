@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4ac8047aae7948dbb052b2a66a70ffd6" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиАдрес" Width="1.5" PointX="43" PointY="79.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиБухгалтер" Width="1.5" PointX="46" PointY="70.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиГрузоотправитель" Width="1.5" PointX="35.5" PointY="64.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиГрузополучатель" Width="1.5" PointX="35.5" PointY="69.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиДокумент" Width="1.5" PointX="31" PointY="59.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиПоДокументам" Width="1.5" PointX="37.75" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиПокупатель" Width="1.5" PointX="35.5" PointY="73.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиПоставщик" Width="1.5" PointX="35.5" PointY="78.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиПоФакту" Width="1.5" PointX="37.75" PointY="54.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиПредставители" Width="1.5" PointX="43.75" PointY="71.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиРуководитель" Width="1.5" PointX="46" PointY="73.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиСписокАдрес" Width="1.5" PointX="40.75" PointY="76" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиСписокОснование" Width="1.5" PointX="33.25" PointY="45.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиСписокПараметр" Width="1.5" PointX="37.75" PointY="65.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиСписокСтрОтклонения" Width="1.5" PointX="33.25" PointY="54.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиСписокХарактеристика" Width="1.5" PointX="37.75" PointY="57.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиСтороны" Width="1.5" PointX="33.25" PointY="72.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиСтрОтклонения" Width="1.5" PointX="35.5" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиФайл" Width="1.5" PointX="28.75" PointY="60.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеАдрес" Width="1.5" PointX="21.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеДокумент" Width="1.5" PointX="17" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеИтогТабл" Width="1.5" PointX="21.5" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеОснование" Width="1.5" PointX="19.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеОтправитель" Width="1.5" PointX="19.25" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеПолучатель" Width="1.5" PointX="19.25" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеПредставитель" Width="1.5" PointX="21.5" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеСтрТабл" Width="1.5" PointX="21.5" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеТаблДок" Width="1.5" PointX="19.25" PointY="35.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеФайл" Width="1.5" PointX="14.75" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Адрес" Width="1.5" PointX="10.5" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Документ" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1ИтогТабл" Width="1.5" PointX="7.5" PointY="32.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Основание" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Отправитель" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Получатель" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Представитель" Width="1.5" PointX="7.5" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1СтрТабл" Width="1.5" PointX="7.5" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1ТаблДок" Width="1.5" PointX="5.25" PointY="35.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Файл" Width="1.5" PointX="0.75" PointY="23.625" IsExpanded="true" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСписокАдрес_Адрес" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПредставители_Бухгалтер" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузоотправитель_Представители" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузоотправитель_СписокАдрес" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузоотправитель_СписокПараметр" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСтороны_Грузоотправитель" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузополучатель_Представители" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузополучатель_СписокАдрес" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузополучатель_СписокПараметр" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСтороны_Грузополучатель" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиДокумент_СписокОснование" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиДокумент_СписокПараметр" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиДокумент_СписокСтрОтклонения" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиДокумент_Стороны" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиФайл_Документ" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСтрОтклонения_ПоДокументам" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПокупатель_Представители" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПокупатель_СписокАдрес" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПокупатель_СписокПараметр" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСтороны_Покупатель" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПоставщик_Представители" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПоставщик_СписокАдрес" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПоставщик_СписокПараметр" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСтороны_Поставщик" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСтрОтклонения_ПоФакту" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПредставители_Руководитель" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСтрОтклонения_СписокПараметр" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСписокСтрОтклонения_СтрОтклонения" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСтрОтклонения_СписокХарактеристика" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Отправитель_Адрес" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Получатель_Адрес" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Документ_Основание" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Документ_Отправитель" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Документ_Получатель" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Документ_ТаблДок" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Файл_Документ" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.ТаблДок_ИтогТабл" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Отправитель_Представитель" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.ТаблДок_СтрТабл" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Отправитель_Адрес" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Получатель_Адрес" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Документ_Основание" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Документ_Отправитель" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Документ_Получатель" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Документ_ТаблДок" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Файл_Документ" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1ТаблДок_ИтогТабл" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Отправитель_Представитель" ManuallyRouted="false" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1ТаблДок_СтрТабл" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиАдрИно" Width="1.5" PointX="45.25" PointY="77.375" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиАдрРФ" Width="1.5" PointX="45.25" PointY="80.125" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиБанкРекв" Width="1.5" PointX="40.75" PointY="71.75" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиВалюта" Width="1.5" PointX="33.25" PointY="48" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиКонтакт" Width="1.5" PointX="37.75" PointY="76.625" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиНДС" Width="1.5" PointX="40" PointY="53" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиОснование" Width="1.5" PointX="35.5" PointY="44.875" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиПараметр" Width="1.5" PointX="40" PointY="63.375" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиПодразделение" Width="1.5" PointX="40.75" PointY="66.875" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиСвФЛ" Width="1.5" PointX="43.75" PointY="64.75" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиСвЮЛ" Width="1.5" PointX="37.75" PointY="71.375" />
+        <EntityTypeShape EntityType="Dme.Core.Model.АктПриемкиХарактеристика" Width="1.5" PointX="40" PointY="57.75" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеАдрИно" Width="1.5" PointX="23.75" PointY="27.625" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеАдрРФ" Width="1.5" PointX="23.75" PointY="13.625" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеБанкРекв" Width="1.5" PointX="27.5" PointY="18.25" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеКонтакт" Width="1.5" PointX="21.5" PointY="17.25" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеНДС" Width="1.5" PointX="26.75" PointY="33.875" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеПараметр" Width="1.5" PointX="23.75" PointY="22.5" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеПодразделение" Width="1.5" PointX="26.5" PointY="26.5" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеРазмерКоробки" Width="1.5" PointX="23.75" PointY="37.25" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеРазмерМалСтандарт" Width="1.5" PointX="23.75" PointY="40.75" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеРазмерУпаковки" Width="1.5" PointX="23.75" PointY="34" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеСвФЛ" Width="1.5" PointX="26.75" PointY="22" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеСвЮЛ" Width="1.5" PointX="24.5" PointY="18.125" />
+        <EntityTypeShape EntityType="Dme.Core.Model.ЗаказНаРазмещениеХарактеристика" Width="1.5" PointX="26.75" PointY="38.125" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1АдрИно" Width="1.5" PointX="12.75" PointY="18.375" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1АдрРФ" Width="1.5" PointX="12.75" PointY="28.125" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1БанкРекв" Width="1.5" PointX="7.5" PointY="21" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Контакт" Width="1.5" PointX="7.5" PointY="17" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1НДС" Width="1.5" PointX="12.75" PointY="35.375" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Параметр" Width="1.5" PointX="9.75" PointY="23.75" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Подразделение" Width="1.5" PointX="10.5" PointY="16.125" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1СвФЛ" Width="1.5" PointX="12.75" PointY="23.5" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1СвЮЛ" Width="1.5" PointX="7.5" PointY="24.875" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Мх1Характеристика" Width="1.5" PointX="9.75" PointY="35.625" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиАдрес_АдрИно" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиАдрес_АдрРФ" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузоотправитель_БанкРекв" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузополучатель_БанкРекв" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПокупатель_БанкРекв" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПоставщик_БанкРекв" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиБухгалтер_Основание" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиДокумент_Валюта" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузоотправитель_Контакт" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузоотправитель_Подразделение" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузоотправитель_СвФЛ" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузоотправитель_СвЮЛ" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузополучатель_Контакт" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузополучатель_Подразделение" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузополучатель_СвФЛ" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиГрузополучатель_СвЮЛ" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПокупатель_Контакт" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПоставщик_Контакт" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПоДокументам_НДС" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПоФакту_НДС" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСтрОтклонения_НДС" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиРуководитель_Основание" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСписокОснование_Основание" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСписокПараметр_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПокупатель_Подразделение" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПоставщик_Подразделение" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПокупатель_СвФЛ" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПокупатель_СвЮЛ" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПоставщик_СвФЛ" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиПоставщик_СвЮЛ" />
+        <AssociationConnector Association="Dme.Core.Model.АктПриемкиСписокХарактеристика_Характеристика" />
+        <AssociationConnector Association="Dme.Core.Model.Адрес_АдрИно" />
+        <AssociationConnector Association="Dme.Core.Model.Адрес_АдрРФ" />
+        <AssociationConnector Association="Dme.Core.Model.Отправитель_БанкРекв" />
+        <AssociationConnector Association="Dme.Core.Model.Получатель_БанкРекв" />
+        <AssociationConnector Association="Dme.Core.Model.Документ_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.ИтогТабл_НДС" />
+        <AssociationConnector Association="Dme.Core.Model.ИтогТабл_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.ИтогТабл_Характеристика" />
+        <AssociationConnector Association="Dme.Core.Model.Отправитель_Контакт" />
+        <AssociationConnector Association="Dme.Core.Model.Получатель_Контакт" />
+        <AssociationConnector Association="Dme.Core.Model.СтрТабл_НДС" />
+        <AssociationConnector Association="Dme.Core.Model.Основание_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.Отправитель_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.Отправитель_Подразделение" />
+        <AssociationConnector Association="Dme.Core.Model.Отправитель_СвФЛ" />
+        <AssociationConnector Association="Dme.Core.Model.Отправитель_СвЮЛ" />
+        <AssociationConnector Association="Dme.Core.Model.Получатель_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.Получатель_Подразделение" />
+        <AssociationConnector Association="Dme.Core.Model.Получатель_СвФЛ" />
+        <AssociationConnector Association="Dme.Core.Model.Получатель_СвЮЛ" />
+        <AssociationConnector Association="Dme.Core.Model.Представитель_СвФЛ" />
+        <AssociationConnector Association="Dme.Core.Model.СтрТабл_РазмерКоробки" />
+        <AssociationConnector Association="Dme.Core.Model.СтрТабл_РазмерМалСтандарт" />
+        <AssociationConnector Association="Dme.Core.Model.СтрТабл_РазмерУпаковки" />
+        <AssociationConnector Association="Dme.Core.Model.СтрТабл_Характеристика" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Адрес_АдрИно" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Адрес_АдрРФ" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Отправитель_БанкРекв" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Получатель_БанкРекв" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Документ_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1ИтогТабл_НДС" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1ИтогТабл_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1ИтогТабл_Характеристика" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Отправитель_Контакт" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Получатель_Контакт" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1СтрТабл_НДС" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Основание_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Отправитель_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Отправитель_Подразделение" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Отправитель_СвФЛ" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Отправитель_СвЮЛ" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Получатель_Параметр" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Получатель_Подразделение" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Получатель_СвФЛ" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Получатель_СвЮЛ" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1Представитель_СвФЛ" />
+        <AssociationConnector Association="Dme.Core.Model.Мх1СтрТабл_Характеристика" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Клиенты" Width="1.5" PointX="2.2474042597447541" PointY="28.717965765259212" />
+        <EntityTypeShape EntityType="Dme.Core.Model.Товар" Width="1.5" PointX="4.4815588539846054" PointY="25.473762613476143" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
