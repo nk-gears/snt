@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dme.Tests</RootNamespace>
     <AssemblyName>Dme.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -74,7 +74,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -85,8 +87,13 @@
     <Compile Include="TestXml.cs" />
     <Compile Include="TestXmlAndEF.cs" />
     <Compile Include="TestGDP.cs" />
+    <Compile Include="TestB2B.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dme.B2B\Dme.B2B.csproj">
+      <Project>{d9c5e0db-4fdb-42e0-8f21-400cf1b836b0}</Project>
+      <Name>Dme.B2B</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dme.Core\Dme.Core.csproj">
       <Project>{85de3637-9508-4d80-b21b-986103eb7514}</Project>
       <Name>Dme.Core</Name>

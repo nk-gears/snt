@@ -82,7 +82,7 @@ namespace Dme.Core.Xml
             if (_Config.ContainsKey(typeof(T)))
             {
                 WellKnownEntityConfig cfg = _Config[typeof(T)];
-                Deserializer deserializer = new Deserializer();
+                Deserializer deserializer = new Deserializer(typeof(T));
                 deserializer.OnFilter += cfg.OnFilter;
                 deserializer.OnRename += cfg.OnRename;
                 return deserializer;

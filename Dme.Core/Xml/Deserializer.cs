@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
-using System.Collections;
 
 namespace Dme.Core.Xml
 {
@@ -15,15 +12,21 @@ namespace Dme.Core.Xml
         public event EventHandler<DeserializerFilterEventArgs> OnFilter;
         public event EventHandler<DeserializerRenameEventArgs> OnRename;
 
+        Type _Type = null;
+
         public Deserializer()
         { 
         }
+        public Deserializer(Type tp)
+        {
+            _Type = tp;
+        }
 
-        public object Execute(Stream input, Type tp)
+        public object Execute(Stream input, Type tp = null)
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(input);
-            return CreateObjectFromXmlElement(doc.DocumentElement, tp, "/");
+            return CreateObjectFromXmlElement(doc.DocumentElement, tp ?? _Type, "/");
         }
 
         private object CreateObjectFromXmlElement(XmlElement xmlElement, Type tp, string rootXPath)

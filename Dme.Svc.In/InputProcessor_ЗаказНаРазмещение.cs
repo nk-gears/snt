@@ -30,8 +30,8 @@ namespace Dme.Svc
             {
                 _xml.Save(stream);
                 stream.Position = 0;
-                var deserializer = CreateDeserializer();
-                var file = (ЗаказНаРазмещениеФайл)deserializer.Execute(stream, typeof(ЗаказНаРазмещениеФайл));
+                var deserializer = Dme.Core.Xml.DeserializerFactory.Default.Create<ЗаказНаРазмещениеФайл>();
+                var file = (ЗаказНаРазмещениеФайл)deserializer.Execute(stream);
                 _Context.ЗаказНаРазмещениеФайл.Add(file);
                 _Context.SaveChanges();
             }
@@ -45,26 +45,6 @@ namespace Dme.Svc
             _xml = xml;
         }
 
-        public Dme.Core.Xml.Deserializer CreateDeserializer()
-        {
-            var deserializer = new Dme.Core.Xml.Deserializer();
-            deserializer.OnFilter += deserializer_OnFilter;
-            deserializer.OnRename += deserializer_OnRename;
-            return deserializer;
-        }
-
-        void deserializer_OnRename(object sender, Core.Xml.DeserializerRenameEventArgs e)
-        {
-            if (Regex.IsMatch(e.XPath, @"[/]" + e.Name + "$"))
-                e.Name = "ЗаказНаРазмещение" + e.Name;
-        }
-
-        void deserializer_OnFilter(object sender, Core.Xml.DeserializerFilterEventArgs e)
-        {
-            if (Regex.IsMatch(e.XPath, @"@.+_Id$"))
-                e.Skip = true;
-        }
-    
         public void Dispose()
         {
  	        if(_Context!=null)

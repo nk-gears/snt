@@ -48,7 +48,7 @@ namespace Dme.Svc.Out
                         packageBuilder.Flush();
                         // помечаем файл как выгруженный
                         file.C_WfState = WF_STATE_OUT;
-                        file.C_WfLastUpdateUser = String.Format("{0}\\{1}",Environment.UserDomainName,Environment.UserName);
+                        file.C_WfLastUpdateUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
                         file.C_WfLastUpdateDT = DateTime.Now;
                         await context.SaveChangesAsync();
                     }

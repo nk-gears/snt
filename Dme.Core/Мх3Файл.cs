@@ -12,20 +12,19 @@ namespace Dme.Core
     using System;
     using System.Collections.Generic;
     
-    public partial class ЗаказНаРазмещениеФайл
+    public partial class Мх3Файл
     {
-        public ЗаказНаРазмещениеФайл()
+        public Мх3Файл()
         {
-            this.ЗаказНаРазмещениеДокумент = new HashSet<ЗаказНаРазмещениеДокумент>();
+            this.Мх3Документ = new HashSet<Мх3Документ>();
         }
     
+        public string ИдФайл { get; set; }
         public string ВерсПрог { get; set; }
-        public string ВерсияФормата { get; set; }
-        public string Имя { get; set; }
-        public string Формат { get; set; }
-        public string КодФормы { get; set; }
+        public string ИдФорм { get; set; }
+        public string ВерсФорм { get; set; }
+        public string Сформирован { get; set; }
         public int Файл_Id { get; set; }
-        public System.DateTime C_CreatedDT { get; set; }
         public int C_WfState { get; set; }
         public System.DateTime C_WfLastUpdateDT { get; set; }
         public string C_WfLastUpdateUser { get; set; }
@@ -33,6 +32,6 @@ namespace Dme.Core
         public Nullable<System.DateTime> C_DeleteDT { get; set; }
         public string C_DeletedUser { get; set; }
     
-        public virtual ICollection<ЗаказНаРазмещениеДокумент> ЗаказНаРазмещениеДокумент { get; set; }
+        public virtual ICollection<Мх3Документ> Мх3Документ { get; set; }
     }
 }

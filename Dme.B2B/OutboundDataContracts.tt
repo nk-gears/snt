@@ -1,0 +1,139 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)\Dme.Core\bin\Debug\Dme.Core.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Dme.Core" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Collections.ObjectModel;
+using System.Text;
+
+namespace Dme.B2B.Outbound
+{
+<#
+_TypesTodo.Add(typeof(Dme.Core.ЗаказНаОтгрузкуФайл));
+_RemovePrefixes.Add("ЗаказНаОтгрузку");
+
+GenerateAll(); 
+#>
+}
+
+<#+
+        private void GenerateAll()
+        {
+            while(_TypesTodo.Count>0)
+            {
+                var tp = _TypesTodo[0];
+                GenerateClassProxy(tp);
+                _TypesDone.Add(tp);
+                _TypesTodo.Remove(tp);
+            }
+			WriteLine("");
+			PushIndent("\t");
+			WriteLine(CurrentIndent + "static class DataContractMapperCfg");
+			WriteLine(CurrentIndent + "{");
+			PushIndent("\t");
+			WriteLine(CurrentIndent + "public static void Initialize()");
+			WriteLine(CurrentIndent + "{");
+			PushIndent("\t");
+			WriteLine(CurrentIndent + "AutoMapper.Mapper.Initialize(cfg => {");
+			PushIndent("\t");
+			WriteLine(CurrentIndent + "cfg.ClearPrefixes();");
+			WriteLine(CurrentIndent + "cfg.RecognizeDestinationPrefixes(new string[] { \"ЗаказНаОтгрузку\" });");
+			foreach(var tp in _TypesDone)
+				WriteLine(CurrentIndent + "cfg.CreateMap<"+RemovePrefixes(tp.Name)+", Core."+tp.Name+">();");
+			WriteLine(CurrentIndent + "cfg.ClearPrefixes();");
+			WriteLine(CurrentIndent + "cfg.RecognizePrefixes(new string[] { \"ЗаказНаОтгрузку\" });");
+			foreach(var tp in _TypesDone)
+				WriteLine(CurrentIndent + "cfg.CreateMap<Core."+tp.Name+", "+RemovePrefixes(tp.Name)+">();");
+			PopIndent();
+			WriteLine(CurrentIndent + "});");
+			PopIndent();
+			WriteLine(CurrentIndent + "}");
+			PopIndent();
+			WriteLine(CurrentIndent + "}");
+			PopIndent();
+        }
+#>
+<#+
+        private void GenerateClassProxy(Type tp)
+        {
+            PushIndent("\t");
+			WriteLine(CurrentIndent + "[Serializable]");
+            WriteLine(CurrentIndent + "[DataContract]");
+            WriteLine(CurrentIndent + "public partial class " + RemovePrefixes(tp.Name));
+            WriteLine(CurrentIndent + "{");
+            PushIndent("\t");
+            foreach (var propInfo in tp.GetProperties())
+            {
+                if (propInfo.Name.IndexOf("C_") == 0)
+                    continue;
+                if (propInfo.Name.IndexOf("_Id") == (propInfo.Name.Length - 3))
+                    continue;
+                GenerateProperty(tp, propInfo);
+            }
+            PopIndent();
+            WriteLine(CurrentIndent + "}");
+            PopIndent();
+			WriteLine("");
+            PushIndent("\t");
+            WriteLine(CurrentIndent + "[CollectionDataContract]");
+            WriteLine(CurrentIndent + "public class " + RemovePrefixes(tp.Name)+"Коллекция : Collection<"+ RemovePrefixes(tp.Name) + "> {}");
+            PopIndent();
+			WriteLine("");
+        }
+#>
+
+<#+ 
+        private void GenerateProperty(Type tp, System.Reflection.PropertyInfo propInfo)
+        {
+            string propType = propInfo.PropertyType.Name;
+            if (propInfo.PropertyType.Name.IndexOf("ICollection`") == 0)
+            {
+                var tpCollection = propInfo.PropertyType.GetGenericArguments().Single();
+                propType = tpCollection.Name + "Коллекция";
+                if (!_TypesTodo.Contains(tpCollection) && !_TypesDone.Contains(tpCollection))
+                    _TypesTodo.Add(tpCollection);
+            }
+            else if (propInfo.PropertyType.Name.IndexOf("Nullable`") == 0)
+            {
+                var tpNullable = propInfo.PropertyType.GetGenericArguments().Single();
+                propType = tpNullable.Name + "?";
+            }
+            else if (!(propInfo.PropertyType.IsPrimitive 
+                || propInfo.PropertyType.IsValueType 
+                || propInfo.PropertyType == typeof(string)
+                || propInfo.PropertyType == typeof(Decimal)
+                || propInfo.PropertyType == typeof(DateTime)
+                || propInfo.PropertyType == typeof(int)))
+                return;
+			WriteLine(CurrentIndent + "[DataMember]");
+            WriteLine(CurrentIndent + "public " + RemovePrefixes(propType) + " "+ RemovePrefixes(propInfo.Name) +" { get; set; }");
+
+        }
+
+#>
+
+<#+ 
+        private string RemovePrefixes(string s)
+        {
+            foreach (var p in _RemovePrefixes)
+                if (s.IndexOf(p) == 0)
+                    return s.Substring(p.Length);
+            return s;
+        }
+
+#>
+
+<#+ 
+List<Type> _TypesTodo = new List<Type>();
+List<Type> _TypesDone = new List<Type>();
+List<string> _RemovePrefixes = new List<string>();
+#>

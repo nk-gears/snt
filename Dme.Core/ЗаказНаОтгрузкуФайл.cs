@@ -12,27 +12,27 @@ namespace Dme.Core
     using System;
     using System.Collections.Generic;
     
-    public partial class ЗаказНаРазмещениеФайл
+    public partial class ЗаказНаОтгрузкуФайл
     {
-        public ЗаказНаРазмещениеФайл()
+        public ЗаказНаОтгрузкуФайл()
         {
-            this.ЗаказНаРазмещениеДокумент = new HashSet<ЗаказНаРазмещениеДокумент>();
+            this.ЗаказНаОтгрузкуДокумент = new HashSet<ЗаказНаОтгрузкуДокумент>();
         }
     
+        public string ИдФайл { get; set; }
         public string ВерсПрог { get; set; }
-        public string ВерсияФормата { get; set; }
-        public string Имя { get; set; }
-        public string Формат { get; set; }
-        public string КодФормы { get; set; }
+        public string ИдФорм { get; set; }
+        public string ВерсФорм { get; set; }
+        public string Сформирован { get; set; }
         public int Файл_Id { get; set; }
-        public System.DateTime C_CreatedDT { get; set; }
         public int C_WfState { get; set; }
         public System.DateTime C_WfLastUpdateDT { get; set; }
         public string C_WfLastUpdateUser { get; set; }
         public bool C_Deleted { get; set; }
         public Nullable<System.DateTime> C_DeleteDT { get; set; }
         public string C_DeletedUser { get; set; }
+        public System.DateTime C_CreatedDT { get; set; }
     
-        public virtual ICollection<ЗаказНаРазмещениеДокумент> ЗаказНаРазмещениеДокумент { get; set; }
+        public virtual ICollection<ЗаказНаОтгрузкуДокумент> ЗаказНаОтгрузкуДокумент { get; set; }
     }
 }

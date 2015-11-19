@@ -101,5 +101,41 @@ namespace Dme.Core
         public DbSet<Мх1Характеристика> Мх1Характеристика { get; set; }
         public DbSet<Клиенты> Клиенты { get; set; }
         public DbSet<Товар> Товар { get; set; }
+        public DbSet<КодАВЕ> КодАВЕ { get; set; }
+        public DbSet<КодНалСт> КодНалСт { get; set; }
+        public DbSet<Мх3Адрес> Мх3Адрес { get; set; }
+        public DbSet<Мх3АдрИно> Мх3АдрИно { get; set; }
+        public DbSet<Мх3АдрРФ> Мх3АдрРФ { get; set; }
+        public DbSet<Мх3БанкРекв> Мх3БанкРекв { get; set; }
+        public DbSet<Мх3Документ> Мх3Документ { get; set; }
+        public DbSet<Мх3ИтогТабл> Мх3ИтогТабл { get; set; }
+        public DbSet<Мх3Контакт> Мх3Контакт { get; set; }
+        public DbSet<Мх3Налог> Мх3Налог { get; set; }
+        public DbSet<Мх3Основание> Мх3Основание { get; set; }
+        public DbSet<Мх3Параметр> Мх3Параметр { get; set; }
+        public DbSet<Мх3Представитель> Мх3Представитель { get; set; }
+        public DbSet<Мх3СвФЛ> Мх3СвФЛ { get; set; }
+        public DbSet<Мх3СвЮЛ> Мх3СвЮЛ { get; set; }
+        public DbSet<Мх3СтрТабл> Мх3СтрТабл { get; set; }
+        public DbSet<Мх3Таблица> Мх3Таблица { get; set; }
+        public DbSet<Мх3Участник> Мх3Участник { get; set; }
+        public DbSet<Мх3Файл> Мх3Файл { get; set; }
+        public DbSet<ЗаказНаОтгрузкуАдрес> ЗаказНаОтгрузкуАдрес { get; set; }
+        public DbSet<ЗаказНаОтгрузкуАдрИно> ЗаказНаОтгрузкуАдрИно { get; set; }
+        public DbSet<ЗаказНаОтгрузкуАдрРФ> ЗаказНаОтгрузкуАдрРФ { get; set; }
+        public DbSet<ЗаказНаОтгрузкуБанкРекв> ЗаказНаОтгрузкуБанкРекв { get; set; }
+        public DbSet<ЗаказНаОтгрузкуДокумент> ЗаказНаОтгрузкуДокумент { get; set; }
+        public DbSet<ЗаказНаОтгрузкуИтогТабл> ЗаказНаОтгрузкуИтогТабл { get; set; }
+        public DbSet<ЗаказНаОтгрузкуКонтакт> ЗаказНаОтгрузкуКонтакт { get; set; }
+        public DbSet<ЗаказНаОтгрузкуНалог> ЗаказНаОтгрузкуНалог { get; set; }
+        public DbSet<ЗаказНаОтгрузкуОснование> ЗаказНаОтгрузкуОснование { get; set; }
+        public DbSet<ЗаказНаОтгрузкуПараметр> ЗаказНаОтгрузкуПараметр { get; set; }
+        public DbSet<ЗаказНаОтгрузкуПредставитель> ЗаказНаОтгрузкуПредставитель { get; set; }
+        public DbSet<ЗаказНаОтгрузкуСвФЛ> ЗаказНаОтгрузкуСвФЛ { get; set; }
+        public DbSet<ЗаказНаОтгрузкуСвЮЛ> ЗаказНаОтгрузкуСвЮЛ { get; set; }
+        public DbSet<ЗаказНаОтгрузкуСтрТабл> ЗаказНаОтгрузкуСтрТабл { get; set; }
+        public DbSet<ЗаказНаОтгрузкуТаблица> ЗаказНаОтгрузкуТаблица { get; set; }
+        public DbSet<ЗаказНаОтгрузкуУчастник> ЗаказНаОтгрузкуУчастник { get; set; }
+        public DbSet<ЗаказНаОтгрузкуФайл> ЗаказНаОтгрузкуФайл { get; set; }
     }
 }

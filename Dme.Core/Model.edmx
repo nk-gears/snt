@@ -368,6 +368,215 @@
           <Property Name="СписокХарактеристика_Id" Type="int" />
           <Property Name="Характеристика_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуАдрес">
+          <Key>
+            <PropertyRef Name="Адрес_Id" />
+          </Key>
+          <Property Name="Тип" Type="nvarchar" MaxLength="250" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="250" />
+          <Property Name="Адрес_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Участник_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуАдрИно">
+          <Key>
+            <PropertyRef Name="АдрИно_Id" />
+          </Key>
+          <Property Name="КодСтр" Type="nvarchar" MaxLength="3" />
+          <Property Name="АдрТекст" Type="nvarchar" MaxLength="255" />
+          <Property Name="Адрес_Id" Type="int" />
+          <Property Name="АдрИно_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуАдрРФ">
+          <Key>
+            <PropertyRef Name="АдрРФ_Id" />
+          </Key>
+          <Property Name="Индекс" Type="nvarchar" MaxLength="6" />
+          <Property Name="КодРегион" Type="nvarchar" MaxLength="2" />
+          <Property Name="Район" Type="nvarchar" MaxLength="50" />
+          <Property Name="Город" Type="nvarchar" MaxLength="50" />
+          <Property Name="НаселПункт" Type="nvarchar" MaxLength="50" />
+          <Property Name="Улица" Type="nvarchar" MaxLength="50" />
+          <Property Name="Дом" Type="nvarchar" MaxLength="8" />
+          <Property Name="Корпус" Type="nvarchar" MaxLength="8" />
+          <Property Name="Кварт" Type="nvarchar" MaxLength="8" />
+          <Property Name="Адрес_Id" Type="int" />
+          <Property Name="АдрРФ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуБанкРекв">
+          <Key>
+            <PropertyRef Name="БанкРекв_Id" />
+          </Key>
+          <Property Name="НаимБанк" Type="nvarchar" MaxLength="250" />
+          <Property Name="БИК" Type="nvarchar" MaxLength="20" />
+          <Property Name="РСчет" Type="nvarchar" MaxLength="20" />
+          <Property Name="КСчет" Type="nvarchar" MaxLength="20" />
+          <Property Name="Участник_Id" Type="int" />
+          <Property Name="БанкРекв_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуДокумент">
+          <Key>
+            <PropertyRef Name="Документ_Id" />
+          </Key>
+          <Property Name="Дата" Type="nvarchar" MaxLength="20" />
+          <Property Name="Номер" Type="nvarchar" MaxLength="100" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Документ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Файл_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуИтогТабл">
+          <Key>
+            <PropertyRef Name="ИтогТабл_Id" />
+          </Key>
+          <Property Name="Тип" Type="nvarchar" MaxLength="30" />
+          <Property Name="Кол_во" Type="int" />
+          <Property Name="Нетто" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Брутто" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="СуммаБезНал" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="nvarchar" MaxLength="250" />
+          <Property Name="ИтогТабл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Таблица_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуКонтакт">
+          <Key>
+            <PropertyRef Name="Контакт_Id" />
+          </Key>
+          <Property Name="Телефон" Type="nvarchar" MaxLength="20" />
+          <Property Name="Факс" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Internet" Type="nvarchar" MaxLength="150" />
+          <Property Name="Участник_Id" Type="int" />
+          <Property Name="Контакт_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуНалог">
+          <Key>
+            <PropertyRef Name="Налог_Id" />
+          </Key>
+          <Property Name="Наим" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ставка" Type="nvarchar" MaxLength="50" />
+          <Property Name="ТипСтавки" Type="nvarchar" MaxLength="50" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="СтрТабл_Id" Type="int" />
+          <Property Name="ИтогТабл_Id" Type="int" />
+          <Property Name="Налог_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуОснование">
+          <Key>
+            <PropertyRef Name="Основание_Id" />
+          </Key>
+          <Property Name="Номер" Type="nvarchar" MaxLength="100" />
+          <Property Name="Дата" Type="nvarchar" MaxLength="30" />
+          <Property Name="КодОКВ" Type="nvarchar" MaxLength="3" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="250" />
+          <Property Name="СуммаБезНал" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="СрокОплаты" Type="nvarchar" MaxLength="10" />
+          <Property Name="Основание_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Документ_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуПараметр">
+          <Key>
+            <PropertyRef Name="Параметр_Id" />
+          </Key>
+          <Property Name="Имя" Type="nvarchar" MaxLength="50" />
+          <Property Name="Значение" Type="nvarchar" MaxLength="250" />
+          <Property Name="Участник_Id" Type="int" />
+          <Property Name="Основание_Id" Type="int" />
+          <Property Name="СтрТабл_Id" Type="int" />
+          <Property Name="ИтогТабл_Id" Type="int" />
+          <Property Name="Документ_Id" Type="int" />
+          <Property Name="Параметр_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуПредставитель">
+          <Key>
+            <PropertyRef Name="Представитель_Id" />
+          </Key>
+          <Property Name="Должность" Type="nvarchar" MaxLength="50" />
+          <Property Name="Роль" Type="nvarchar" MaxLength="50" />
+          <Property Name="Представитель_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Участник_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуСвФЛ">
+          <Key>
+            <PropertyRef Name="СвФЛ_Id" />
+          </Key>
+          <Property Name="ИНН" Type="nvarchar" MaxLength="12" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="250" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="60" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="60" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="60" />
+          <Property Name="Обращение" Type="nvarchar" MaxLength="50" />
+          <Property Name="Представитель_Id" Type="int" />
+          <Property Name="Участник_Id" Type="int" />
+          <Property Name="СвФЛ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуСвЮЛ">
+          <Key>
+            <PropertyRef Name="СвЮЛ_Id" />
+          </Key>
+          <Property Name="Наим" Type="nvarchar" MaxLength="250" />
+          <Property Name="ОфицНаим" Type="nvarchar" MaxLength="250" />
+          <Property Name="ИНН" Type="nvarchar" MaxLength="10" />
+          <Property Name="КПП" Type="nvarchar" MaxLength="9" />
+          <Property Name="ОКДП" Type="nvarchar" MaxLength="20" />
+          <Property Name="ОКПО" Type="nvarchar" MaxLength="20" />
+          <Property Name="Участник_Id" Type="int" />
+          <Property Name="СвЮЛ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуСтрТабл">
+          <Key>
+            <PropertyRef Name="СтрТабл_Id" />
+          </Key>
+          <Property Name="ПорНомер" Type="nvarchar" MaxLength="20" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="250" />
+          <Property Name="Кол_во" Type="int" />
+          <Property Name="ЕдИзм" Type="nvarchar" MaxLength="250" />
+          <Property Name="ОКЕИ" Type="nvarchar" MaxLength="3" />
+          <Property Name="Цена" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="СуммаБезНал" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="nvarchar" MaxLength="250" />
+          <Property Name="Описание" Type="nvarchar" MaxLength="250" />
+          <Property Name="Ид" Type="nvarchar" MaxLength="50" />
+          <Property Name="СтрТабл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Таблица_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуТаблица">
+          <Key>
+            <PropertyRef Name="Таблица_Id" />
+          </Key>
+          <Property Name="Тип" Type="nvarchar" MaxLength="20" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="50" />
+          <Property Name="Таблица_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Документ_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуУчастник">
+          <Key>
+            <PropertyRef Name="Участник_Id" />
+          </Key>
+          <Property Name="Роль" Type="nvarchar" MaxLength="50" />
+          <Property Name="Участник_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Документ_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуФайл">
+          <Key>
+            <PropertyRef Name="Файл_Id" />
+          </Key>
+          <Property Name="ИдФайл" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ВерсПрог" Type="nvarchar" MaxLength="50" />
+          <Property Name="ИдФорм" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="ВерсФорм" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Сформирован" Type="nvarchar" MaxLength="30" />
+          <Property Name="Файл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="_WfState" Type="int" Nullable="false" />
+          <Property Name="_WfLastUpdateDT" Type="datetime" Nullable="false" />
+          <Property Name="_WfLastUpdateUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="_Deleted" Type="bit" Nullable="false" />
+          <Property Name="_DeleteDT" Type="datetime" />
+          <Property Name="_DeletedUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="_CreatedDT" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="ЗаказНаРазмещениеАдрес">
           <Key>
             <PropertyRef Name="Адрес_Id" />
@@ -645,9 +854,13 @@
           <Property Name="Формат" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="КодФормы" Type="nvarchar" MaxLength="20" />
           <Property Name="Файл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="_WfState" Type="int" Nullable="false" />
+          <Property Name="_WfLastUpdateDT" Type="datetime" Nullable="false" />
+          <Property Name="_WfLastUpdateUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="_Deleted" Type="bit" Nullable="false" />
+          <Property Name="_DeleteDT" Type="datetime" />
+          <Property Name="_DeletedUser" Type="nvarchar" MaxLength="50" />
           <Property Name="_CreatedDT" Type="datetime" Nullable="false" />
-          <Property Name="_Processed" Type="bit" Nullable="false" />
-          <Property Name="_ProcessedDT" Type="datetime" />
         </EntityType>
         <EntityType Name="ЗаказНаРазмещениеХарактеристика">
           <Key>
@@ -686,6 +899,20 @@
           <Property Name="ПрефиксМХ1" Type="nvarchar" MaxLength="20" />
           <Property Name="ПрефиксАктПриемки" Type="nvarchar" MaxLength="20" />
           <Property Name="ПрефиксМХ3" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="КодАВЕ">
+          <Key>
+            <PropertyRef Name="КодАВЕ" />
+          </Key>
+          <Property Name="КодАВЕ" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Код" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="КодНалСт">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="КодНалСт" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Мх1Адрес">
           <Key>
@@ -813,7 +1040,7 @@
           <Property Name="Получатель_Id" Type="int" />
           <Property Name="ИтогТабл_Id" Type="int" />
           <Property Name="Документ_Id" Type="int" />
-          <Property Name="Параметр_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Параметр_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Мх1Подразделение">
           <Key>
@@ -924,6 +1151,214 @@
           <Property Name="СтрТабл_Id" Type="int" />
           <Property Name="ИтогТабл_Id" Type="int" />
           <Property Name="Характеристика_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Мх3Адрес">
+          <Key>
+            <PropertyRef Name="Адрес_Id" />
+          </Key>
+          <Property Name="Тип" Type="nvarchar" MaxLength="250" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="250" />
+          <Property Name="Адрес_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Участник_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Мх3АдрИно">
+          <Key>
+            <PropertyRef Name="АдрИно_Id" />
+          </Key>
+          <Property Name="КодСтр" Type="nvarchar" MaxLength="3" />
+          <Property Name="АдрТекст" Type="nvarchar" MaxLength="255" />
+          <Property Name="Адрес_Id" Type="int" />
+          <Property Name="АдрИно_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Мх3АдрРФ">
+          <Key>
+            <PropertyRef Name="АдрРФ_Id" />
+          </Key>
+          <Property Name="Индекс" Type="nvarchar" MaxLength="6" />
+          <Property Name="КодРегион" Type="nvarchar" MaxLength="2" />
+          <Property Name="Район" Type="nvarchar" MaxLength="50" />
+          <Property Name="Город" Type="nvarchar" MaxLength="50" />
+          <Property Name="НаселПункт" Type="nvarchar" MaxLength="50" />
+          <Property Name="Улица" Type="nvarchar" MaxLength="50" />
+          <Property Name="Дом" Type="nvarchar" MaxLength="8" />
+          <Property Name="Корпус" Type="nvarchar" MaxLength="8" />
+          <Property Name="Кварт" Type="nvarchar" MaxLength="8" />
+          <Property Name="Адрес_Id" Type="int" />
+          <Property Name="АдрРФ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Мх3БанкРекв">
+          <Key>
+            <PropertyRef Name="БанкРекв_Id" />
+          </Key>
+          <Property Name="НаимБанк" Type="nvarchar" MaxLength="250" />
+          <Property Name="БИК" Type="nvarchar" MaxLength="20" />
+          <Property Name="РСчет" Type="nvarchar" MaxLength="20" />
+          <Property Name="КСчет" Type="nvarchar" MaxLength="20" />
+          <Property Name="Участник_Id" Type="int" />
+          <Property Name="БанкРекв_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Мх3Документ">
+          <Key>
+            <PropertyRef Name="Документ_Id" />
+          </Key>
+          <Property Name="Дата" Type="nvarchar" MaxLength="20" />
+          <Property Name="Номер" Type="nvarchar" MaxLength="100" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Документ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Файл_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Мх3ИтогТабл">
+          <Key>
+            <PropertyRef Name="ИтогТабл_Id" />
+          </Key>
+          <Property Name="Тип" Type="nvarchar" MaxLength="30" />
+          <Property Name="Кол_во" Type="int" />
+          <Property Name="Нетто" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Брутто" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="СуммаБезНал" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="nvarchar" MaxLength="250" />
+          <Property Name="ИтогТабл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Таблица_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Мх3Контакт">
+          <Key>
+            <PropertyRef Name="Контакт_Id" />
+          </Key>
+          <Property Name="Телефон" Type="nvarchar" MaxLength="20" />
+          <Property Name="Факс" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Internet" Type="nvarchar" MaxLength="150" />
+          <Property Name="Участник_Id" Type="int" />
+          <Property Name="Контакт_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Мх3Налог">
+          <Key>
+            <PropertyRef Name="Налог_Id" />
+          </Key>
+          <Property Name="Наим" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ставка" Type="nvarchar" MaxLength="50" />
+          <Property Name="ТипСтавки" Type="nvarchar" MaxLength="50" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="СтрТабл_Id" Type="int" />
+          <Property Name="ИтогТабл_Id" Type="int" />
+          <Property Name="Налог_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Мх3Основание">
+          <Key>
+            <PropertyRef Name="Основание_Id" />
+          </Key>
+          <Property Name="Номер" Type="nvarchar" MaxLength="100" />
+          <Property Name="Дата" Type="nvarchar" MaxLength="30" />
+          <Property Name="КодОКВ" Type="nvarchar" MaxLength="3" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="250" />
+          <Property Name="СуммаБезНал" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="СрокОплаты" Type="nvarchar" MaxLength="10" />
+          <Property Name="Основание_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Документ_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Мх3Параметр">
+          <Key>
+            <PropertyRef Name="Параметр_Id" />
+          </Key>
+          <Property Name="Имя" Type="nvarchar" MaxLength="50" />
+          <Property Name="Значение" Type="nvarchar" MaxLength="250" />
+          <Property Name="Участник_Id" Type="int" />
+          <Property Name="Основание_Id" Type="int" />
+          <Property Name="СтрТабл_Id" Type="int" />
+          <Property Name="ИтогТабл_Id" Type="int" />
+          <Property Name="Документ_Id" Type="int" />
+          <Property Name="Параметр_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Мх3Представитель">
+          <Key>
+            <PropertyRef Name="Представитель_Id" />
+          </Key>
+          <Property Name="Должность" Type="nvarchar" MaxLength="50" />
+          <Property Name="Роль" Type="nvarchar" MaxLength="50" />
+          <Property Name="Представитель_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Участник_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Мх3СвФЛ">
+          <Key>
+            <PropertyRef Name="СвФЛ_Id" />
+          </Key>
+          <Property Name="ИНН" Type="nvarchar" MaxLength="12" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="250" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="60" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="60" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="60" />
+          <Property Name="Обращение" Type="nvarchar" MaxLength="50" />
+          <Property Name="Представитель_Id" Type="int" />
+          <Property Name="Участник_Id" Type="int" />
+          <Property Name="СвФЛ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Мх3СвЮЛ">
+          <Key>
+            <PropertyRef Name="СвЮЛ_Id" />
+          </Key>
+          <Property Name="Наим" Type="nvarchar" MaxLength="250" />
+          <Property Name="ОфицНаим" Type="nvarchar" MaxLength="250" />
+          <Property Name="ИНН" Type="nvarchar" MaxLength="10" />
+          <Property Name="КПП" Type="nvarchar" MaxLength="9" />
+          <Property Name="ОКДП" Type="nvarchar" MaxLength="20" />
+          <Property Name="ОКПО" Type="nvarchar" MaxLength="20" />
+          <Property Name="Участник_Id" Type="int" />
+          <Property Name="СвЮЛ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Мх3СтрТабл">
+          <Key>
+            <PropertyRef Name="СтрТабл_Id" />
+          </Key>
+          <Property Name="ПорНомер" Type="nvarchar" MaxLength="20" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="250" />
+          <Property Name="Кол_во" Type="int" />
+          <Property Name="ЕдИзм" Type="nvarchar" MaxLength="250" />
+          <Property Name="ОКЕИ" Type="nvarchar" MaxLength="3" />
+          <Property Name="Цена" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="СуммаБезНал" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="nvarchar" MaxLength="250" />
+          <Property Name="Описание" Type="nvarchar" MaxLength="250" />
+          <Property Name="Ид" Type="nvarchar" MaxLength="50" />
+          <Property Name="СтрТабл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Таблица_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Мх3Таблица">
+          <Key>
+            <PropertyRef Name="Таблица_Id" />
+          </Key>
+          <Property Name="Тип" Type="nvarchar" MaxLength="20" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="50" />
+          <Property Name="Таблица_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Документ_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Мх3Участник">
+          <Key>
+            <PropertyRef Name="Участник_Id" />
+          </Key>
+          <Property Name="Роль" Type="nvarchar" MaxLength="50" />
+          <Property Name="Участник_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Документ_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Мх3Файл">
+          <Key>
+            <PropertyRef Name="Файл_Id" />
+          </Key>
+          <Property Name="ИдФайл" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ВерсПрог" Type="nvarchar" MaxLength="50" />
+          <Property Name="ИдФорм" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="ВерсФорм" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Сформирован" Type="nvarchar" MaxLength="30" />
+          <Property Name="Файл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="_WfState" Type="int" Nullable="false" />
+          <Property Name="_WfLastUpdateDT" Type="datetime" Nullable="false" />
+          <Property Name="_WfLastUpdateUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="_Deleted" Type="bit" Nullable="false" />
+          <Property Name="_DeleteDT" Type="datetime" />
+          <Property Name="_DeletedUser" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Товар">
           <Key>
@@ -1875,6 +2310,304 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ЗаказНаОтгрузкуАдрес_АдрИно">
+          <End Role="ЗаказНаОтгрузкуАдрес" Type="Self.ЗаказНаОтгрузкуАдрес" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуАдрИно" Type="Self.ЗаказНаОтгрузкуАдрИно" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуАдрес">
+              <PropertyRef Name="Адрес_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуАдрИно">
+              <PropertyRef Name="Адрес_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуАдрес_АдрРФ">
+          <End Role="ЗаказНаОтгрузкуАдрес" Type="Self.ЗаказНаОтгрузкуАдрес" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуАдрРФ" Type="Self.ЗаказНаОтгрузкуАдрРФ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуАдрес">
+              <PropertyRef Name="Адрес_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуАдрРФ">
+              <PropertyRef Name="Адрес_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуДокумент_Основание">
+          <End Role="ЗаказНаОтгрузкуДокумент" Type="Self.ЗаказНаОтгрузкуДокумент" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуОснование" Type="Self.ЗаказНаОтгрузкуОснование" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуОснование">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуДокумент_Параметр">
+          <End Role="ЗаказНаОтгрузкуДокумент" Type="Self.ЗаказНаОтгрузкуДокумент" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуПараметр" Type="Self.ЗаказНаОтгрузкуПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПараметр">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуДокумент_Таблица">
+          <End Role="ЗаказНаОтгрузкуДокумент" Type="Self.ЗаказНаОтгрузкуДокумент" Multiplicity="0..1" />
+          <End Role="ЗаказНаОтгрузкуТаблица" Type="Self.ЗаказНаОтгрузкуТаблица" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуТаблица">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуДокумент_Участник">
+          <End Role="ЗаказНаОтгрузкуДокумент" Type="Self.ЗаказНаОтгрузкуДокумент" Multiplicity="0..1" />
+          <End Role="ЗаказНаОтгрузкуУчастник" Type="Self.ЗаказНаОтгрузкуУчастник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуИтогТабл_Налог">
+          <End Role="ЗаказНаОтгрузкуИтогТабл" Type="Self.ЗаказНаОтгрузкуИтогТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуНалог" Type="Self.ЗаказНаОтгрузкуНалог" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуИтогТабл">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуНалог">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуИтогТабл_Параметр">
+          <End Role="ЗаказНаОтгрузкуИтогТабл" Type="Self.ЗаказНаОтгрузкуИтогТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуПараметр" Type="Self.ЗаказНаОтгрузкуПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуИтогТабл">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПараметр">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуОснование_Параметр">
+          <End Role="ЗаказНаОтгрузкуОснование" Type="Self.ЗаказНаОтгрузкуОснование" Multiplicity="0..1" />
+          <End Role="ЗаказНаОтгрузкуПараметр" Type="Self.ЗаказНаОтгрузкуПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуОснование">
+              <PropertyRef Name="Основание_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПараметр">
+              <PropertyRef Name="Основание_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуПредставитель_СвФЛ">
+          <End Role="ЗаказНаОтгрузкуПредставитель" Type="Self.ЗаказНаОтгрузкуПредставитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуСвФЛ" Type="Self.ЗаказНаОтгрузкуСвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуПредставитель">
+              <PropertyRef Name="Представитель_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуСвФЛ">
+              <PropertyRef Name="Представитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуСтрТабл_Налог">
+          <End Role="ЗаказНаОтгрузкуСтрТабл" Type="Self.ЗаказНаОтгрузкуСтрТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуНалог" Type="Self.ЗаказНаОтгрузкуНалог" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуСтрТабл">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуНалог">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуСтрТабл_Параметр">
+          <End Role="ЗаказНаОтгрузкуСтрТабл" Type="Self.ЗаказНаОтгрузкуСтрТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуПараметр" Type="Self.ЗаказНаОтгрузкуПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуСтрТабл">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПараметр">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуТаблица_ИтогТабл">
+          <End Role="ЗаказНаОтгрузкуТаблица" Type="Self.ЗаказНаОтгрузкуТаблица" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуИтогТабл" Type="Self.ЗаказНаОтгрузкуИтогТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуТаблица">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуИтогТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуТаблица_СтрТабл">
+          <End Role="ЗаказНаОтгрузкуТаблица" Type="Self.ЗаказНаОтгрузкуТаблица" Multiplicity="0..1" />
+          <End Role="ЗаказНаОтгрузкуСтрТабл" Type="Self.ЗаказНаОтгрузкуСтрТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуТаблица">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуСтрТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_Адрес">
+          <End Role="ЗаказНаОтгрузкуУчастник" Type="Self.ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуАдрес" Type="Self.ЗаказНаОтгрузкуАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуАдрес">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_БанкРекв">
+          <End Role="ЗаказНаОтгрузкуУчастник" Type="Self.ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуБанкРекв" Type="Self.ЗаказНаОтгрузкуБанкРекв" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуБанкРекв">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_Контакт">
+          <End Role="ЗаказНаОтгрузкуУчастник" Type="Self.ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуКонтакт" Type="Self.ЗаказНаОтгрузкуКонтакт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуКонтакт">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_Параметр">
+          <End Role="ЗаказНаОтгрузкуУчастник" Type="Self.ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуПараметр" Type="Self.ЗаказНаОтгрузкуПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПараметр">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_Представитель">
+          <End Role="ЗаказНаОтгрузкуУчастник" Type="Self.ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуПредставитель" Type="Self.ЗаказНаОтгрузкуПредставитель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПредставитель">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_СвФЛ">
+          <End Role="ЗаказНаОтгрузкуУчастник" Type="Self.ЗаказНаОтгрузкуУчастник" Multiplicity="0..1" />
+          <End Role="ЗаказНаОтгрузкуСвФЛ" Type="Self.ЗаказНаОтгрузкуСвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуСвФЛ">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_СвЮЛ">
+          <End Role="ЗаказНаОтгрузкуУчастник" Type="Self.ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуСвЮЛ" Type="Self.ЗаказНаОтгрузкуСвЮЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуСвЮЛ">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуФайл_Документ">
+          <End Role="ЗаказНаОтгрузкуФайл" Type="Self.ЗаказНаОтгрузкуФайл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ЗаказНаОтгрузкуДокумент" Type="Self.ЗаказНаОтгрузкуДокумент" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуФайл">
+              <PropertyRef Name="Файл_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Файл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ИтогТабл_НДС">
           <End Role="ЗаказНаРазмещениеИтогТабл" Type="Self.ЗаказНаРазмещениеИтогТабл" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -2351,6 +3084,304 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Мх3Адрес_АдрИно">
+          <End Role="Мх3Адрес" Type="Self.Мх3Адрес" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3АдрИно" Type="Self.Мх3АдрИно" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Адрес">
+              <PropertyRef Name="Адрес_Id" />
+            </Principal>
+            <Dependent Role="Мх3АдрИно">
+              <PropertyRef Name="Адрес_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Адрес_АдрРФ">
+          <End Role="Мх3Адрес" Type="Self.Мх3Адрес" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3АдрРФ" Type="Self.Мх3АдрРФ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Адрес">
+              <PropertyRef Name="Адрес_Id" />
+            </Principal>
+            <Dependent Role="Мх3АдрРФ">
+              <PropertyRef Name="Адрес_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Документ_Основание">
+          <End Role="Мх3Документ" Type="Self.Мх3Документ" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Основание" Type="Self.Мх3Основание" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Документ">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="Мх3Основание">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Документ_Параметр">
+          <End Role="Мх3Документ" Type="Self.Мх3Документ" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Параметр" Type="Self.Мх3Параметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Документ">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="Мх3Параметр">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Документ_Таблица">
+          <End Role="Мх3Документ" Type="Self.Мх3Документ" Multiplicity="0..1" />
+          <End Role="Мх3Таблица" Type="Self.Мх3Таблица" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Документ">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="Мх3Таблица">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Документ_Участник">
+          <End Role="Мх3Документ" Type="Self.Мх3Документ" Multiplicity="0..1" />
+          <End Role="Мх3Участник" Type="Self.Мх3Участник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Документ">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="Мх3Участник">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3ИтогТабл_Налог">
+          <End Role="Мх3ИтогТабл" Type="Self.Мх3ИтогТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Налог" Type="Self.Мх3Налог" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3ИтогТабл">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Principal>
+            <Dependent Role="Мх3Налог">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3ИтогТабл_Параметр">
+          <End Role="Мх3ИтогТабл" Type="Self.Мх3ИтогТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Параметр" Type="Self.Мх3Параметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3ИтогТабл">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Principal>
+            <Dependent Role="Мх3Параметр">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Основание_Параметр">
+          <End Role="Мх3Основание" Type="Self.Мх3Основание" Multiplicity="0..1" />
+          <End Role="Мх3Параметр" Type="Self.Мх3Параметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Основание">
+              <PropertyRef Name="Основание_Id" />
+            </Principal>
+            <Dependent Role="Мх3Параметр">
+              <PropertyRef Name="Основание_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Представитель_СвФЛ">
+          <End Role="Мх3Представитель" Type="Self.Мх3Представитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3СвФЛ" Type="Self.Мх3СвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Представитель">
+              <PropertyRef Name="Представитель_Id" />
+            </Principal>
+            <Dependent Role="Мх3СвФЛ">
+              <PropertyRef Name="Представитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3СтрТабл_Налог">
+          <End Role="Мх3СтрТабл" Type="Self.Мх3СтрТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Налог" Type="Self.Мх3Налог" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3СтрТабл">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Principal>
+            <Dependent Role="Мх3Налог">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3СтрТабл_Параметр">
+          <End Role="Мх3СтрТабл" Type="Self.Мх3СтрТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Параметр" Type="Self.Мх3Параметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3СтрТабл">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Principal>
+            <Dependent Role="Мх3Параметр">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Таблица_ИтогТабл">
+          <End Role="Мх3Таблица" Type="Self.Мх3Таблица" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3ИтогТабл" Type="Self.Мх3ИтогТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Таблица">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="Мх3ИтогТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Таблица_СтрТабл">
+          <End Role="Мх3Таблица" Type="Self.Мх3Таблица" Multiplicity="0..1" />
+          <End Role="Мх3СтрТабл" Type="Self.Мх3СтрТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Таблица">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="Мх3СтрТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_Адрес">
+          <End Role="Мх3Участник" Type="Self.Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Адрес" Type="Self.Мх3Адрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3Адрес">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_БанкРекв">
+          <End Role="Мх3Участник" Type="Self.Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3БанкРекв" Type="Self.Мх3БанкРекв" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3БанкРекв">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_Контакт">
+          <End Role="Мх3Участник" Type="Self.Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Контакт" Type="Self.Мх3Контакт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3Контакт">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_Параметр">
+          <End Role="Мх3Участник" Type="Self.Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Параметр" Type="Self.Мх3Параметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3Параметр">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_Представитель">
+          <End Role="Мх3Участник" Type="Self.Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Представитель" Type="Self.Мх3Представитель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3Представитель">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_СвФЛ">
+          <End Role="Мх3Участник" Type="Self.Мх3Участник" Multiplicity="0..1" />
+          <End Role="Мх3СвФЛ" Type="Self.Мх3СвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3СвФЛ">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_СвЮЛ">
+          <End Role="Мх3Участник" Type="Self.Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3СвЮЛ" Type="Self.Мх3СвЮЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3СвЮЛ">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Файл_Документ">
+          <End Role="Мх3Файл" Type="Self.Мх3Файл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Мх3Документ" Type="Self.Мх3Документ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Файл">
+              <PropertyRef Name="Файл_Id" />
+            </Principal>
+            <Dependent Role="Мх3Документ">
+              <PropertyRef Name="Файл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Основание_Параметр">
           <End Role="ЗаказНаРазмещениеОснование" Type="Self.ЗаказНаРазмещениеОснование" Multiplicity="0..1" />
           <End Role="ЗаказНаРазмещениеПараметр" Type="Self.ЗаказНаРазмещениеПараметр" Multiplicity="*" />
@@ -2725,6 +3756,23 @@
           <EntitySet Name="АктПриемкиСтрОтклонения" EntityType="Self.АктПриемкиСтрОтклонения" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="АктПриемкиФайл" EntityType="Self.АктПриемкиФайл" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="АктПриемкиХарактеристика" EntityType="Self.АктПриемкиХарактеристика" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуАдрес" EntityType="Self.ЗаказНаОтгрузкуАдрес" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуАдрИно" EntityType="Self.ЗаказНаОтгрузкуАдрИно" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуАдрРФ" EntityType="Self.ЗаказНаОтгрузкуАдрРФ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуБанкРекв" EntityType="Self.ЗаказНаОтгрузкуБанкРекв" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуДокумент" EntityType="Self.ЗаказНаОтгрузкуДокумент" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуИтогТабл" EntityType="Self.ЗаказНаОтгрузкуИтогТабл" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуКонтакт" EntityType="Self.ЗаказНаОтгрузкуКонтакт" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуНалог" EntityType="Self.ЗаказНаОтгрузкуНалог" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуОснование" EntityType="Self.ЗаказНаОтгрузкуОснование" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуПараметр" EntityType="Self.ЗаказНаОтгрузкуПараметр" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуПредставитель" EntityType="Self.ЗаказНаОтгрузкуПредставитель" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуСвФЛ" EntityType="Self.ЗаказНаОтгрузкуСвФЛ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуСвЮЛ" EntityType="Self.ЗаказНаОтгрузкуСвЮЛ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуСтрТабл" EntityType="Self.ЗаказНаОтгрузкуСтрТабл" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуТаблица" EntityType="Self.ЗаказНаОтгрузкуТаблица" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуУчастник" EntityType="Self.ЗаказНаОтгрузкуУчастник" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуФайл" EntityType="Self.ЗаказНаОтгрузкуФайл" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаРазмещениеАдрес" EntityType="Self.ЗаказНаРазмещениеАдрес" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаРазмещениеАдрИно" EntityType="Self.ЗаказНаРазмещениеАдрИно" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаРазмещениеАдрРФ" EntityType="Self.ЗаказНаРазмещениеАдрРФ" Schema="dbo" store:Type="Tables" />
@@ -2749,6 +3797,8 @@
           <EntitySet Name="ЗаказНаРазмещениеФайл" EntityType="Self.ЗаказНаРазмещениеФайл" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаРазмещениеХарактеристика" EntityType="Self.ЗаказНаРазмещениеХарактеристика" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Клиенты" EntityType="Self.Клиенты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="КодАВЕ" EntityType="Self.КодАВЕ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="КодНалСт" EntityType="Self.КодНалСт" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх1Адрес" EntityType="Self.Мх1Адрес" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх1АдрИно" EntityType="Self.Мх1АдрИно" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх1АдрРФ" EntityType="Self.Мх1АдрРФ" Schema="dbo" store:Type="Tables" />
@@ -2769,6 +3819,23 @@
           <EntitySet Name="Мх1ТаблДок" EntityType="Self.Мх1ТаблДок" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх1Файл" EntityType="Self.Мх1Файл" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх1Характеристика" EntityType="Self.Мх1Характеристика" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3Адрес" EntityType="Self.Мх3Адрес" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3АдрИно" EntityType="Self.Мх3АдрИно" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3АдрРФ" EntityType="Self.Мх3АдрРФ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3БанкРекв" EntityType="Self.Мх3БанкРекв" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3Документ" EntityType="Self.Мх3Документ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3ИтогТабл" EntityType="Self.Мх3ИтогТабл" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3Контакт" EntityType="Self.Мх3Контакт" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3Налог" EntityType="Self.Мх3Налог" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3Основание" EntityType="Self.Мх3Основание" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3Параметр" EntityType="Self.Мх3Параметр" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3Представитель" EntityType="Self.Мх3Представитель" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3СвФЛ" EntityType="Self.Мх3СвФЛ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3СвЮЛ" EntityType="Self.Мх3СвЮЛ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3СтрТабл" EntityType="Self.Мх3СтрТабл" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3Таблица" EntityType="Self.Мх3Таблица" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3Участник" EntityType="Self.Мх3Участник" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3Файл" EntityType="Self.Мх3Файл" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Товар" EntityType="Self.Товар" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="Адрес_АдрИно" Association="Self.Адрес_АдрИно">
             <End Role="ЗаказНаРазмещениеАдрес" EntitySet="ЗаказНаРазмещениеАдрес" />
@@ -3038,6 +4105,94 @@
             <End Role="ЗаказНаРазмещениеДокумент" EntitySet="ЗаказНаРазмещениеДокумент" />
             <End Role="ЗаказНаРазмещениеТаблДок" EntitySet="ЗаказНаРазмещениеТаблДок" />
           </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуАдрес_АдрИно" Association="Self.ЗаказНаОтгрузкуАдрес_АдрИно">
+            <End Role="ЗаказНаОтгрузкуАдрес" EntitySet="ЗаказНаОтгрузкуАдрес" />
+            <End Role="ЗаказНаОтгрузкуАдрИно" EntitySet="ЗаказНаОтгрузкуАдрИно" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуАдрес_АдрРФ" Association="Self.ЗаказНаОтгрузкуАдрес_АдрРФ">
+            <End Role="ЗаказНаОтгрузкуАдрес" EntitySet="ЗаказНаОтгрузкуАдрес" />
+            <End Role="ЗаказНаОтгрузкуАдрРФ" EntitySet="ЗаказНаОтгрузкуАдрРФ" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Основание" Association="Self.ЗаказНаОтгрузкуДокумент_Основание">
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+            <End Role="ЗаказНаОтгрузкуОснование" EntitySet="ЗаказНаОтгрузкуОснование" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Параметр" Association="Self.ЗаказНаОтгрузкуДокумент_Параметр">
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+            <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Таблица" Association="Self.ЗаказНаОтгрузкуДокумент_Таблица">
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Участник" Association="Self.ЗаказНаОтгрузкуДокумент_Участник">
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуИтогТабл_Налог" Association="Self.ЗаказНаОтгрузкуИтогТабл_Налог">
+            <End Role="ЗаказНаОтгрузкуИтогТабл" EntitySet="ЗаказНаОтгрузкуИтогТабл" />
+            <End Role="ЗаказНаОтгрузкуНалог" EntitySet="ЗаказНаОтгрузкуНалог" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуИтогТабл_Параметр" Association="Self.ЗаказНаОтгрузкуИтогТабл_Параметр">
+            <End Role="ЗаказНаОтгрузкуИтогТабл" EntitySet="ЗаказНаОтгрузкуИтогТабл" />
+            <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуОснование_Параметр" Association="Self.ЗаказНаОтгрузкуОснование_Параметр">
+            <End Role="ЗаказНаОтгрузкуОснование" EntitySet="ЗаказНаОтгрузкуОснование" />
+            <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуПредставитель_СвФЛ" Association="Self.ЗаказНаОтгрузкуПредставитель_СвФЛ">
+            <End Role="ЗаказНаОтгрузкуПредставитель" EntitySet="ЗаказНаОтгрузкуПредставитель" />
+            <End Role="ЗаказНаОтгрузкуСвФЛ" EntitySet="ЗаказНаОтгрузкуСвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуСтрТабл_Налог" Association="Self.ЗаказНаОтгрузкуСтрТабл_Налог">
+            <End Role="ЗаказНаОтгрузкуСтрТабл" EntitySet="ЗаказНаОтгрузкуСтрТабл" />
+            <End Role="ЗаказНаОтгрузкуНалог" EntitySet="ЗаказНаОтгрузкуНалог" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуСтрТабл_Параметр" Association="Self.ЗаказНаОтгрузкуСтрТабл_Параметр">
+            <End Role="ЗаказНаОтгрузкуСтрТабл" EntitySet="ЗаказНаОтгрузкуСтрТабл" />
+            <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуТаблица_ИтогТабл" Association="Self.ЗаказНаОтгрузкуТаблица_ИтогТабл">
+            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
+            <End Role="ЗаказНаОтгрузкуИтогТабл" EntitySet="ЗаказНаОтгрузкуИтогТабл" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуТаблица_СтрТабл" Association="Self.ЗаказНаОтгрузкуТаблица_СтрТабл">
+            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
+            <End Role="ЗаказНаОтгрузкуСтрТабл" EntitySet="ЗаказНаОтгрузкуСтрТабл" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_Адрес" Association="Self.ЗаказНаОтгрузкуУчастник_Адрес">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуАдрес" EntitySet="ЗаказНаОтгрузкуАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_БанкРекв" Association="Self.ЗаказНаОтгрузкуУчастник_БанкРекв">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуБанкРекв" EntitySet="ЗаказНаОтгрузкуБанкРекв" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_Контакт" Association="Self.ЗаказНаОтгрузкуУчастник_Контакт">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуКонтакт" EntitySet="ЗаказНаОтгрузкуКонтакт" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_Параметр" Association="Self.ЗаказНаОтгрузкуУчастник_Параметр">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_Представитель" Association="Self.ЗаказНаОтгрузкуУчастник_Представитель">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуПредставитель" EntitySet="ЗаказНаОтгрузкуПредставитель" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_СвФЛ" Association="Self.ЗаказНаОтгрузкуУчастник_СвФЛ">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуСвФЛ" EntitySet="ЗаказНаОтгрузкуСвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_СвЮЛ" Association="Self.ЗаказНаОтгрузкуУчастник_СвЮЛ">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуСвЮЛ" EntitySet="ЗаказНаОтгрузкуСвЮЛ" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуФайл_Документ" Association="Self.ЗаказНаОтгрузкуФайл_Документ">
+            <End Role="ЗаказНаОтгрузкуФайл" EntitySet="ЗаказНаОтгрузкуФайл" />
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+          </AssociationSet>
           <AssociationSet Name="ИтогТабл_НДС" Association="Self.ИтогТабл_НДС">
             <End Role="ЗаказНаРазмещениеИтогТабл" EntitySet="ЗаказНаРазмещениеИтогТабл" />
             <End Role="ЗаказНаРазмещениеНДС" EntitySet="ЗаказНаРазмещениеНДС" />
@@ -3177,6 +4332,94 @@
           <AssociationSet Name="Мх1Файл_Документ" Association="Self.Мх1Файл_Документ">
             <End Role="Мх1Файл" EntitySet="Мх1Файл" />
             <End Role="Мх1Документ" EntitySet="Мх1Документ" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Адрес_АдрИно" Association="Self.Мх3Адрес_АдрИно">
+            <End Role="Мх3Адрес" EntitySet="Мх3Адрес" />
+            <End Role="Мх3АдрИно" EntitySet="Мх3АдрИно" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Адрес_АдрРФ" Association="Self.Мх3Адрес_АдрРФ">
+            <End Role="Мх3Адрес" EntitySet="Мх3Адрес" />
+            <End Role="Мх3АдрРФ" EntitySet="Мх3АдрРФ" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Документ_Основание" Association="Self.Мх3Документ_Основание">
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+            <End Role="Мх3Основание" EntitySet="Мх3Основание" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Документ_Параметр" Association="Self.Мх3Документ_Параметр">
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+            <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Документ_Таблица" Association="Self.Мх3Документ_Таблица">
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Документ_Участник" Association="Self.Мх3Документ_Участник">
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3ИтогТабл_Налог" Association="Self.Мх3ИтогТабл_Налог">
+            <End Role="Мх3ИтогТабл" EntitySet="Мх3ИтогТабл" />
+            <End Role="Мх3Налог" EntitySet="Мх3Налог" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3ИтогТабл_Параметр" Association="Self.Мх3ИтогТабл_Параметр">
+            <End Role="Мх3ИтогТабл" EntitySet="Мх3ИтогТабл" />
+            <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Основание_Параметр" Association="Self.Мх3Основание_Параметр">
+            <End Role="Мх3Основание" EntitySet="Мх3Основание" />
+            <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Представитель_СвФЛ" Association="Self.Мх3Представитель_СвФЛ">
+            <End Role="Мх3Представитель" EntitySet="Мх3Представитель" />
+            <End Role="Мх3СвФЛ" EntitySet="Мх3СвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3СтрТабл_Налог" Association="Self.Мх3СтрТабл_Налог">
+            <End Role="Мх3СтрТабл" EntitySet="Мх3СтрТабл" />
+            <End Role="Мх3Налог" EntitySet="Мх3Налог" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3СтрТабл_Параметр" Association="Self.Мх3СтрТабл_Параметр">
+            <End Role="Мх3СтрТабл" EntitySet="Мх3СтрТабл" />
+            <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Таблица_ИтогТабл" Association="Self.Мх3Таблица_ИтогТабл">
+            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
+            <End Role="Мх3ИтогТабл" EntitySet="Мх3ИтогТабл" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Таблица_СтрТабл" Association="Self.Мх3Таблица_СтрТабл">
+            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
+            <End Role="Мх3СтрТабл" EntitySet="Мх3СтрТабл" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_Адрес" Association="Self.Мх3Участник_Адрес">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3Адрес" EntitySet="Мх3Адрес" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_БанкРекв" Association="Self.Мх3Участник_БанкРекв">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3БанкРекв" EntitySet="Мх3БанкРекв" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_Контакт" Association="Self.Мх3Участник_Контакт">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3Контакт" EntitySet="Мх3Контакт" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_Параметр" Association="Self.Мх3Участник_Параметр">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_Представитель" Association="Self.Мх3Участник_Представитель">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3Представитель" EntitySet="Мх3Представитель" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_СвФЛ" Association="Self.Мх3Участник_СвФЛ">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3СвФЛ" EntitySet="Мх3СвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_СвЮЛ" Association="Self.Мх3Участник_СвЮЛ">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3СвЮЛ" EntitySet="Мх3СвЮЛ" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Файл_Документ" Association="Self.Мх3Файл_Документ">
+            <End Role="Мх3Файл" EntitySet="Мх3Файл" />
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
           </AssociationSet>
           <AssociationSet Name="Основание_Параметр" Association="Self.Основание_Параметр">
             <End Role="ЗаказНаРазмещениеОснование" EntitySet="ЗаказНаРазмещениеОснование" />
@@ -3868,6 +5111,218 @@
           </AssociationSet>
           <EntitySet Name="Клиенты" EntityType="Dme.Core.Model.Клиенты" />
           <EntitySet Name="Товар" EntityType="Dme.Core.Model.Товар" />
+          <EntitySet Name="КодАВЕ" EntityType="Dme.Core.Model.КодАВЕ" />
+          <EntitySet Name="КодНалСт" EntityType="Dme.Core.Model.КодНалСт" />
+          <EntitySet Name="Мх3Адрес" EntityType="Dme.Core.Model.Мх3Адрес" />
+          <EntitySet Name="Мх3АдрИно" EntityType="Dme.Core.Model.Мх3АдрИно" />
+          <EntitySet Name="Мх3АдрРФ" EntityType="Dme.Core.Model.Мх3АдрРФ" />
+          <EntitySet Name="Мх3БанкРекв" EntityType="Dme.Core.Model.Мх3БанкРекв" />
+          <EntitySet Name="Мх3Документ" EntityType="Dme.Core.Model.Мх3Документ" />
+          <EntitySet Name="Мх3ИтогТабл" EntityType="Dme.Core.Model.Мх3ИтогТабл" />
+          <EntitySet Name="Мх3Контакт" EntityType="Dme.Core.Model.Мх3Контакт" />
+          <EntitySet Name="Мх3Налог" EntityType="Dme.Core.Model.Мх3Налог" />
+          <EntitySet Name="Мх3Основание" EntityType="Dme.Core.Model.Мх3Основание" />
+          <EntitySet Name="Мх3Параметр" EntityType="Dme.Core.Model.Мх3Параметр" />
+          <EntitySet Name="Мх3Представитель" EntityType="Dme.Core.Model.Мх3Представитель" />
+          <EntitySet Name="Мх3СвФЛ" EntityType="Dme.Core.Model.Мх3СвФЛ" />
+          <EntitySet Name="Мх3СвЮЛ" EntityType="Dme.Core.Model.Мх3СвЮЛ" />
+          <EntitySet Name="Мх3СтрТабл" EntityType="Dme.Core.Model.Мх3СтрТабл" />
+          <EntitySet Name="Мх3Таблица" EntityType="Dme.Core.Model.Мх3Таблица" />
+          <EntitySet Name="Мх3Участник" EntityType="Dme.Core.Model.Мх3Участник" />
+          <EntitySet Name="Мх3Файл" EntityType="Dme.Core.Model.Мх3Файл" />
+          <AssociationSet Name="Мх3Адрес_АдрИно" Association="Dme.Core.Model.Мх3Адрес_АдрИно">
+            <End Role="Мх3Адрес" EntitySet="Мх3Адрес" />
+            <End Role="Мх3АдрИно" EntitySet="Мх3АдрИно" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Адрес_АдрРФ" Association="Dme.Core.Model.Мх3Адрес_АдрРФ">
+            <End Role="Мх3Адрес" EntitySet="Мх3Адрес" />
+            <End Role="Мх3АдрРФ" EntitySet="Мх3АдрРФ" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_Адрес" Association="Dme.Core.Model.Мх3Участник_Адрес">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3Адрес" EntitySet="Мх3Адрес" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_БанкРекв" Association="Dme.Core.Model.Мх3Участник_БанкРекв">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3БанкРекв" EntitySet="Мх3БанкРекв" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Документ_Основание" Association="Dme.Core.Model.Мх3Документ_Основание">
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+            <End Role="Мх3Основание" EntitySet="Мх3Основание" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Документ_Параметр" Association="Dme.Core.Model.Мх3Документ_Параметр">
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+            <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Документ_Таблица" Association="Dme.Core.Model.Мх3Документ_Таблица">
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Документ_Участник" Association="Dme.Core.Model.Мх3Документ_Участник">
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Файл_Документ" Association="Dme.Core.Model.Мх3Файл_Документ">
+            <End Role="Мх3Файл" EntitySet="Мх3Файл" />
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3ИтогТабл_Налог" Association="Dme.Core.Model.Мх3ИтогТабл_Налог">
+            <End Role="Мх3ИтогТабл" EntitySet="Мх3ИтогТабл" />
+            <End Role="Мх3Налог" EntitySet="Мх3Налог" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3ИтогТабл_Параметр" Association="Dme.Core.Model.Мх3ИтогТабл_Параметр">
+            <End Role="Мх3ИтогТабл" EntitySet="Мх3ИтогТабл" />
+            <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Таблица_ИтогТабл" Association="Dme.Core.Model.Мх3Таблица_ИтогТабл">
+            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
+            <End Role="Мх3ИтогТабл" EntitySet="Мх3ИтогТабл" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_Контакт" Association="Dme.Core.Model.Мх3Участник_Контакт">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3Контакт" EntitySet="Мх3Контакт" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3СтрТабл_Налог" Association="Dme.Core.Model.Мх3СтрТабл_Налог">
+            <End Role="Мх3СтрТабл" EntitySet="Мх3СтрТабл" />
+            <End Role="Мх3Налог" EntitySet="Мх3Налог" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Основание_Параметр" Association="Dme.Core.Model.Мх3Основание_Параметр">
+            <End Role="Мх3Основание" EntitySet="Мх3Основание" />
+            <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3СтрТабл_Параметр" Association="Dme.Core.Model.Мх3СтрТабл_Параметр">
+            <End Role="Мх3СтрТабл" EntitySet="Мх3СтрТабл" />
+            <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_Параметр" Association="Dme.Core.Model.Мх3Участник_Параметр">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Представитель_СвФЛ" Association="Dme.Core.Model.Мх3Представитель_СвФЛ">
+            <End Role="Мх3Представитель" EntitySet="Мх3Представитель" />
+            <End Role="Мх3СвФЛ" EntitySet="Мх3СвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_Представитель" Association="Dme.Core.Model.Мх3Участник_Представитель">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3Представитель" EntitySet="Мх3Представитель" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_СвФЛ" Association="Dme.Core.Model.Мх3Участник_СвФЛ">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3СвФЛ" EntitySet="Мх3СвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Участник_СвЮЛ" Association="Dme.Core.Model.Мх3Участник_СвЮЛ">
+            <End Role="Мх3Участник" EntitySet="Мх3Участник" />
+            <End Role="Мх3СвЮЛ" EntitySet="Мх3СвЮЛ" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Таблица_СтрТабл" Association="Dme.Core.Model.Мх3Таблица_СтрТабл">
+            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
+            <End Role="Мх3СтрТабл" EntitySet="Мх3СтрТабл" />
+          </AssociationSet>
+          <EntitySet Name="ЗаказНаОтгрузкуАдрес" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуАдрес" />
+          <EntitySet Name="ЗаказНаОтгрузкуАдрИно" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуАдрИно" />
+          <EntitySet Name="ЗаказНаОтгрузкуАдрРФ" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуАдрРФ" />
+          <EntitySet Name="ЗаказНаОтгрузкуБанкРекв" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуБанкРекв" />
+          <EntitySet Name="ЗаказНаОтгрузкуДокумент" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуДокумент" />
+          <EntitySet Name="ЗаказНаОтгрузкуИтогТабл" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл" />
+          <EntitySet Name="ЗаказНаОтгрузкуКонтакт" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуКонтакт" />
+          <EntitySet Name="ЗаказНаОтгрузкуНалог" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуНалог" />
+          <EntitySet Name="ЗаказНаОтгрузкуОснование" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуОснование" />
+          <EntitySet Name="ЗаказНаОтгрузкуПараметр" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуПараметр" />
+          <EntitySet Name="ЗаказНаОтгрузкуПредставитель" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуПредставитель" />
+          <EntitySet Name="ЗаказНаОтгрузкуСвФЛ" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуСвФЛ" />
+          <EntitySet Name="ЗаказНаОтгрузкуСвЮЛ" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуСвЮЛ" />
+          <EntitySet Name="ЗаказНаОтгрузкуСтрТабл" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл" />
+          <EntitySet Name="ЗаказНаОтгрузкуТаблица" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуТаблица" />
+          <EntitySet Name="ЗаказНаОтгрузкуУчастник" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" />
+          <EntitySet Name="ЗаказНаОтгрузкуФайл" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуФайл" />
+          <AssociationSet Name="ЗаказНаОтгрузкуАдрес_АдрИно" Association="Dme.Core.Model.ЗаказНаОтгрузкуАдрес_АдрИно">
+            <End Role="ЗаказНаОтгрузкуАдрес" EntitySet="ЗаказНаОтгрузкуАдрес" />
+            <End Role="ЗаказНаОтгрузкуАдрИно" EntitySet="ЗаказНаОтгрузкуАдрИно" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуАдрес_АдрРФ" Association="Dme.Core.Model.ЗаказНаОтгрузкуАдрес_АдрРФ">
+            <End Role="ЗаказНаОтгрузкуАдрес" EntitySet="ЗаказНаОтгрузкуАдрес" />
+            <End Role="ЗаказНаОтгрузкуАдрРФ" EntitySet="ЗаказНаОтгрузкуАдрРФ" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_Адрес" Association="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Адрес">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуАдрес" EntitySet="ЗаказНаОтгрузкуАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_БанкРекв" Association="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_БанкРекв">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуБанкРекв" EntitySet="ЗаказНаОтгрузкуБанкРекв" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Основание" Association="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Основание">
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+            <End Role="ЗаказНаОтгрузкуОснование" EntitySet="ЗаказНаОтгрузкуОснование" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Параметр" Association="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Параметр">
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+            <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Таблица" Association="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Таблица">
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Участник" Association="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Участник">
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуФайл_Документ" Association="Dme.Core.Model.ЗаказНаОтгрузкуФайл_Документ">
+            <End Role="ЗаказНаОтгрузкуФайл" EntitySet="ЗаказНаОтгрузкуФайл" />
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуИтогТабл_Налог" Association="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл_Налог">
+            <End Role="ЗаказНаОтгрузкуИтогТабл" EntitySet="ЗаказНаОтгрузкуИтогТабл" />
+            <End Role="ЗаказНаОтгрузкуНалог" EntitySet="ЗаказНаОтгрузкуНалог" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуИтогТабл_Параметр" Association="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл_Параметр">
+            <End Role="ЗаказНаОтгрузкуИтогТабл" EntitySet="ЗаказНаОтгрузкуИтогТабл" />
+            <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуТаблица_ИтогТабл" Association="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_ИтогТабл">
+            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
+            <End Role="ЗаказНаОтгрузкуИтогТабл" EntitySet="ЗаказНаОтгрузкуИтогТабл" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_Контакт" Association="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Контакт">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуКонтакт" EntitySet="ЗаказНаОтгрузкуКонтакт" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуСтрТабл_Налог" Association="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл_Налог">
+            <End Role="ЗаказНаОтгрузкуСтрТабл" EntitySet="ЗаказНаОтгрузкуСтрТабл" />
+            <End Role="ЗаказНаОтгрузкуНалог" EntitySet="ЗаказНаОтгрузкуНалог" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуОснование_Параметр" Association="Dme.Core.Model.ЗаказНаОтгрузкуОснование_Параметр">
+            <End Role="ЗаказНаОтгрузкуОснование" EntitySet="ЗаказНаОтгрузкуОснование" />
+            <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуСтрТабл_Параметр" Association="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл_Параметр">
+            <End Role="ЗаказНаОтгрузкуСтрТабл" EntitySet="ЗаказНаОтгрузкуСтрТабл" />
+            <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_Параметр" Association="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Параметр">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуПредставитель_СвФЛ" Association="Dme.Core.Model.ЗаказНаОтгрузкуПредставитель_СвФЛ">
+            <End Role="ЗаказНаОтгрузкуПредставитель" EntitySet="ЗаказНаОтгрузкуПредставитель" />
+            <End Role="ЗаказНаОтгрузкуСвФЛ" EntitySet="ЗаказНаОтгрузкуСвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_Представитель" Association="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Представитель">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуПредставитель" EntitySet="ЗаказНаОтгрузкуПредставитель" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_СвФЛ" Association="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_СвФЛ">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуСвФЛ" EntitySet="ЗаказНаОтгрузкуСвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуУчастник_СвЮЛ" Association="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_СвЮЛ">
+            <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
+            <End Role="ЗаказНаОтгрузкуСвЮЛ" EntitySet="ЗаказНаОтгрузкуСвЮЛ" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуТаблица_СтрТабл" Association="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_СтрТабл">
+            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
+            <End Role="ЗаказНаОтгрузкуСтрТабл" EntitySet="ЗаказНаОтгрузкуСтрТабл" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="АктПриемкиАдрес">
           <Key>
@@ -4332,8 +5787,12 @@
           <Property Name="Файл_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ЗаказНаРазмещениеДокумент" Relationship="Dme.Core.Model.Файл_Документ" FromRole="ЗаказНаРазмещениеФайл" ToRole="ЗаказНаРазмещениеДокумент" />
           <Property Type="DateTime" Name="C_CreatedDT" Nullable="false" Precision="3" />
-          <Property Type="Boolean" Name="C_Processed" Nullable="false" />
-          <Property Type="DateTime" Name="C_ProcessedDT" Precision="3" />
+          <Property Name="C_WfState" Type="Int32" Nullable="false" />
+          <Property Name="C_WfLastUpdateDT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="C_WfLastUpdateUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="C_DeleteDT" Type="DateTime" Precision="3" />
+          <Property Name="C_DeletedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Мх1Адрес">
           <Key>
@@ -6599,6 +8058,1121 @@
           <Property Type="String" Name="КодАВЕ" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="КодНалСт" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="КодАВЕ">
+          <Key>
+            <PropertyRef Name="КодАВЕ1" />
+          </Key>
+          <Property Name="КодАВЕ1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Код" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="КодНалСт">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="КодНалСт1" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Мх3Адрес">
+          <Key>
+            <PropertyRef Name="Адрес_Id" />
+          </Key>
+          <Property Name="Тип" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <NavigationProperty Name="Мх3АдрИно" Relationship="Dme.Core.Model.Мх3Адрес_АдрИно" FromRole="Мх3Адрес" ToRole="Мх3АдрИно" />
+          <NavigationProperty Name="Мх3АдрРФ" Relationship="Dme.Core.Model.Мх3Адрес_АдрРФ" FromRole="Мх3Адрес" ToRole="Мх3АдрРФ" />
+          <NavigationProperty Name="Мх3Участник" Relationship="Dme.Core.Model.Мх3Участник_Адрес" FromRole="Мх3Адрес" ToRole="Мх3Участник" />
+        </EntityType>
+        <EntityType Name="Мх3АдрИно">
+          <Key>
+            <PropertyRef Name="АдрИно_Id" />
+          </Key>
+          <Property Name="КодСтр" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="АдрТекст" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес_Id" Type="Int32" />
+          <Property Name="АдрИно_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Мх3Адрес" Relationship="Dme.Core.Model.Мх3Адрес_АдрИно" FromRole="Мх3АдрИно" ToRole="Мх3Адрес" />
+        </EntityType>
+        <EntityType Name="Мх3АдрРФ">
+          <Key>
+            <PropertyRef Name="АдрРФ_Id" />
+          </Key>
+          <Property Name="Индекс" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="КодРегион" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Район" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Город" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="НаселПункт" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Улица" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Дом" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Корпус" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Кварт" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес_Id" Type="Int32" />
+          <Property Name="АдрРФ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Мх3Адрес" Relationship="Dme.Core.Model.Мх3Адрес_АдрРФ" FromRole="Мх3АдрРФ" ToRole="Мх3Адрес" />
+        </EntityType>
+        <EntityType Name="Мх3БанкРекв">
+          <Key>
+            <PropertyRef Name="БанкРекв_Id" />
+          </Key>
+          <Property Name="НаимБанк" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="БИК" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="РСчет" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="КСчет" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <Property Name="БанкРекв_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Мх3Участник" Relationship="Dme.Core.Model.Мх3Участник_БанкРекв" FromRole="Мх3БанкРекв" ToRole="Мх3Участник" />
+        </EntityType>
+        <EntityType Name="Мх3Документ">
+          <Key>
+            <PropertyRef Name="Документ_Id" />
+          </Key>
+          <Property Name="Дата" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Номер" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Документ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Файл_Id" Type="Int32" />
+          <NavigationProperty Name="Мх3Основание" Relationship="Dme.Core.Model.Мх3Документ_Основание" FromRole="Мх3Документ" ToRole="Мх3Основание" />
+          <NavigationProperty Name="Мх3Параметр" Relationship="Dme.Core.Model.Мх3Документ_Параметр" FromRole="Мх3Документ" ToRole="Мх3Параметр" />
+          <NavigationProperty Name="Мх3Таблица" Relationship="Dme.Core.Model.Мх3Документ_Таблица" FromRole="Мх3Документ" ToRole="Мх3Таблица" />
+          <NavigationProperty Name="Мх3Участник" Relationship="Dme.Core.Model.Мх3Документ_Участник" FromRole="Мх3Документ" ToRole="Мх3Участник" />
+          <NavigationProperty Name="Мх3Файл" Relationship="Dme.Core.Model.Мх3Файл_Документ" FromRole="Мх3Документ" ToRole="Мх3Файл" />
+        </EntityType>
+        <EntityType Name="Мх3ИтогТабл">
+          <Key>
+            <PropertyRef Name="ИтогТабл_Id" />
+          </Key>
+          <Property Name="Тип" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Кол_во" Type="Int32" />
+          <Property Name="Нетто" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Брутто" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="СуммаБезНал" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ИтогТабл_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Таблица_Id" Type="Int32" />
+          <NavigationProperty Name="Мх3Налог" Relationship="Dme.Core.Model.Мх3ИтогТабл_Налог" FromRole="Мх3ИтогТабл" ToRole="Мх3Налог" />
+          <NavigationProperty Name="Мх3Параметр" Relationship="Dme.Core.Model.Мх3ИтогТабл_Параметр" FromRole="Мх3ИтогТабл" ToRole="Мх3Параметр" />
+          <NavigationProperty Name="Мх3Таблица" Relationship="Dme.Core.Model.Мх3Таблица_ИтогТабл" FromRole="Мх3ИтогТабл" ToRole="Мх3Таблица" />
+        </EntityType>
+        <EntityType Name="Мх3Контакт">
+          <Key>
+            <PropertyRef Name="Контакт_Id" />
+          </Key>
+          <Property Name="Телефон" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Факс" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Internet" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <Property Name="Контакт_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Мх3Участник" Relationship="Dme.Core.Model.Мх3Участник_Контакт" FromRole="Мх3Контакт" ToRole="Мх3Участник" />
+        </EntityType>
+        <EntityType Name="Мх3Налог">
+          <Key>
+            <PropertyRef Name="Налог_Id" />
+          </Key>
+          <Property Name="Наим" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ставка" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ТипСтавки" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="СтрТабл_Id" Type="Int32" />
+          <Property Name="ИтогТабл_Id" Type="Int32" />
+          <Property Name="Налог_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Мх3ИтогТабл" Relationship="Dme.Core.Model.Мх3ИтогТабл_Налог" FromRole="Мх3Налог" ToRole="Мх3ИтогТабл" />
+          <NavigationProperty Name="Мх3СтрТабл" Relationship="Dme.Core.Model.Мх3СтрТабл_Налог" FromRole="Мх3Налог" ToRole="Мх3СтрТабл" />
+        </EntityType>
+        <EntityType Name="Мх3Основание">
+          <Key>
+            <PropertyRef Name="Основание_Id" />
+          </Key>
+          <Property Name="Номер" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="КодОКВ" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="СуммаБезНал" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="СрокОплаты" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Основание_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <NavigationProperty Name="Мх3Документ" Relationship="Dme.Core.Model.Мх3Документ_Основание" FromRole="Мх3Основание" ToRole="Мх3Документ" />
+          <NavigationProperty Name="Мх3Параметр" Relationship="Dme.Core.Model.Мх3Основание_Параметр" FromRole="Мх3Основание" ToRole="Мх3Параметр" />
+        </EntityType>
+        <EntityType Name="Мх3Параметр">
+          <Key>
+            <PropertyRef Name="Параметр_Id" />
+          </Key>
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Значение" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <Property Name="Основание_Id" Type="Int32" />
+          <Property Name="СтрТабл_Id" Type="Int32" />
+          <Property Name="ИтогТабл_Id" Type="Int32" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <Property Name="Параметр_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Мх3Документ" Relationship="Dme.Core.Model.Мх3Документ_Параметр" FromRole="Мх3Параметр" ToRole="Мх3Документ" />
+          <NavigationProperty Name="Мх3ИтогТабл" Relationship="Dme.Core.Model.Мх3ИтогТабл_Параметр" FromRole="Мх3Параметр" ToRole="Мх3ИтогТабл" />
+          <NavigationProperty Name="Мх3Основание" Relationship="Dme.Core.Model.Мх3Основание_Параметр" FromRole="Мх3Параметр" ToRole="Мх3Основание" />
+          <NavigationProperty Name="Мх3СтрТабл" Relationship="Dme.Core.Model.Мх3СтрТабл_Параметр" FromRole="Мх3Параметр" ToRole="Мх3СтрТабл" />
+          <NavigationProperty Name="Мх3Участник" Relationship="Dme.Core.Model.Мх3Участник_Параметр" FromRole="Мх3Параметр" ToRole="Мх3Участник" />
+        </EntityType>
+        <EntityType Name="Мх3Представитель">
+          <Key>
+            <PropertyRef Name="Представитель_Id" />
+          </Key>
+          <Property Name="Должность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Роль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Представитель_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <NavigationProperty Name="Мх3СвФЛ" Relationship="Dme.Core.Model.Мх3Представитель_СвФЛ" FromRole="Мх3Представитель" ToRole="Мх3СвФЛ" />
+          <NavigationProperty Name="Мх3Участник" Relationship="Dme.Core.Model.Мх3Участник_Представитель" FromRole="Мх3Представитель" ToRole="Мх3Участник" />
+        </EntityType>
+        <EntityType Name="Мх3СвФЛ">
+          <Key>
+            <PropertyRef Name="СвФЛ_Id" />
+          </Key>
+          <Property Name="ИНН" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Фамилия" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Обращение" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Представитель_Id" Type="Int32" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <Property Name="СвФЛ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Мх3Представитель" Relationship="Dme.Core.Model.Мх3Представитель_СвФЛ" FromRole="Мх3СвФЛ" ToRole="Мх3Представитель" />
+          <NavigationProperty Name="Мх3Участник" Relationship="Dme.Core.Model.Мх3Участник_СвФЛ" FromRole="Мх3СвФЛ" ToRole="Мх3Участник" />
+        </EntityType>
+        <EntityType Name="Мх3СвЮЛ">
+          <Key>
+            <PropertyRef Name="СвЮЛ_Id" />
+          </Key>
+          <Property Name="Наим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ОфицНаим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ИНН" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="КПП" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="ОКДП" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ОКПО" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <Property Name="СвЮЛ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Мх3Участник" Relationship="Dme.Core.Model.Мх3Участник_СвЮЛ" FromRole="Мх3СвЮЛ" ToRole="Мх3Участник" />
+        </EntityType>
+        <EntityType Name="Мх3СтрТабл">
+          <Key>
+            <PropertyRef Name="СтрТабл_Id" />
+          </Key>
+          <Property Name="ПорНомер" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Кол_во" Type="Int32" />
+          <Property Name="ЕдИзм" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ОКЕИ" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Цена" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="СуммаБезНал" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Описание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Ид" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="СтрТабл_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Таблица_Id" Type="Int32" />
+          <NavigationProperty Name="Мх3Налог" Relationship="Dme.Core.Model.Мх3СтрТабл_Налог" FromRole="Мх3СтрТабл" ToRole="Мх3Налог" />
+          <NavigationProperty Name="Мх3Параметр" Relationship="Dme.Core.Model.Мх3СтрТабл_Параметр" FromRole="Мх3СтрТабл" ToRole="Мх3Параметр" />
+          <NavigationProperty Name="Мх3Таблица" Relationship="Dme.Core.Model.Мх3Таблица_СтрТабл" FromRole="Мх3СтрТабл" ToRole="Мх3Таблица" />
+        </EntityType>
+        <EntityType Name="Мх3Таблица">
+          <Key>
+            <PropertyRef Name="Таблица_Id" />
+          </Key>
+          <Property Name="Тип" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Таблица_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <NavigationProperty Name="Мх3Документ" Relationship="Dme.Core.Model.Мх3Документ_Таблица" FromRole="Мх3Таблица" ToRole="Мх3Документ" />
+          <NavigationProperty Name="Мх3ИтогТабл" Relationship="Dme.Core.Model.Мх3Таблица_ИтогТабл" FromRole="Мх3Таблица" ToRole="Мх3ИтогТабл" />
+          <NavigationProperty Name="Мх3СтрТабл" Relationship="Dme.Core.Model.Мх3Таблица_СтрТабл" FromRole="Мх3Таблица" ToRole="Мх3СтрТабл" />
+        </EntityType>
+        <EntityType Name="Мх3Участник">
+          <Key>
+            <PropertyRef Name="Участник_Id" />
+          </Key>
+          <Property Name="Роль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Участник_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <NavigationProperty Name="Мх3Адрес" Relationship="Dme.Core.Model.Мх3Участник_Адрес" FromRole="Мх3Участник" ToRole="Мх3Адрес" />
+          <NavigationProperty Name="Мх3БанкРекв" Relationship="Dme.Core.Model.Мх3Участник_БанкРекв" FromRole="Мх3Участник" ToRole="Мх3БанкРекв" />
+          <NavigationProperty Name="Мх3Документ" Relationship="Dme.Core.Model.Мх3Документ_Участник" FromRole="Мх3Участник" ToRole="Мх3Документ" />
+          <NavigationProperty Name="Мх3Контакт" Relationship="Dme.Core.Model.Мх3Участник_Контакт" FromRole="Мх3Участник" ToRole="Мх3Контакт" />
+          <NavigationProperty Name="Мх3Параметр" Relationship="Dme.Core.Model.Мх3Участник_Параметр" FromRole="Мх3Участник" ToRole="Мх3Параметр" />
+          <NavigationProperty Name="Мх3Представитель" Relationship="Dme.Core.Model.Мх3Участник_Представитель" FromRole="Мх3Участник" ToRole="Мх3Представитель" />
+          <NavigationProperty Name="Мх3СвФЛ" Relationship="Dme.Core.Model.Мх3Участник_СвФЛ" FromRole="Мх3Участник" ToRole="Мх3СвФЛ" />
+          <NavigationProperty Name="Мх3СвЮЛ" Relationship="Dme.Core.Model.Мх3Участник_СвЮЛ" FromRole="Мх3Участник" ToRole="Мх3СвЮЛ" />
+        </EntityType>
+        <EntityType Name="Мх3Файл">
+          <Key>
+            <PropertyRef Name="Файл_Id" />
+          </Key>
+          <Property Name="ИдФайл" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ВерсПрог" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ИдФорм" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ВерсФорм" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Сформирован" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Файл_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_WfState" Type="Int32" Nullable="false" />
+          <Property Name="C_WfLastUpdateDT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="C_WfLastUpdateUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="C_DeleteDT" Type="DateTime" Precision="3" />
+          <Property Name="C_DeletedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Мх3Документ" Relationship="Dme.Core.Model.Мх3Файл_Документ" FromRole="Мх3Файл" ToRole="Мх3Документ" />
+        </EntityType>
+        <Association Name="Мх3Адрес_АдрИно">
+          <End Type="Dme.Core.Model.Мх3Адрес" Role="Мх3Адрес" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3АдрИно" Role="Мх3АдрИно" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Адрес">
+              <PropertyRef Name="Адрес_Id" />
+            </Principal>
+            <Dependent Role="Мх3АдрИно">
+              <PropertyRef Name="Адрес_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Адрес_АдрРФ">
+          <End Type="Dme.Core.Model.Мх3Адрес" Role="Мх3Адрес" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3АдрРФ" Role="Мх3АдрРФ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Адрес">
+              <PropertyRef Name="Адрес_Id" />
+            </Principal>
+            <Dependent Role="Мх3АдрРФ">
+              <PropertyRef Name="Адрес_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_Адрес">
+          <End Type="Dme.Core.Model.Мх3Участник" Role="Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Адрес" Role="Мх3Адрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3Адрес">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_БанкРекв">
+          <End Type="Dme.Core.Model.Мх3Участник" Role="Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3БанкРекв" Role="Мх3БанкРекв" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3БанкРекв">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Документ_Основание">
+          <End Type="Dme.Core.Model.Мх3Документ" Role="Мх3Документ" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Основание" Role="Мх3Основание" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Документ">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="Мх3Основание">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Документ_Параметр">
+          <End Type="Dme.Core.Model.Мх3Документ" Role="Мх3Документ" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Параметр" Role="Мх3Параметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Документ">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="Мх3Параметр">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Документ_Таблица">
+          <End Type="Dme.Core.Model.Мх3Документ" Role="Мх3Документ" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.Мх3Таблица" Role="Мх3Таблица" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Документ">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="Мх3Таблица">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Документ_Участник">
+          <End Type="Dme.Core.Model.Мх3Документ" Role="Мх3Документ" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.Мх3Участник" Role="Мх3Участник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Документ">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="Мх3Участник">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Файл_Документ">
+          <End Type="Dme.Core.Model.Мх3Файл" Role="Мх3Файл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Документ" Role="Мх3Документ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Файл">
+              <PropertyRef Name="Файл_Id" />
+            </Principal>
+            <Dependent Role="Мх3Документ">
+              <PropertyRef Name="Файл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3ИтогТабл_Налог">
+          <End Type="Dme.Core.Model.Мх3ИтогТабл" Role="Мх3ИтогТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Налог" Role="Мх3Налог" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3ИтогТабл">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Principal>
+            <Dependent Role="Мх3Налог">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3ИтогТабл_Параметр">
+          <End Type="Dme.Core.Model.Мх3ИтогТабл" Role="Мх3ИтогТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Параметр" Role="Мх3Параметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3ИтогТабл">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Principal>
+            <Dependent Role="Мх3Параметр">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Таблица_ИтогТабл">
+          <End Type="Dme.Core.Model.Мх3Таблица" Role="Мх3Таблица" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3ИтогТабл" Role="Мх3ИтогТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Таблица">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="Мх3ИтогТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_Контакт">
+          <End Type="Dme.Core.Model.Мх3Участник" Role="Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Контакт" Role="Мх3Контакт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3Контакт">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3СтрТабл_Налог">
+          <End Type="Dme.Core.Model.Мх3СтрТабл" Role="Мх3СтрТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Налог" Role="Мх3Налог" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3СтрТабл">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Principal>
+            <Dependent Role="Мх3Налог">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Основание_Параметр">
+          <End Type="Dme.Core.Model.Мх3Основание" Role="Мх3Основание" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.Мх3Параметр" Role="Мх3Параметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Основание">
+              <PropertyRef Name="Основание_Id" />
+            </Principal>
+            <Dependent Role="Мх3Параметр">
+              <PropertyRef Name="Основание_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3СтрТабл_Параметр">
+          <End Type="Dme.Core.Model.Мх3СтрТабл" Role="Мх3СтрТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Параметр" Role="Мх3Параметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3СтрТабл">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Principal>
+            <Dependent Role="Мх3Параметр">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_Параметр">
+          <End Type="Dme.Core.Model.Мх3Участник" Role="Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Параметр" Role="Мх3Параметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3Параметр">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Представитель_СвФЛ">
+          <End Type="Dme.Core.Model.Мх3Представитель" Role="Мх3Представитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3СвФЛ" Role="Мх3СвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Представитель">
+              <PropertyRef Name="Представитель_Id" />
+            </Principal>
+            <Dependent Role="Мх3СвФЛ">
+              <PropertyRef Name="Представитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_Представитель">
+          <End Type="Dme.Core.Model.Мх3Участник" Role="Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3Представитель" Role="Мх3Представитель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3Представитель">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_СвФЛ">
+          <End Type="Dme.Core.Model.Мх3Участник" Role="Мх3Участник" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.Мх3СвФЛ" Role="Мх3СвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3СвФЛ">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Участник_СвЮЛ">
+          <End Type="Dme.Core.Model.Мх3Участник" Role="Мх3Участник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3СвЮЛ" Role="Мх3СвЮЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Участник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="Мх3СвЮЛ">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Таблица_СтрТабл">
+          <End Type="Dme.Core.Model.Мх3Таблица" Role="Мх3Таблица" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.Мх3СтрТабл" Role="Мх3СтрТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Таблица">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="Мх3СтрТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ЗаказНаОтгрузкуАдрес">
+          <Key>
+            <PropertyRef Name="Адрес_Id" />
+          </Key>
+          <Property Name="Тип" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуАдрИно" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуАдрес_АдрИно" FromRole="ЗаказНаОтгрузкуАдрес" ToRole="ЗаказНаОтгрузкуАдрИно" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуАдрРФ" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуАдрес_АдрРФ" FromRole="ЗаказНаОтгрузкуАдрес" ToRole="ЗаказНаОтгрузкуАдрРФ" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуУчастник" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Адрес" FromRole="ЗаказНаОтгрузкуАдрес" ToRole="ЗаказНаОтгрузкуУчастник" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуАдрИно">
+          <Key>
+            <PropertyRef Name="АдрИно_Id" />
+          </Key>
+          <Property Name="КодСтр" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="АдрТекст" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес_Id" Type="Int32" />
+          <Property Name="АдрИно_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуАдрес" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуАдрес_АдрИно" FromRole="ЗаказНаОтгрузкуАдрИно" ToRole="ЗаказНаОтгрузкуАдрес" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуАдрРФ">
+          <Key>
+            <PropertyRef Name="АдрРФ_Id" />
+          </Key>
+          <Property Name="Индекс" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="КодРегион" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Район" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Город" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="НаселПункт" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Улица" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Дом" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Корпус" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Кварт" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес_Id" Type="Int32" />
+          <Property Name="АдрРФ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуАдрес" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуАдрес_АдрРФ" FromRole="ЗаказНаОтгрузкуАдрРФ" ToRole="ЗаказНаОтгрузкуАдрес" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуБанкРекв">
+          <Key>
+            <PropertyRef Name="БанкРекв_Id" />
+          </Key>
+          <Property Name="НаимБанк" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="БИК" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="РСчет" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="КСчет" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <Property Name="БанкРекв_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуУчастник" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_БанкРекв" FromRole="ЗаказНаОтгрузкуБанкРекв" ToRole="ЗаказНаОтгрузкуУчастник" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуДокумент">
+          <Key>
+            <PropertyRef Name="Документ_Id" />
+          </Key>
+          <Property Name="Дата" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Номер" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Документ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Файл_Id" Type="Int32" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуОснование" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Основание" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуОснование" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуПараметр" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Параметр" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуПараметр" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуТаблица" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Таблица" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуТаблица" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуУчастник" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Участник" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуУчастник" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуФайл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуФайл_Документ" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуФайл" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуИтогТабл">
+          <Key>
+            <PropertyRef Name="ИтогТабл_Id" />
+          </Key>
+          <Property Name="Тип" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Кол_во" Type="Int32" />
+          <Property Name="Нетто" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Брутто" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="СуммаБезНал" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ИтогТабл_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Таблица_Id" Type="Int32" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуНалог" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл_Налог" FromRole="ЗаказНаОтгрузкуИтогТабл" ToRole="ЗаказНаОтгрузкуНалог" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуПараметр" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл_Параметр" FromRole="ЗаказНаОтгрузкуИтогТабл" ToRole="ЗаказНаОтгрузкуПараметр" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуТаблица" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_ИтогТабл" FromRole="ЗаказНаОтгрузкуИтогТабл" ToRole="ЗаказНаОтгрузкуТаблица" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуКонтакт">
+          <Key>
+            <PropertyRef Name="Контакт_Id" />
+          </Key>
+          <Property Name="Телефон" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Факс" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Internet" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <Property Name="Контакт_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуУчастник" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Контакт" FromRole="ЗаказНаОтгрузкуКонтакт" ToRole="ЗаказНаОтгрузкуУчастник" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуНалог">
+          <Key>
+            <PropertyRef Name="Налог_Id" />
+          </Key>
+          <Property Name="Наим" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ставка" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ТипСтавки" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="СтрТабл_Id" Type="Int32" />
+          <Property Name="ИтогТабл_Id" Type="Int32" />
+          <Property Name="Налог_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуИтогТабл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл_Налог" FromRole="ЗаказНаОтгрузкуНалог" ToRole="ЗаказНаОтгрузкуИтогТабл" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуСтрТабл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл_Налог" FromRole="ЗаказНаОтгрузкуНалог" ToRole="ЗаказНаОтгрузкуСтрТабл" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуОснование">
+          <Key>
+            <PropertyRef Name="Основание_Id" />
+          </Key>
+          <Property Name="Номер" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="КодОКВ" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="СуммаБезНал" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="СрокОплаты" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Основание_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуДокумент" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Основание" FromRole="ЗаказНаОтгрузкуОснование" ToRole="ЗаказНаОтгрузкуДокумент" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуПараметр" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуОснование_Параметр" FromRole="ЗаказНаОтгрузкуОснование" ToRole="ЗаказНаОтгрузкуПараметр" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуПараметр">
+          <Key>
+            <PropertyRef Name="Параметр_Id" />
+          </Key>
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Значение" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <Property Name="Основание_Id" Type="Int32" />
+          <Property Name="СтрТабл_Id" Type="Int32" />
+          <Property Name="ИтогТабл_Id" Type="Int32" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <Property Name="Параметр_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуДокумент" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Параметр" FromRole="ЗаказНаОтгрузкуПараметр" ToRole="ЗаказНаОтгрузкуДокумент" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуИтогТабл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл_Параметр" FromRole="ЗаказНаОтгрузкуПараметр" ToRole="ЗаказНаОтгрузкуИтогТабл" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуОснование" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуОснование_Параметр" FromRole="ЗаказНаОтгрузкуПараметр" ToRole="ЗаказНаОтгрузкуОснование" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуСтрТабл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл_Параметр" FromRole="ЗаказНаОтгрузкуПараметр" ToRole="ЗаказНаОтгрузкуСтрТабл" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуУчастник" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Параметр" FromRole="ЗаказНаОтгрузкуПараметр" ToRole="ЗаказНаОтгрузкуУчастник" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуПредставитель">
+          <Key>
+            <PropertyRef Name="Представитель_Id" />
+          </Key>
+          <Property Name="Должность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Роль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Представитель_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуСвФЛ" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуПредставитель_СвФЛ" FromRole="ЗаказНаОтгрузкуПредставитель" ToRole="ЗаказНаОтгрузкуСвФЛ" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуУчастник" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Представитель" FromRole="ЗаказНаОтгрузкуПредставитель" ToRole="ЗаказНаОтгрузкуУчастник" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуСвФЛ">
+          <Key>
+            <PropertyRef Name="СвФЛ_Id" />
+          </Key>
+          <Property Name="ИНН" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Фамилия" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Обращение" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Представитель_Id" Type="Int32" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <Property Name="СвФЛ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуПредставитель" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуПредставитель_СвФЛ" FromRole="ЗаказНаОтгрузкуСвФЛ" ToRole="ЗаказНаОтгрузкуПредставитель" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуУчастник" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_СвФЛ" FromRole="ЗаказНаОтгрузкуСвФЛ" ToRole="ЗаказНаОтгрузкуУчастник" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуСвЮЛ">
+          <Key>
+            <PropertyRef Name="СвЮЛ_Id" />
+          </Key>
+          <Property Name="Наим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ОфицНаим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ИНН" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="КПП" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="ОКДП" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ОКПО" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Участник_Id" Type="Int32" />
+          <Property Name="СвЮЛ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуУчастник" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_СвЮЛ" FromRole="ЗаказНаОтгрузкуСвЮЛ" ToRole="ЗаказНаОтгрузкуУчастник" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуСтрТабл">
+          <Key>
+            <PropertyRef Name="СтрТабл_Id" />
+          </Key>
+          <Property Name="ПорНомер" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Кол_во" Type="Int32" />
+          <Property Name="ЕдИзм" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ОКЕИ" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Цена" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="СуммаБезНал" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Описание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Ид" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="СтрТабл_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Таблица_Id" Type="Int32" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуНалог" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл_Налог" FromRole="ЗаказНаОтгрузкуСтрТабл" ToRole="ЗаказНаОтгрузкуНалог" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуПараметр" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл_Параметр" FromRole="ЗаказНаОтгрузкуСтрТабл" ToRole="ЗаказНаОтгрузкуПараметр" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуТаблица" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_СтрТабл" FromRole="ЗаказНаОтгрузкуСтрТабл" ToRole="ЗаказНаОтгрузкуТаблица" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуТаблица">
+          <Key>
+            <PropertyRef Name="Таблица_Id" />
+          </Key>
+          <Property Name="Тип" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Таблица_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуДокумент" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Таблица" FromRole="ЗаказНаОтгрузкуТаблица" ToRole="ЗаказНаОтгрузкуДокумент" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуИтогТабл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_ИтогТабл" FromRole="ЗаказНаОтгрузкуТаблица" ToRole="ЗаказНаОтгрузкуИтогТабл" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуСтрТабл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_СтрТабл" FromRole="ЗаказНаОтгрузкуТаблица" ToRole="ЗаказНаОтгрузкуСтрТабл" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуУчастник">
+          <Key>
+            <PropertyRef Name="Участник_Id" />
+          </Key>
+          <Property Name="Роль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Участник_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуАдрес" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Адрес" FromRole="ЗаказНаОтгрузкуУчастник" ToRole="ЗаказНаОтгрузкуАдрес" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуБанкРекв" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_БанкРекв" FromRole="ЗаказНаОтгрузкуУчастник" ToRole="ЗаказНаОтгрузкуБанкРекв" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуДокумент" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Участник" FromRole="ЗаказНаОтгрузкуУчастник" ToRole="ЗаказНаОтгрузкуДокумент" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуКонтакт" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Контакт" FromRole="ЗаказНаОтгрузкуУчастник" ToRole="ЗаказНаОтгрузкуКонтакт" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуПараметр" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Параметр" FromRole="ЗаказНаОтгрузкуУчастник" ToRole="ЗаказНаОтгрузкуПараметр" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуПредставитель" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Представитель" FromRole="ЗаказНаОтгрузкуУчастник" ToRole="ЗаказНаОтгрузкуПредставитель" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуСвФЛ" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_СвФЛ" FromRole="ЗаказНаОтгрузкуУчастник" ToRole="ЗаказНаОтгрузкуСвФЛ" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуСвЮЛ" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_СвЮЛ" FromRole="ЗаказНаОтгрузкуУчастник" ToRole="ЗаказНаОтгрузкуСвЮЛ" />
+        </EntityType>
+        <EntityType Name="ЗаказНаОтгрузкуФайл">
+          <Key>
+            <PropertyRef Name="Файл_Id" />
+          </Key>
+          <Property Name="ИдФайл" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ВерсПрог" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ИдФорм" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ВерсФорм" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Сформирован" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Файл_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_WfState" Type="Int32" Nullable="false" />
+          <Property Name="C_WfLastUpdateDT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="C_WfLastUpdateUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="C_DeleteDT" Type="DateTime" Precision="3" />
+          <Property Name="C_DeletedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуДокумент" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуФайл_Документ" FromRole="ЗаказНаОтгрузкуФайл" ToRole="ЗаказНаОтгрузкуДокумент" />
+          <Property Name="C_CreatedDT" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="ЗаказНаОтгрузкуАдрес_АдрИно">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуАдрес" Role="ЗаказНаОтгрузкуАдрес" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуАдрИно" Role="ЗаказНаОтгрузкуАдрИно" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуАдрес">
+              <PropertyRef Name="Адрес_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуАдрИно">
+              <PropertyRef Name="Адрес_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуАдрес_АдрРФ">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуАдрес" Role="ЗаказНаОтгрузкуАдрес" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуАдрРФ" Role="ЗаказНаОтгрузкуАдрРФ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуАдрес">
+              <PropertyRef Name="Адрес_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуАдрРФ">
+              <PropertyRef Name="Адрес_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_Адрес">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" Role="ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуАдрес" Role="ЗаказНаОтгрузкуАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуАдрес">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_БанкРекв">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" Role="ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуБанкРекв" Role="ЗаказНаОтгрузкуБанкРекв" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуБанкРекв">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуДокумент_Основание">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуДокумент" Role="ЗаказНаОтгрузкуДокумент" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуОснование" Role="ЗаказНаОтгрузкуОснование" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуОснование">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуДокумент_Параметр">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуДокумент" Role="ЗаказНаОтгрузкуДокумент" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуПараметр" Role="ЗаказНаОтгрузкуПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПараметр">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуДокумент_Таблица">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуДокумент" Role="ЗаказНаОтгрузкуДокумент" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуТаблица" Role="ЗаказНаОтгрузкуТаблица" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуТаблица">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуДокумент_Участник">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуДокумент" Role="ЗаказНаОтгрузкуДокумент" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" Role="ЗаказНаОтгрузкуУчастник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуФайл_Документ">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуФайл" Role="ЗаказНаОтгрузкуФайл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуДокумент" Role="ЗаказНаОтгрузкуДокумент" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуФайл">
+              <PropertyRef Name="Файл_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Файл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуИтогТабл_Налог">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл" Role="ЗаказНаОтгрузкуИтогТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуНалог" Role="ЗаказНаОтгрузкуНалог" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуИтогТабл">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуНалог">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуИтогТабл_Параметр">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл" Role="ЗаказНаОтгрузкуИтогТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуПараметр" Role="ЗаказНаОтгрузкуПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуИтогТабл">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПараметр">
+              <PropertyRef Name="ИтогТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуТаблица_ИтогТабл">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуТаблица" Role="ЗаказНаОтгрузкуТаблица" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл" Role="ЗаказНаОтгрузкуИтогТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуТаблица">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуИтогТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_Контакт">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" Role="ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуКонтакт" Role="ЗаказНаОтгрузкуКонтакт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуКонтакт">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуСтрТабл_Налог">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл" Role="ЗаказНаОтгрузкуСтрТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуНалог" Role="ЗаказНаОтгрузкуНалог" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуСтрТабл">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуНалог">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуОснование_Параметр">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуОснование" Role="ЗаказНаОтгрузкуОснование" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуПараметр" Role="ЗаказНаОтгрузкуПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуОснование">
+              <PropertyRef Name="Основание_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПараметр">
+              <PropertyRef Name="Основание_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуСтрТабл_Параметр">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл" Role="ЗаказНаОтгрузкуСтрТабл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуПараметр" Role="ЗаказНаОтгрузкуПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуСтрТабл">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПараметр">
+              <PropertyRef Name="СтрТабл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_Параметр">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" Role="ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуПараметр" Role="ЗаказНаОтгрузкуПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПараметр">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуПредставитель_СвФЛ">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуПредставитель" Role="ЗаказНаОтгрузкуПредставитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуСвФЛ" Role="ЗаказНаОтгрузкуСвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуПредставитель">
+              <PropertyRef Name="Представитель_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуСвФЛ">
+              <PropertyRef Name="Представитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_Представитель">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" Role="ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуПредставитель" Role="ЗаказНаОтгрузкуПредставитель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуПредставитель">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_СвФЛ">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" Role="ЗаказНаОтгрузкуУчастник" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуСвФЛ" Role="ЗаказНаОтгрузкуСвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуСвФЛ">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуУчастник_СвЮЛ">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" Role="ЗаказНаОтгрузкуУчастник" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуСвЮЛ" Role="ЗаказНаОтгрузкуСвЮЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуУчастник">
+              <PropertyRef Name="Участник_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуСвЮЛ">
+              <PropertyRef Name="Участник_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуТаблица_СтрТабл">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуТаблица" Role="ЗаказНаОтгрузкуТаблица" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл" Role="ЗаказНаОтгрузкуСтрТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуТаблица">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуСтрТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6954,8 +9528,12 @@
           <EntitySetMapping Name="ЗаказНаРазмещениеФайл">
             <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаРазмещениеФайл">
               <MappingFragment StoreEntitySet="ЗаказНаРазмещениеФайл">
-                <ScalarProperty Name="C_ProcessedDT" ColumnName="_ProcessedDT" />
-                <ScalarProperty Name="C_Processed" ColumnName="_Processed" />
+                <ScalarProperty Name="C_DeletedUser" ColumnName="_DeletedUser" />
+                <ScalarProperty Name="C_DeleteDT" ColumnName="_DeleteDT" />
+                <ScalarProperty Name="C_Deleted" ColumnName="_Deleted" />
+                <ScalarProperty Name="C_WfLastUpdateUser" ColumnName="_WfLastUpdateUser" />
+                <ScalarProperty Name="C_WfLastUpdateDT" ColumnName="_WfLastUpdateDT" />
+                <ScalarProperty Name="C_WfState" ColumnName="_WfState" />
                 <ScalarProperty Name="C_CreatedDT" ColumnName="_CreatedDT" />
                 <ScalarProperty Name="ВерсПрог" ColumnName="ВерсПрог" />
                 <ScalarProperty Name="ВерсияФормата" ColumnName="ВерсияФормата" />
@@ -7630,6 +10208,473 @@
                 <ScalarProperty Name="Название" ColumnName="Название" />
                 <ScalarProperty Name="ШтрихКод" ColumnName="ШтрихКод" />
                 <ScalarProperty Name="Код" ColumnName="Код" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="КодАВЕ">
+            <EntityTypeMapping TypeName="Dme.Core.Model.КодАВЕ">
+              <MappingFragment StoreEntitySet="КодАВЕ">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="КодАВЕ1" ColumnName="КодАВЕ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="КодНалСт">
+            <EntityTypeMapping TypeName="Dme.Core.Model.КодНалСт">
+              <MappingFragment StoreEntitySet="КодНалСт">
+                <ScalarProperty Name="КодНалСт1" ColumnName="КодНалСт" />
+                <ScalarProperty Name="Код" ColumnName="Код" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3Адрес">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Адрес">
+              <MappingFragment StoreEntitySet="Мх3Адрес">
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Адрес_Id" ColumnName="Адрес_Id" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3АдрИно">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3АдрИно">
+              <MappingFragment StoreEntitySet="Мх3АдрИно">
+                <ScalarProperty Name="АдрИно_Id" ColumnName="АдрИно_Id" />
+                <ScalarProperty Name="Адрес_Id" ColumnName="Адрес_Id" />
+                <ScalarProperty Name="АдрТекст" ColumnName="АдрТекст" />
+                <ScalarProperty Name="КодСтр" ColumnName="КодСтр" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3АдрРФ">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3АдрРФ">
+              <MappingFragment StoreEntitySet="Мх3АдрРФ">
+                <ScalarProperty Name="АдрРФ_Id" ColumnName="АдрРФ_Id" />
+                <ScalarProperty Name="Адрес_Id" ColumnName="Адрес_Id" />
+                <ScalarProperty Name="Кварт" ColumnName="Кварт" />
+                <ScalarProperty Name="Корпус" ColumnName="Корпус" />
+                <ScalarProperty Name="Дом" ColumnName="Дом" />
+                <ScalarProperty Name="Улица" ColumnName="Улица" />
+                <ScalarProperty Name="НаселПункт" ColumnName="НаселПункт" />
+                <ScalarProperty Name="Город" ColumnName="Город" />
+                <ScalarProperty Name="Район" ColumnName="Район" />
+                <ScalarProperty Name="КодРегион" ColumnName="КодРегион" />
+                <ScalarProperty Name="Индекс" ColumnName="Индекс" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3БанкРекв">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3БанкРекв">
+              <MappingFragment StoreEntitySet="Мх3БанкРекв">
+                <ScalarProperty Name="БанкРекв_Id" ColumnName="БанкРекв_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="КСчет" ColumnName="КСчет" />
+                <ScalarProperty Name="РСчет" ColumnName="РСчет" />
+                <ScalarProperty Name="БИК" ColumnName="БИК" />
+                <ScalarProperty Name="НаимБанк" ColumnName="НаимБанк" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3Документ">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Документ">
+              <MappingFragment StoreEntitySet="Мх3Документ">
+                <ScalarProperty Name="Файл_Id" ColumnName="Файл_Id" />
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3ИтогТабл">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3ИтогТабл">
+              <MappingFragment StoreEntitySet="Мх3ИтогТабл">
+                <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
+                <ScalarProperty Name="ИтогТабл_Id" ColumnName="ИтогТабл_Id" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="СуммаБезНал" ColumnName="СуммаБезНал" />
+                <ScalarProperty Name="Брутто" ColumnName="Брутто" />
+                <ScalarProperty Name="Нетто" ColumnName="Нетто" />
+                <ScalarProperty Name="Кол_во" ColumnName="Кол_во" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3Контакт">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Контакт">
+              <MappingFragment StoreEntitySet="Мх3Контакт">
+                <ScalarProperty Name="Контакт_Id" ColumnName="Контакт_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Internet" ColumnName="Internet" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Факс" ColumnName="Факс" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3Налог">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Налог">
+              <MappingFragment StoreEntitySet="Мх3Налог">
+                <ScalarProperty Name="Налог_Id" ColumnName="Налог_Id" />
+                <ScalarProperty Name="ИтогТабл_Id" ColumnName="ИтогТабл_Id" />
+                <ScalarProperty Name="СтрТабл_Id" ColumnName="СтрТабл_Id" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="ТипСтавки" ColumnName="ТипСтавки" />
+                <ScalarProperty Name="Ставка" ColumnName="Ставка" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3Основание">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Основание">
+              <MappingFragment StoreEntitySet="Мх3Основание">
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Основание_Id" ColumnName="Основание_Id" />
+                <ScalarProperty Name="СрокОплаты" ColumnName="СрокОплаты" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="СуммаБезНал" ColumnName="СуммаБезНал" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="КодОКВ" ColumnName="КодОКВ" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3Параметр">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Параметр">
+              <MappingFragment StoreEntitySet="Мх3Параметр">
+                <ScalarProperty Name="Параметр_Id" ColumnName="Параметр_Id" />
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="ИтогТабл_Id" ColumnName="ИтогТабл_Id" />
+                <ScalarProperty Name="СтрТабл_Id" ColumnName="СтрТабл_Id" />
+                <ScalarProperty Name="Основание_Id" ColumnName="Основание_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Значение" ColumnName="Значение" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3Представитель">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Представитель">
+              <MappingFragment StoreEntitySet="Мх3Представитель">
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Представитель_Id" ColumnName="Представитель_Id" />
+                <ScalarProperty Name="Роль" ColumnName="Роль" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3СвФЛ">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3СвФЛ">
+              <MappingFragment StoreEntitySet="Мх3СвФЛ">
+                <ScalarProperty Name="СвФЛ_Id" ColumnName="СвФЛ_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Представитель_Id" ColumnName="Представитель_Id" />
+                <ScalarProperty Name="Обращение" ColumnName="Обращение" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="ИНН" ColumnName="ИНН" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3СвЮЛ">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3СвЮЛ">
+              <MappingFragment StoreEntitySet="Мх3СвЮЛ">
+                <ScalarProperty Name="СвЮЛ_Id" ColumnName="СвЮЛ_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="ОКПО" ColumnName="ОКПО" />
+                <ScalarProperty Name="ОКДП" ColumnName="ОКДП" />
+                <ScalarProperty Name="КПП" ColumnName="КПП" />
+                <ScalarProperty Name="ИНН" ColumnName="ИНН" />
+                <ScalarProperty Name="ОфицНаим" ColumnName="ОфицНаим" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3СтрТабл">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3СтрТабл">
+              <MappingFragment StoreEntitySet="Мх3СтрТабл">
+                <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
+                <ScalarProperty Name="СтрТабл_Id" ColumnName="СтрТабл_Id" />
+                <ScalarProperty Name="Ид" ColumnName="Ид" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="СуммаБезНал" ColumnName="СуммаБезНал" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="ОКЕИ" ColumnName="ОКЕИ" />
+                <ScalarProperty Name="ЕдИзм" ColumnName="ЕдИзм" />
+                <ScalarProperty Name="Кол_во" ColumnName="Кол_во" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="ПорНомер" ColumnName="ПорНомер" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3Таблица">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Таблица">
+              <MappingFragment StoreEntitySet="Мх3Таблица">
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3Участник">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Участник">
+              <MappingFragment StoreEntitySet="Мх3Участник">
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Роль" ColumnName="Роль" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3Файл">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Файл">
+              <MappingFragment StoreEntitySet="Мх3Файл">
+                <ScalarProperty Name="C_DeletedUser" ColumnName="_DeletedUser" />
+                <ScalarProperty Name="C_DeleteDT" ColumnName="_DeleteDT" />
+                <ScalarProperty Name="C_Deleted" ColumnName="_Deleted" />
+                <ScalarProperty Name="C_WfLastUpdateUser" ColumnName="_WfLastUpdateUser" />
+                <ScalarProperty Name="C_WfLastUpdateDT" ColumnName="_WfLastUpdateDT" />
+                <ScalarProperty Name="C_WfState" ColumnName="_WfState" />
+                <ScalarProperty Name="Файл_Id" ColumnName="Файл_Id" />
+                <ScalarProperty Name="Сформирован" ColumnName="Сформирован" />
+                <ScalarProperty Name="ВерсФорм" ColumnName="ВерсФорм" />
+                <ScalarProperty Name="ИдФорм" ColumnName="ИдФорм" />
+                <ScalarProperty Name="ВерсПрог" ColumnName="ВерсПрог" />
+                <ScalarProperty Name="ИдФайл" ColumnName="ИдФайл" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуАдрес">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуАдрес">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуАдрес">
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Адрес_Id" ColumnName="Адрес_Id" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуАдрИно">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуАдрИно">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуАдрИно">
+                <ScalarProperty Name="АдрИно_Id" ColumnName="АдрИно_Id" />
+                <ScalarProperty Name="Адрес_Id" ColumnName="Адрес_Id" />
+                <ScalarProperty Name="АдрТекст" ColumnName="АдрТекст" />
+                <ScalarProperty Name="КодСтр" ColumnName="КодСтр" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуАдрРФ">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуАдрРФ">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуАдрРФ">
+                <ScalarProperty Name="АдрРФ_Id" ColumnName="АдрРФ_Id" />
+                <ScalarProperty Name="Адрес_Id" ColumnName="Адрес_Id" />
+                <ScalarProperty Name="Кварт" ColumnName="Кварт" />
+                <ScalarProperty Name="Корпус" ColumnName="Корпус" />
+                <ScalarProperty Name="Дом" ColumnName="Дом" />
+                <ScalarProperty Name="Улица" ColumnName="Улица" />
+                <ScalarProperty Name="НаселПункт" ColumnName="НаселПункт" />
+                <ScalarProperty Name="Город" ColumnName="Город" />
+                <ScalarProperty Name="Район" ColumnName="Район" />
+                <ScalarProperty Name="КодРегион" ColumnName="КодРегион" />
+                <ScalarProperty Name="Индекс" ColumnName="Индекс" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуБанкРекв">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуБанкРекв">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуБанкРекв">
+                <ScalarProperty Name="БанкРекв_Id" ColumnName="БанкРекв_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="КСчет" ColumnName="КСчет" />
+                <ScalarProperty Name="РСчет" ColumnName="РСчет" />
+                <ScalarProperty Name="БИК" ColumnName="БИК" />
+                <ScalarProperty Name="НаимБанк" ColumnName="НаимБанк" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуДокумент">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуДокумент">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуДокумент">
+                <ScalarProperty Name="Файл_Id" ColumnName="Файл_Id" />
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуИтогТабл">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуИтогТабл">
+                <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
+                <ScalarProperty Name="ИтогТабл_Id" ColumnName="ИтогТабл_Id" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="СуммаБезНал" ColumnName="СуммаБезНал" />
+                <ScalarProperty Name="Брутто" ColumnName="Брутто" />
+                <ScalarProperty Name="Нетто" ColumnName="Нетто" />
+                <ScalarProperty Name="Кол_во" ColumnName="Кол_во" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуКонтакт">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуКонтакт">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуКонтакт">
+                <ScalarProperty Name="Контакт_Id" ColumnName="Контакт_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Internet" ColumnName="Internet" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Факс" ColumnName="Факс" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуНалог">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуНалог">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуНалог">
+                <ScalarProperty Name="Налог_Id" ColumnName="Налог_Id" />
+                <ScalarProperty Name="ИтогТабл_Id" ColumnName="ИтогТабл_Id" />
+                <ScalarProperty Name="СтрТабл_Id" ColumnName="СтрТабл_Id" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="ТипСтавки" ColumnName="ТипСтавки" />
+                <ScalarProperty Name="Ставка" ColumnName="Ставка" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуОснование">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуОснование">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуОснование">
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Основание_Id" ColumnName="Основание_Id" />
+                <ScalarProperty Name="СрокОплаты" ColumnName="СрокОплаты" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="СуммаБезНал" ColumnName="СуммаБезНал" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="КодОКВ" ColumnName="КодОКВ" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуПараметр">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуПараметр">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуПараметр">
+                <ScalarProperty Name="Параметр_Id" ColumnName="Параметр_Id" />
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="ИтогТабл_Id" ColumnName="ИтогТабл_Id" />
+                <ScalarProperty Name="СтрТабл_Id" ColumnName="СтрТабл_Id" />
+                <ScalarProperty Name="Основание_Id" ColumnName="Основание_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Значение" ColumnName="Значение" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуПредставитель">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуПредставитель">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуПредставитель">
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Представитель_Id" ColumnName="Представитель_Id" />
+                <ScalarProperty Name="Роль" ColumnName="Роль" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуСвФЛ">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуСвФЛ">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуСвФЛ">
+                <ScalarProperty Name="СвФЛ_Id" ColumnName="СвФЛ_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Представитель_Id" ColumnName="Представитель_Id" />
+                <ScalarProperty Name="Обращение" ColumnName="Обращение" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="ИНН" ColumnName="ИНН" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуСвЮЛ">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуСвЮЛ">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуСвЮЛ">
+                <ScalarProperty Name="СвЮЛ_Id" ColumnName="СвЮЛ_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="ОКПО" ColumnName="ОКПО" />
+                <ScalarProperty Name="ОКДП" ColumnName="ОКДП" />
+                <ScalarProperty Name="КПП" ColumnName="КПП" />
+                <ScalarProperty Name="ИНН" ColumnName="ИНН" />
+                <ScalarProperty Name="ОфицНаим" ColumnName="ОфицНаим" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуСтрТабл">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуСтрТабл">
+                <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
+                <ScalarProperty Name="СтрТабл_Id" ColumnName="СтрТабл_Id" />
+                <ScalarProperty Name="Ид" ColumnName="Ид" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="СуммаБезНал" ColumnName="СуммаБезНал" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="ОКЕИ" ColumnName="ОКЕИ" />
+                <ScalarProperty Name="ЕдИзм" ColumnName="ЕдИзм" />
+                <ScalarProperty Name="Кол_во" ColumnName="Кол_во" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="ПорНомер" ColumnName="ПорНомер" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуТаблица">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуТаблица">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуТаблица">
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуУчастник">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуУчастник">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуУчастник">
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
+                <ScalarProperty Name="Роль" ColumnName="Роль" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуФайл">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуФайл">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуФайл">
+                <ScalarProperty Name="C_CreatedDT" ColumnName="_CreatedDT" />
+                <ScalarProperty Name="C_DeletedUser" ColumnName="_DeletedUser" />
+                <ScalarProperty Name="C_DeleteDT" ColumnName="_DeleteDT" />
+                <ScalarProperty Name="C_Deleted" ColumnName="_Deleted" />
+                <ScalarProperty Name="C_WfLastUpdateUser" ColumnName="_WfLastUpdateUser" />
+                <ScalarProperty Name="C_WfLastUpdateDT" ColumnName="_WfLastUpdateDT" />
+                <ScalarProperty Name="C_WfState" ColumnName="_WfState" />
+                <ScalarProperty Name="Файл_Id" ColumnName="Файл_Id" />
+                <ScalarProperty Name="Сформирован" ColumnName="Сформирован" />
+                <ScalarProperty Name="ВерсФорм" ColumnName="ВерсФорм" />
+                <ScalarProperty Name="ИдФорм" ColumnName="ИдФорм" />
+                <ScalarProperty Name="ВерсПрог" ColumnName="ВерсПрог" />
+                <ScalarProperty Name="ИдФайл" ColumnName="ИдФайл" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -184,6 +184,57 @@
     <Compile Include="АктПриемкиХарактеристика.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ЗаказНаОтгрузкуАдрес.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуАдрИно.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуАдрРФ.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуБанкРекв.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуДокумент.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуИтогТабл.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуКонтакт.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуНалог.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуОснование.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуПараметр.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуПредставитель.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуСвФЛ.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуСвЮЛ.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуСтрТабл.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуТаблица.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуУчастник.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаказНаОтгрузкуФайл.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="ЗаказНаРазмещениеАдрес.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -256,6 +307,12 @@
     <Compile Include="Клиенты.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="КодАВЕ.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="КодНалСт.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Мх1Адрес.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -314,6 +371,57 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Мх1Характеристика.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3Адрес.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3АдрИно.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3АдрРФ.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3БанкРекв.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3Документ.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3ИтогТабл.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3Контакт.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3Налог.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3Основание.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3Параметр.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3Представитель.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3СвФЛ.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3СвЮЛ.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3СтрТабл.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3Таблица.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3Участник.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Мх3Файл.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Товар.cs">
