@@ -20,8 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dme.Sbis", "Dme.Sbis\Dme.Sb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dme.B2B", "Dme.B2B\Dme.B2B.csproj", "{D9C5E0DB-4FDB-42E0-8F21-400CF1B836B0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Справка", "Справка", "{6BD2BE14-56EF-42A4-8EDA-322784041E19}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Материалы", "Материалы", "{EE0B8C9F-DDFB-49AB-B8CB-8FA68936BF3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Сбис", "Сбис", "{12EE660B-A177-4C5D-BC9E-19AAB52077BB}"
@@ -55,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Печати", "Печат�
 		Материалы\Печати\Signature.png = Материалы\Печати\Signature.png
 		Материалы\Печати\Stamp.png = Материалы\Печати\Stamp.png
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dme.ApiDoc", "Dme.ApiDoc\Dme.ApiDoc.csproj", "{CEBE9092-AEEA-4F7F-A7CA-03A8BA405970}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +90,10 @@ Global
 		{D9C5E0DB-4FDB-42E0-8F21-400CF1B836B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9C5E0DB-4FDB-42E0-8F21-400CF1B836B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9C5E0DB-4FDB-42E0-8F21-400CF1B836B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEBE9092-AEEA-4F7F-A7CA-03A8BA405970}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{CEBE9092-AEEA-4F7F-A7CA-03A8BA405970}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{CEBE9092-AEEA-4F7F-A7CA-03A8BA405970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEBE9092-AEEA-4F7F-A7CA-03A8BA405970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

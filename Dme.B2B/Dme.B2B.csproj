@@ -74,6 +74,11 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="InboundDataContracts.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InboundDataContracts.cs</LastGenOutput>
+    </Content>
+    <Content Include="InboundService.svc" />
     <Content Include="OutboundDataContracts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OutboundDataContracts.cs</LastGenOutput>
@@ -82,6 +87,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IInboundService.cs" />
+    <Compile Include="InboundDataContracts.cs">
+      <DependentUpon>InboundDataContracts.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="InboundService.svc.cs">
+      <DependentUpon>InboundService.svc</DependentUpon>
+    </Compile>
     <Compile Include="OutboundDataContracts.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -98,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\b2b wh-app-01.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
