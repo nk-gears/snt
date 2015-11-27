@@ -32,6 +32,6 @@ namespace Dme.Core
     
         public virtual ICollection<Мх3Налог> Мх3Налог { get; set; }
         public virtual ICollection<Мх3Параметр> Мх3Параметр { get; set; }
-        public virtual Мх3Таблица Мх3Таблица { get; set; }
+        public virtual Мх3ТаблДок Мх3ТаблДок { get; set; }
     }
 }

@@ -12,21 +12,19 @@ namespace Dme.Core
     using System;
     using System.Collections.Generic;
     
-    public partial class Мх3Таблица
+    public partial class ДоставкаТаблДок
     {
-        public Мх3Таблица()
+        public ДоставкаТаблДок()
         {
-            this.Мх3ИтогТабл = new HashSet<Мх3ИтогТабл>();
-            this.Мх3СтрТабл = new HashSet<Мх3СтрТабл>();
+            this.ДоставкаСтрТабл = new HashSet<ДоставкаСтрТабл>();
         }
     
+        public string Название { get; set; }
         public string Тип { get; set; }
-        public string Наим { get; set; }
-        public int Таблица_Id { get; set; }
         public Nullable<int> Документ_Id { get; set; }
+        public int ТаблДок_Id { get; set; }
     
-        public virtual Мх3Документ Мх3Документ { get; set; }
-        public virtual ICollection<Мх3ИтогТабл> Мх3ИтогТабл { get; set; }
-        public virtual ICollection<Мх3СтрТабл> Мх3СтрТабл { get; set; }
+        public virtual ДоставкаДокумент ДоставкаДокумент { get; set; }
+        public virtual ICollection<ДоставкаСтрТабл> ДоставкаСтрТабл { get; set; }
     }
 }

@@ -12,21 +12,17 @@ namespace Dme.Core
     using System;
     using System.Collections.Generic;
     
-    public partial class Мх3Параметр
+    public partial class ДоставкаПараметр
     {
         public string Имя { get; set; }
         public string Значение { get; set; }
-        public Nullable<int> Участник_Id { get; set; }
-        public Nullable<int> Основание_Id { get; set; }
-        public Nullable<int> СтрТабл_Id { get; set; }
-        public Nullable<int> ИтогТабл_Id { get; set; }
+        public Nullable<int> Отправитель_Id { get; set; }
+        public Nullable<int> Получатель_Id { get; set; }
         public Nullable<int> Документ_Id { get; set; }
         public long Параметр_Id { get; set; }
     
-        public virtual Мх3Документ Мх3Документ { get; set; }
-        public virtual Мх3ИтогТабл Мх3ИтогТабл { get; set; }
-        public virtual Мх3Основание Мх3Основание { get; set; }
-        public virtual Мх3СтрТабл Мх3СтрТабл { get; set; }
-        public virtual Мх3Участник Мх3Участник { get; set; }
+        public virtual ДоставкаДокумент ДоставкаДокумент { get; set; }
+        public virtual ДоставкаОтправитель ДоставкаОтправитель { get; set; }
+        public virtual ДоставкаПолучатель ДоставкаПолучатель { get; set; }
     }
 }

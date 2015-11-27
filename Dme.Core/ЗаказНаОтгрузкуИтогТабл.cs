@@ -32,6 +32,6 @@ namespace Dme.Core
     
         public virtual ICollection<ЗаказНаОтгрузкуНалог> ЗаказНаОтгрузкуНалог { get; set; }
         public virtual ICollection<ЗаказНаОтгрузкуПараметр> ЗаказНаОтгрузкуПараметр { get; set; }
-        public virtual ЗаказНаОтгрузкуТаблица ЗаказНаОтгрузкуТаблица { get; set; }
+        public virtual ЗаказНаОтгрузкуТаблДок ЗаказНаОтгрузкуТаблДок { get; set; }
     }
 }

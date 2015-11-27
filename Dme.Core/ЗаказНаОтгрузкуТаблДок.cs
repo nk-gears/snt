@@ -12,9 +12,9 @@ namespace Dme.Core
     using System;
     using System.Collections.Generic;
     
-    public partial class ЗаказНаОтгрузкуТаблица
+    public partial class ЗаказНаОтгрузкуТаблДок
     {
-        public ЗаказНаОтгрузкуТаблица()
+        public ЗаказНаОтгрузкуТаблДок()
         {
             this.ЗаказНаОтгрузкуИтогТабл = new HashSet<ЗаказНаОтгрузкуИтогТабл>();
             this.ЗаказНаОтгрузкуСтрТабл = new HashSet<ЗаказНаОтгрузкуСтрТабл>();

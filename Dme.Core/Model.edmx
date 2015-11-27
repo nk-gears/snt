@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Dme.Core.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="WfStates">
+          <Key>
+            <PropertyRef Name="WfName" />
+            <PropertyRef Name="WfState" />
+          </Key>
+          <Property Name="WfName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WfState" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="АктПриемкиАдрес">
           <Key>
             <PropertyRef Name="Адрес_Id" />
@@ -13,6 +22,8 @@
           <Property Name="АдрТекст" Type="varchar" MaxLength="1000" />
           <Property Name="СписокАдрес_Id" Type="int" />
           <Property Name="Адрес_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Маршрут_Id" Type="nvarchar" MaxLength="10" />
+          <Property Name="НормАдр_Id" Type="int" />
         </EntityType>
         <EntityType Name="АктПриемкиАдрИно">
           <Key>
@@ -149,7 +160,7 @@
           <Key>
             <PropertyRef Name="Параметр_Id" />
           </Key>
-          <Property Name="Имя" Type="nvarchar" MaxLength="30" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="40" />
           <Property Name="Значение" Type="nvarchar" MaxLength="250" />
           <Property Name="СписокПараметр_Id" Type="int" />
           <Property Name="Параметр_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
@@ -368,6 +379,154 @@
           <Property Name="СписокХарактеристика_Id" Type="int" />
           <Property Name="Характеристика_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="ДоставкаАдрес">
+          <Key>
+            <PropertyRef Name="Адрес_Id" />
+          </Key>
+          <Property Name="Тип" Type="nvarchar" MaxLength="20" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="255" />
+          <Property Name="АдрТекст" Type="nvarchar" MaxLength="255" />
+          <Property Name="Отправитель_Id" Type="int" />
+          <Property Name="Получатель_Id" Type="int" />
+          <Property Name="Адрес_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Маршрут_Id" Type="nvarchar" MaxLength="10" />
+          <Property Name="НормАдр_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="ДоставкаДокумент">
+          <Key>
+            <PropertyRef Name="Документ_Id" />
+          </Key>
+          <Property Name="Дата" Type="datetime" />
+          <Property Name="Номер" Type="nvarchar" MaxLength="250" />
+          <Property Name="Файл_Id" Type="int" />
+          <Property Name="Документ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ДоставкаКонтакт">
+          <Key>
+            <PropertyRef Name="Контакт_Id" />
+          </Key>
+          <Property Name="Телефон" Type="nvarchar" MaxLength="20" />
+          <Property Name="Факс" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Internet" Type="nvarchar" MaxLength="250" />
+          <Property Name="Отправитель_Id" Type="int" />
+          <Property Name="Получатель_Id" Type="int" />
+          <Property Name="Контакт_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ДоставкаОтправитель">
+          <Key>
+            <PropertyRef Name="Отправитель_Id" />
+          </Key>
+          <Property Name="Название" Type="nvarchar" MaxLength="250" />
+          <Property Name="Документ_Id" Type="int" />
+          <Property Name="Отправитель_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ДоставкаПараметр">
+          <Key>
+            <PropertyRef Name="Параметр_Id" />
+          </Key>
+          <Property Name="Имя" Type="nvarchar" MaxLength="50" />
+          <Property Name="Значение" Type="nvarchar" MaxLength="250" />
+          <Property Name="Отправитель_Id" Type="int" />
+          <Property Name="Получатель_Id" Type="int" />
+          <Property Name="Документ_Id" Type="int" />
+          <Property Name="Параметр_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ДоставкаПолучатель">
+          <Key>
+            <PropertyRef Name="Получатель_Id" />
+          </Key>
+          <Property Name="Название" Type="nvarchar" MaxLength="250" />
+          <Property Name="Документ_Id" Type="int" />
+          <Property Name="Получатель_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ДоставкаСвФЛ">
+          <Key>
+            <PropertyRef Name="СвФЛ_Id" />
+          </Key>
+          <Property Name="ИНН" Type="nvarchar" MaxLength="12" />
+          <Property Name="Название" Type="nvarchar" MaxLength="250" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="60" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="60" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="60" />
+          <Property Name="Обращение" Type="nvarchar" MaxLength="10" />
+          <Property Name="Отправитель_Id" Type="int" />
+          <Property Name="Получатель_Id" Type="int" />
+          <Property Name="СвФЛ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ДоставкаСвЮЛ">
+          <Key>
+            <PropertyRef Name="СвЮЛ_Id" />
+          </Key>
+          <Property Name="Название" Type="nvarchar" MaxLength="250" />
+          <Property Name="ИНН" Type="nvarchar" MaxLength="10" />
+          <Property Name="КПП" Type="nvarchar" MaxLength="9" />
+          <Property Name="ОКДП" Type="nvarchar" MaxLength="20" />
+          <Property Name="ОКПО" Type="nvarchar" MaxLength="20" />
+          <Property Name="Отправитель_Id" Type="int" />
+          <Property Name="Получатель_Id" Type="int" />
+          <Property Name="СвЮЛ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ДоставкаСтрТабл">
+          <Key>
+            <PropertyRef Name="СтрТабл_Id" />
+          </Key>
+          <Property Name="ПорНомер" Type="int" />
+          <Property Name="Название" Type="nvarchar" MaxLength="250" />
+          <Property Name="Кол_воМест" Type="int" />
+          <Property Name="НомерМеста" Type="nvarchar" MaxLength="20" />
+          <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="nvarchar" MaxLength="250" />
+          <Property Name="ТаблДок_Id" Type="int" />
+          <Property Name="СтрТабл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ДоставкаТаблДок">
+          <Key>
+            <PropertyRef Name="ТаблДок_Id" />
+          </Key>
+          <Property Name="Название" Type="nvarchar" MaxLength="256" />
+          <Property Name="Тип" Type="nvarchar" MaxLength="20" />
+          <Property Name="Документ_Id" Type="int" />
+          <Property Name="ТаблДок_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ДоставкаФайл">
+          <Key>
+            <PropertyRef Name="Файл_Id" />
+          </Key>
+          <Property Name="ИдФайл" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ВерсПрог" Type="nvarchar" MaxLength="50" />
+          <Property Name="ИдФорм" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="ВерсФорм" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Сформирован" Type="datetime" />
+          <Property Name="Файл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="_WfState" Type="int" Nullable="false" />
+          <Property Name="_WfLastUpdateDT" Type="datetime" Nullable="false" />
+          <Property Name="_WfLastUpdateUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="_Deleted" Type="bit" Nullable="false" />
+          <Property Name="_DeleteDT" Type="datetime" />
+          <Property Name="_DeletedUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="_CreatedDT" Type="date" Nullable="false" />
+          <Property Name="_CreatedUser" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ЗаданиеНаДоставку">
+          <Key>
+            <PropertyRef Name="ЗаданиеНаДоставку_Id" />
+          </Key>
+          <Property Name="ЗаданиеНаДоставку_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Маршрут_Id" Type="nvarchar" MaxLength="10" />
+          <Property Name="Перевозчик_Id" Type="int" />
+          <Property Name="Номер" Type="nvarchar" MaxLength="50" />
+          <Property Name="Дата" Type="date" />
+          <Property Name="Примечание" Type="nvarchar" MaxLength="250" />
+          <Property Name="Вес" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Объем" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Мест" Type="int" />
+          <Property Name="_WfState" Type="int" Nullable="false" />
+          <Property Name="_WfLastUpdateDT" Type="datetime" Nullable="false" />
+          <Property Name="_WfLastUpdateUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="_CreatedDT" Type="date" Nullable="false" />
+          <Property Name="Сумма" Type="money" />
+        </EntityType>
         <EntityType Name="ЗаказНаОтгрузкуАдрес">
           <Key>
             <PropertyRef Name="Адрес_Id" />
@@ -376,6 +535,8 @@
           <Property Name="Наим" Type="nvarchar" MaxLength="250" />
           <Property Name="Адрес_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Участник_Id" Type="int" />
+          <Property Name="Маршрут_Id" Type="nvarchar" MaxLength="10" />
+          <Property Name="НормАдр_Id" Type="int" />
         </EntityType>
         <EntityType Name="ЗаказНаОтгрузкуАдрИно">
           <Key>
@@ -417,12 +578,15 @@
           <Key>
             <PropertyRef Name="Документ_Id" />
           </Key>
-          <Property Name="Дата" Type="nvarchar" MaxLength="20" />
+          <Property Name="Дата" Type="nvarchar" MaxLength="30" />
           <Property Name="Номер" Type="nvarchar" MaxLength="100" />
           <Property Name="Сумма" Type="decimal" Precision="15" Scale="2" />
           <Property Name="Примечание" Type="nvarchar" MaxLength="2000" />
           <Property Name="Документ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Файл_Id" Type="int" />
+          <Property Name="_WmsOrderId" Type="nvarchar" MaxLength="16" />
+          <Property Name="_WmsOrderTy" Type="nvarchar" MaxLength="4" />
+          <Property Name="_WmsOrderDt" Type="datetime" />
         </EntityType>
         <EntityType Name="ЗаказНаОтгрузкуИтогТабл">
           <Key>
@@ -542,7 +706,7 @@
           <Property Name="СтрТабл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Таблица_Id" Type="int" />
         </EntityType>
-        <EntityType Name="ЗаказНаОтгрузкуТаблица">
+        <EntityType Name="ЗаказНаОтгрузкуТаблДок">
           <Key>
             <PropertyRef Name="Таблица_Id" />
           </Key>
@@ -576,6 +740,7 @@
           <Property Name="_DeleteDT" Type="datetime" />
           <Property Name="_DeletedUser" Type="nvarchar" MaxLength="50" />
           <Property Name="_CreatedDT" Type="datetime" Nullable="false" />
+          <Property Name="_CreatedUser" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ЗаказНаРазмещениеАдрес">
           <Key>
@@ -587,6 +752,8 @@
           <Property Name="Отправитель_Id" Type="int" />
           <Property Name="Получатель_Id" Type="int" />
           <Property Name="Адрес_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Маршрут_Id" Type="nvarchar" MaxLength="10" />
+          <Property Name="НормАдр_Id" Type="int" />
         </EntityType>
         <EntityType Name="ЗаказНаРазмещениеАдрИно">
           <Key>
@@ -861,6 +1028,7 @@
           <Property Name="_DeleteDT" Type="datetime" />
           <Property Name="_DeletedUser" Type="nvarchar" MaxLength="50" />
           <Property Name="_CreatedDT" Type="datetime" Nullable="false" />
+          <Property Name="_CreatedUser" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ЗаказНаРазмещениеХарактеристика">
           <Key>
@@ -914,16 +1082,28 @@
           <Property Name="Код" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="КодНалСт" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Маршрут">
+          <Key>
+            <PropertyRef Name="Маршрут_Id" />
+          </Key>
+          <Property Name="Маршрут_Id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Примечание" Type="nvarchar" MaxLength="250" />
+          <Property Name="Ворота" Type="nvarchar" MaxLength="20" />
+          <Property Name="ВремяЗагрузки" Type="datetime" />
+          <Property Name="ВремяОтправки" Type="datetime" />
+          <Property Name="Приоритет" Type="smallint" Nullable="false" />
+        </EntityType>
         <EntityType Name="Мх1Адрес">
           <Key>
             <PropertyRef Name="Адрес_Id" />
           </Key>
-          <Property Name="Тип" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Наим" Type="nvarchar" MaxLength="256" />
-          <Property Name="АдрТекст" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Тип" Type="nvarchar" MaxLength="20" />
+          <Property Name="Наим" Type="nvarchar" MaxLength="255" />
+          <Property Name="АдрТекст" Type="nvarchar" MaxLength="255" />
           <Property Name="Отправитель_Id" Type="int" />
           <Property Name="Получатель_Id" Type="int" />
           <Property Name="Адрес_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="НормАдр_Id" Type="int" />
         </EntityType>
         <EntityType Name="Мх1АдрИно">
           <Key>
@@ -966,7 +1146,7 @@
           <Key>
             <PropertyRef Name="Документ_Id" />
           </Key>
-          <Property Name="Дата" Type="nvarchar" MaxLength="20" />
+          <Property Name="Дата" Type="nvarchar" MaxLength="30" />
           <Property Name="Номер" Type="nvarchar" MaxLength="250" />
           <Property Name="Файл_Id" Type="int" />
           <Property Name="Документ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
@@ -987,10 +1167,10 @@
           <Key>
             <PropertyRef Name="Контакт_Id" />
           </Key>
-          <Property Name="Телефон" Type="nvarchar" MaxLength="200" />
-          <Property Name="Факс" Type="nvarchar" MaxLength="200" />
-          <Property Name="Email" Type="nvarchar" MaxLength="500" />
-          <Property Name="Internet" Type="nvarchar" MaxLength="500" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="20" />
+          <Property Name="Факс" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Internet" Type="nvarchar" MaxLength="250" />
           <Property Name="Отправитель_Id" Type="int" />
           <Property Name="Получатель_Id" Type="int" />
           <Property Name="Контакт_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
@@ -1011,12 +1191,12 @@
           <Key>
             <PropertyRef Name="Основание_Id" />
           </Key>
-          <Property Name="Номер" Type="nvarchar" MaxLength="10" />
-          <Property Name="Дата" Type="nvarchar" MaxLength="10" />
+          <Property Name="Номер" Type="nvarchar" MaxLength="50" />
+          <Property Name="Дата" Type="nvarchar" MaxLength="30" />
           <Property Name="Наим" Type="nvarchar" MaxLength="250" />
           <Property Name="СуммаБезНал" Type="real" />
           <Property Name="Сумма" Type="real" />
-          <Property Name="Срок" Type="nvarchar" MaxLength="20" />
+          <Property Name="Срок" Type="nvarchar" MaxLength="30" />
           <Property Name="Документ_Id" Type="int" />
           <Property Name="Основание_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
@@ -1025,7 +1205,7 @@
             <PropertyRef Name="Отправитель_Id" />
           </Key>
           <Property Name="Роль" Type="nvarchar" MaxLength="20" />
-          <Property Name="Название" Type="nvarchar" MaxLength="100" />
+          <Property Name="Название" Type="nvarchar" MaxLength="250" />
           <Property Name="Документ_Id" Type="int" />
           <Property Name="Отправитель_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
@@ -1033,8 +1213,8 @@
           <Key>
             <PropertyRef Name="Параметр_Id" />
           </Key>
-          <Property Name="Имя" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Значение" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="50" />
+          <Property Name="Значение" Type="nvarchar" MaxLength="250" />
           <Property Name="Основание_Id" Type="int" />
           <Property Name="Отправитель_Id" Type="int" />
           <Property Name="Получатель_Id" Type="int" />
@@ -1074,11 +1254,11 @@
             <PropertyRef Name="СвФЛ_Id" />
           </Key>
           <Property Name="ИНН" Type="nvarchar" MaxLength="12" />
-          <Property Name="Название" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Название" Type="nvarchar" MaxLength="250" />
           <Property Name="Фамилия" Type="nvarchar" MaxLength="60" />
           <Property Name="Имя" Type="nvarchar" MaxLength="60" />
           <Property Name="Отчество" Type="nvarchar" MaxLength="60" />
-          <Property Name="Обращение" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Обращение" Type="nvarchar" MaxLength="10" />
           <Property Name="Представитель_Id" Type="int" />
           <Property Name="Отправитель_Id" Type="int" />
           <Property Name="Получатель_Id" Type="int" />
@@ -1160,6 +1340,8 @@
           <Property Name="Наим" Type="nvarchar" MaxLength="250" />
           <Property Name="Адрес_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Участник_Id" Type="int" />
+          <Property Name="Маршрут_Id" Type="nvarchar" MaxLength="10" />
+          <Property Name="НормАдр_Id" Type="int" />
         </EntityType>
         <EntityType Name="Мх3АдрИно">
           <Key>
@@ -1207,6 +1389,8 @@
           <Property Name="Примечание" Type="nvarchar" MaxLength="2000" />
           <Property Name="Документ_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Файл_Id" Type="int" />
+          <Property Name="_WmsOrderId" Type="nvarchar" MaxLength="16" />
+          <Property Name="_WmsOrderTy" Type="nvarchar" MaxLength="4" />
         </EntityType>
         <EntityType Name="Мх3ИтогТабл">
           <Key>
@@ -1270,7 +1454,7 @@
           <Property Name="СтрТабл_Id" Type="int" />
           <Property Name="ИтогТабл_Id" Type="int" />
           <Property Name="Документ_Id" Type="int" />
-          <Property Name="Параметр_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Параметр_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Мх3Представитель">
           <Key>
@@ -1325,8 +1509,9 @@
           <Property Name="Ид" Type="nvarchar" MaxLength="50" />
           <Property Name="СтрТабл_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Таблица_Id" Type="int" />
+          <Property Name="_WmsH2LineId" Type="int" />
         </EntityType>
-        <EntityType Name="Мх3Таблица">
+        <EntityType Name="Мх3ТаблДок">
           <Key>
             <PropertyRef Name="Таблица_Id" />
           </Key>
@@ -1359,6 +1544,48 @@
           <Property Name="_Deleted" Type="bit" Nullable="false" />
           <Property Name="_DeleteDT" Type="datetime" />
           <Property Name="_DeletedUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="ЗаказНаОтгрузку_Документ_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="НормАдр">
+          <Key>
+            <PropertyRef Name="НормАдр_Id" />
+          </Key>
+          <Property Name="АдрТекст" Type="nvarchar" MaxLength="100" />
+          <Property Name="Индекс" Type="nvarchar" MaxLength="20" />
+          <Property Name="КодРегион" Type="nvarchar" MaxLength="50" />
+          <Property Name="Район" Type="nvarchar" MaxLength="50" />
+          <Property Name="Город" Type="nvarchar" MaxLength="50" />
+          <Property Name="НаселПункт" Type="nvarchar" MaxLength="100" />
+          <Property Name="Улица" Type="nvarchar" MaxLength="100" />
+          <Property Name="Дом" Type="nvarchar" MaxLength="20" />
+          <Property Name="Корпус" Type="nvarchar" MaxLength="20" />
+          <Property Name="Кварт" Type="nvarchar" MaxLength="20" />
+          <Property Name="Коорд" Type="geography" />
+          <Property Name="Ссылка" Type="nvarchar" MaxLength="250" />
+          <Property Name="НормАдр_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Маршрут_Id" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Перевозчик">
+          <Key>
+            <PropertyRef Name="Перевозчик_Id" />
+          </Key>
+          <Property Name="Перевозчик_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Активен" Type="bit" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Тип" Type="nvarchar" MaxLength="30" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="150" />
+          <Property Name="ИНН" Type="nvarchar" MaxLength="10" />
+          <Property Name="КПП" Type="nvarchar" MaxLength="9" />
+          <Property Name="ОКДП" Type="nvarchar" MaxLength="20" />
+          <Property Name="ОКПО" Type="nvarchar" MaxLength="20" />
+          <Property Name="Тел" Type="nvarchar" MaxLength="20" />
+          <Property Name="Тел2" Type="nvarchar" MaxLength="20" />
+          <Property Name="Факс" Type="nvarchar" MaxLength="20" />
+          <Property Name="Прмечание" Type="nvarchar" MaxLength="250" />
+          <Property Name="АвтоРегНомер" Type="nvarchar" MaxLength="20" />
+          <Property Name="АвтоМарка" Type="nvarchar" MaxLength="20" />
+          <Property Name="АвтоОбъем" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="АвтоГрузоподъемность" Type="decimal" Precision="15" Scale="2" />
         </EntityType>
         <EntityType Name="Товар">
           <Key>
@@ -1392,6 +1619,270 @@
           <Property Name="КодАВЕ" Type="nvarchar" MaxLength="20" />
           <Property Name="КодНалСт" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="ТТН">
+          <Key>
+            <PropertyRef Name="ТТН_Id" />
+          </Key>
+          <Property Name="ТТН_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ЗаданиеНаДоставку_Id" Type="int" Nullable="false" />
+          <Property Name="Номер" Type="nvarchar" MaxLength="20" />
+          <Property Name="Грузополучатель" Type="nvarchar" MaxLength="50" />
+          <Property Name="ГрузополучательАдрес" Type="nvarchar" MaxLength="150" />
+          <Property Name="ГрузополучательКонтакт" Type="nvarchar" MaxLength="50" />
+          <Property Name="Грузоотправитель" Type="nvarchar" MaxLength="50" />
+          <Property Name="ГрузоотправительАдрес" Type="nvarchar" MaxLength="150" />
+          <Property Name="ГрузоотправительКонтакт" Type="nvarchar" MaxLength="50" />
+          <Property Name="ГрузоотправительПрим1" Type="nvarchar" MaxLength="150" />
+          <Property Name="ГрузоотправительПрим2" Type="nvarchar" MaxLength="150" />
+          <Property Name="ГрузоотправительПрим3" Type="nvarchar" MaxLength="150" />
+          <Property Name="НаимГруза" Type="nvarchar" MaxLength="50" />
+          <Property Name="Кол_воМест" Type="int" />
+          <Property Name="ВидУп" Type="nvarchar" MaxLength="15" />
+          <Property Name="Вес" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Объем" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="ПриемГрузаАдрес" Type="nvarchar" MaxLength="150" />
+          <Property Name="ПриемГрузаВремя" Type="nvarchar" MaxLength="30" />
+          <Property Name="СдачаГрузаАдрес" Type="nvarchar" MaxLength="150" />
+          <Property Name="СдачаГрузаВремя" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ТТНСопрДок">
+          <Key>
+            <PropertyRef Name="ТТНСопрДок_Id" />
+          </Key>
+          <Property Name="ТТНСопрДок_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ТТН_Id" Type="int" Nullable="false" />
+          <Property Name="Номер" Type="nvarchar" MaxLength="50" />
+          <Property Name="Дата" Type="nvarchar" MaxLength="50" />
+          <Property Name="Тип" Type="nvarchar" MaxLength="20" />
+          <Property Name="Мх3Документ_Id" Type="int" />
+          <Property Name="ДоставкаДокумент_Id" Type="int" />
+        </EntityType>
+        <Association Name="FK_ДоставкаДокумент_ДоставкаФайл">
+          <End Role="ДоставкаФайл" Type="Self.ДоставкаФайл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаДокумент" Type="Self.ДоставкаДокумент" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаФайл">
+              <PropertyRef Name="Файл_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаДокумент">
+              <PropertyRef Name="Файл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаКонтакт_ДоставкаОтправитель">
+          <End Role="ДоставкаОтправитель" Type="Self.ДоставкаОтправитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаКонтакт" Type="Self.ДоставкаКонтакт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаОтправитель">
+              <PropertyRef Name="Отправитель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаКонтакт">
+              <PropertyRef Name="Отправитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаКонтакт_ДоставкаПолучатель">
+          <End Role="ДоставкаПолучатель" Type="Self.ДоставкаПолучатель" Multiplicity="0..1" />
+          <End Role="ДоставкаКонтакт" Type="Self.ДоставкаКонтакт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаПолучатель">
+              <PropertyRef Name="Получатель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаКонтакт">
+              <PropertyRef Name="Получатель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаОтправитель_ДоставкаДокумент">
+          <End Role="ДоставкаДокумент" Type="Self.ДоставкаДокумент" Multiplicity="0..1" />
+          <End Role="ДоставкаОтправитель" Type="Self.ДоставкаОтправитель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаОтправитель">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаПараметр_ДоставкаПолучатель">
+          <End Role="ДоставкаПолучатель" Type="Self.ДоставкаПолучатель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаПараметр" Type="Self.ДоставкаПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаПолучатель">
+              <PropertyRef Name="Получатель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаПараметр">
+              <PropertyRef Name="Получатель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаПолучатель_ДоставкаДокумент">
+          <End Role="ДоставкаДокумент" Type="Self.ДоставкаДокумент" Multiplicity="0..1" />
+          <End Role="ДоставкаПолучатель" Type="Self.ДоставкаПолучатель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаПолучатель">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаСвФЛ_ДоставкаОтправитель">
+          <End Role="ДоставкаОтправитель" Type="Self.ДоставкаОтправитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаСвФЛ" Type="Self.ДоставкаСвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаОтправитель">
+              <PropertyRef Name="Отправитель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаСвФЛ">
+              <PropertyRef Name="Отправитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаСвФЛ_ДоставкаПолучатель">
+          <End Role="ДоставкаПолучатель" Type="Self.ДоставкаПолучатель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаСвФЛ" Type="Self.ДоставкаСвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаПолучатель">
+              <PropertyRef Name="Получатель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаСвФЛ">
+              <PropertyRef Name="Получатель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаСвЮЛ_ДоставкаОтправитель">
+          <End Role="ДоставкаОтправитель" Type="Self.ДоставкаОтправитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаСвЮЛ" Type="Self.ДоставкаСвЮЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаОтправитель">
+              <PropertyRef Name="Отправитель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаСвЮЛ">
+              <PropertyRef Name="Отправитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаСвЮЛ_ДоставкаПолучатель">
+          <End Role="ДоставкаПолучатель" Type="Self.ДоставкаПолучатель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаСвЮЛ" Type="Self.ДоставкаСвЮЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаПолучатель">
+              <PropertyRef Name="Получатель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаСвЮЛ">
+              <PropertyRef Name="Получатель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаСтрТабл_ДоставкаТаблДок">
+          <End Role="ДоставкаТаблДок" Type="Self.ДоставкаТаблДок" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаСтрТабл" Type="Self.ДоставкаСтрТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаТаблДок">
+              <PropertyRef Name="ТаблДок_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаСтрТабл">
+              <PropertyRef Name="ТаблДок_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаТаблДок_ДоставкаДокумент">
+          <End Role="ДоставкаДокумент" Type="Self.ДоставкаДокумент" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаТаблДок" Type="Self.ДоставкаТаблДок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаТаблДок">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ЗаданиеНаДоставку_Маршрут">
+          <End Role="Маршрут" Type="Self.Маршрут" Multiplicity="0..1" />
+          <End Role="ЗаданиеНаДоставку" Type="Self.ЗаданиеНаДоставку" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Маршрут">
+              <PropertyRef Name="Маршрут_Id" />
+            </Principal>
+            <Dependent Role="ЗаданиеНаДоставку">
+              <PropertyRef Name="Маршрут_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ЗаданиеНаДоставку_Перевозчик">
+          <End Role="Перевозчик" Type="Self.Перевозчик" Multiplicity="0..1" />
+          <End Role="ЗаданиеНаДоставку" Type="Self.ЗаданиеНаДоставку" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Перевозчик">
+              <PropertyRef Name="Перевозчик_Id" />
+            </Principal>
+            <Dependent Role="ЗаданиеНаДоставку">
+              <PropertyRef Name="Перевозчик_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_НормАдр_Маршрут">
+          <End Role="Маршрут" Type="Self.Маршрут" Multiplicity="0..1" />
+          <End Role="НормАдр" Type="Self.НормАдр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Маршрут">
+              <PropertyRef Name="Маршрут_Id" />
+            </Principal>
+            <Dependent Role="НормАдр">
+              <PropertyRef Name="Маршрут_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТТН_ЗаданиеНаДоставку">
+          <End Role="ЗаданиеНаДоставку" Type="Self.ЗаданиеНаДоставку" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ТТН" Type="Self.ТТН" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаданиеНаДоставку">
+              <PropertyRef Name="ЗаданиеНаДоставку_Id" />
+            </Principal>
+            <Dependent Role="ТТН">
+              <PropertyRef Name="ЗаданиеНаДоставку_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТТНСопрДок_ТТН">
+          <End Role="ТТН" Type="Self.ТТН" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ТТНСопрДок" Type="Self.ТТНСопрДок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТТН">
+              <PropertyRef Name="ТТН_Id" />
+            </Principal>
+            <Dependent Role="ТТНСопрДок">
+              <PropertyRef Name="ТТН_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Адрес_АдрИно">
           <End Role="ЗаказНаРазмещениеАдрес" Type="Self.ЗаказНаРазмещениеАдрес" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -2310,6 +2801,62 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ДоставкаДокумент_Параметр">
+          <End Role="ДоставкаДокумент" Type="Self.ДоставкаДокумент" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаПараметр" Type="Self.ДоставкаПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаПараметр">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ДоставкаОтправитель_Адрес">
+          <End Role="ДоставкаОтправитель" Type="Self.ДоставкаОтправитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаАдрес" Type="Self.ДоставкаАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаОтправитель">
+              <PropertyRef Name="Отправитель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаАдрес">
+              <PropertyRef Name="Отправитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ДоставкаОтправитель_Параметр">
+          <End Role="ДоставкаОтправитель" Type="Self.ДоставкаОтправитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаПараметр" Type="Self.ДоставкаПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаОтправитель">
+              <PropertyRef Name="Отправитель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаПараметр">
+              <PropertyRef Name="Отправитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ДоставкаПолучатель_Адрес">
+          <End Role="ДоставкаПолучатель" Type="Self.ДоставкаПолучатель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ДоставкаАдрес" Type="Self.ДоставкаАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаПолучатель">
+              <PropertyRef Name="Получатель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаАдрес">
+              <PropertyRef Name="Получатель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ЗаказНаОтгрузкуАдрес_АдрИно">
           <End Role="ЗаказНаОтгрузкуАдрес" Type="Self.ЗаказНаОтгрузкуАдрес" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -2368,12 +2915,12 @@
         </Association>
         <Association Name="ЗаказНаОтгрузкуДокумент_Таблица">
           <End Role="ЗаказНаОтгрузкуДокумент" Type="Self.ЗаказНаОтгрузкуДокумент" Multiplicity="0..1" />
-          <End Role="ЗаказНаОтгрузкуТаблица" Type="Self.ЗаказНаОтгрузкуТаблица" Multiplicity="*" />
+          <End Role="ЗаказНаОтгрузкуТаблДок" Type="Self.ЗаказНаОтгрузкуТаблДок" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ЗаказНаОтгрузкуДокумент">
               <PropertyRef Name="Документ_Id" />
             </Principal>
-            <Dependent Role="ЗаказНаОтгрузкуТаблица">
+            <Dependent Role="ЗаказНаОтгрузкуТаблДок">
               <PropertyRef Name="Документ_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -2473,12 +3020,12 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ЗаказНаОтгрузкуТаблица_ИтогТабл">
-          <End Role="ЗаказНаОтгрузкуТаблица" Type="Self.ЗаказНаОтгрузкуТаблица" Multiplicity="0..1">
+          <End Role="ЗаказНаОтгрузкуТаблДок" Type="Self.ЗаказНаОтгрузкуТаблДок" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="ЗаказНаОтгрузкуИтогТабл" Type="Self.ЗаказНаОтгрузкуИтогТабл" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ЗаказНаОтгрузкуТаблица">
+            <Principal Role="ЗаказНаОтгрузкуТаблДок">
               <PropertyRef Name="Таблица_Id" />
             </Principal>
             <Dependent Role="ЗаказНаОтгрузкуИтогТабл">
@@ -2487,10 +3034,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ЗаказНаОтгрузкуТаблица_СтрТабл">
-          <End Role="ЗаказНаОтгрузкуТаблица" Type="Self.ЗаказНаОтгрузкуТаблица" Multiplicity="0..1" />
+          <End Role="ЗаказНаОтгрузкуТаблДок" Type="Self.ЗаказНаОтгрузкуТаблДок" Multiplicity="0..1" />
           <End Role="ЗаказНаОтгрузкуСтрТабл" Type="Self.ЗаказНаОтгрузкуСтрТабл" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ЗаказНаОтгрузкуТаблица">
+            <Principal Role="ЗаказНаОтгрузкуТаблДок">
               <PropertyRef Name="Таблица_Id" />
             </Principal>
             <Dependent Role="ЗаказНаОтгрузкуСтрТабл">
@@ -3142,12 +3689,12 @@
         </Association>
         <Association Name="Мх3Документ_Таблица">
           <End Role="Мх3Документ" Type="Self.Мх3Документ" Multiplicity="0..1" />
-          <End Role="Мх3Таблица" Type="Self.Мх3Таблица" Multiplicity="*" />
+          <End Role="Мх3ТаблДок" Type="Self.Мх3ТаблДок" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Мх3Документ">
               <PropertyRef Name="Документ_Id" />
             </Principal>
-            <Dependent Role="Мх3Таблица">
+            <Dependent Role="Мх3ТаблДок">
               <PropertyRef Name="Документ_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -3247,12 +3794,12 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Мх3Таблица_ИтогТабл">
-          <End Role="Мх3Таблица" Type="Self.Мх3Таблица" Multiplicity="0..1">
+          <End Role="Мх3ТаблДок" Type="Self.Мх3ТаблДок" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Мх3ИтогТабл" Type="Self.Мх3ИтогТабл" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Мх3Таблица">
+            <Principal Role="Мх3ТаблДок">
               <PropertyRef Name="Таблица_Id" />
             </Principal>
             <Dependent Role="Мх3ИтогТабл">
@@ -3261,10 +3808,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Мх3Таблица_СтрТабл">
-          <End Role="Мх3Таблица" Type="Self.Мх3Таблица" Multiplicity="0..1" />
+          <End Role="Мх3ТаблДок" Type="Self.Мх3ТаблДок" Multiplicity="0..1" />
           <End Role="Мх3СтрТабл" Type="Self.Мх3СтрТабл" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Мх3Таблица">
+            <Principal Role="Мх3ТаблДок">
               <PropertyRef Name="Таблица_Id" />
             </Principal>
             <Dependent Role="Мх3СтрТабл">
@@ -3379,6 +3926,78 @@
             </Principal>
             <Dependent Role="Мх3Документ">
               <PropertyRef Name="Файл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_АктПриемкиАдрес">
+          <End Role="НормАдр" Type="Self.НормАдр" Multiplicity="0..1" />
+          <End Role="АктПриемкиАдрес" Type="Self.АктПриемкиАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="АктПриемкиАдрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_ДоставкаАдрес">
+          <End Role="НормАдр" Type="Self.НормАдр" Multiplicity="0..1" />
+          <End Role="ДоставкаАдрес" Type="Self.ДоставкаАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаАдрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_ЗаказНаОтгрузкуАдрес">
+          <End Role="НормАдр" Type="Self.НормАдр" Multiplicity="0..1" />
+          <End Role="ЗаказНаОтгрузкуАдрес" Type="Self.ЗаказНаОтгрузкуАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуАдрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_ЗаказНаРазмещениеАдрес">
+          <End Role="НормАдр" Type="Self.НормАдр" Multiplicity="0..1" />
+          <End Role="ЗаказНаРазмещениеАдрес" Type="Self.ЗаказНаРазмещениеАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаРазмещениеАдрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_Мх1Адрес">
+          <End Role="НормАдр" Type="Self.НормАдр" Multiplicity="0..1" />
+          <End Role="Мх1Адрес" Type="Self.Мх1Адрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="Мх1Адрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_Мх3Адрес">
+          <End Role="НормАдр" Type="Self.НормАдр" Multiplicity="0..1" />
+          <End Role="Мх3Адрес" Type="Self.Мх3Адрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="Мх3Адрес">
+              <PropertyRef Name="НормАдр_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3725,6 +4344,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DmeCoreModelStoreContainer">
+          <EntitySet Name="WfStates" EntityType="Self.WfStates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="АктПриемкиАдрес" EntityType="Self.АктПриемкиАдрес" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="АктПриемкиАдрИно" EntityType="Self.АктПриемкиАдрИно" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="АктПриемкиАдрРФ" EntityType="Self.АктПриемкиАдрРФ" Schema="dbo" store:Type="Tables" />
@@ -3756,6 +4376,18 @@
           <EntitySet Name="АктПриемкиСтрОтклонения" EntityType="Self.АктПриемкиСтрОтклонения" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="АктПриемкиФайл" EntityType="Self.АктПриемкиФайл" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="АктПриемкиХарактеристика" EntityType="Self.АктПриемкиХарактеристика" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаАдрес" EntityType="Self.ДоставкаАдрес" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаДокумент" EntityType="Self.ДоставкаДокумент" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаКонтакт" EntityType="Self.ДоставкаКонтакт" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаОтправитель" EntityType="Self.ДоставкаОтправитель" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаПараметр" EntityType="Self.ДоставкаПараметр" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаПолучатель" EntityType="Self.ДоставкаПолучатель" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаСвФЛ" EntityType="Self.ДоставкаСвФЛ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаСвЮЛ" EntityType="Self.ДоставкаСвЮЛ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаСтрТабл" EntityType="Self.ДоставкаСтрТабл" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаТаблДок" EntityType="Self.ДоставкаТаблДок" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДоставкаФайл" EntityType="Self.ДоставкаФайл" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаданиеНаДоставку" EntityType="Self.ЗаданиеНаДоставку" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаОтгрузкуАдрес" EntityType="Self.ЗаказНаОтгрузкуАдрес" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаОтгрузкуАдрИно" EntityType="Self.ЗаказНаОтгрузкуАдрИно" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаОтгрузкуАдрРФ" EntityType="Self.ЗаказНаОтгрузкуАдрРФ" Schema="dbo" store:Type="Tables" />
@@ -3770,7 +4402,7 @@
           <EntitySet Name="ЗаказНаОтгрузкуСвФЛ" EntityType="Self.ЗаказНаОтгрузкуСвФЛ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаОтгрузкуСвЮЛ" EntityType="Self.ЗаказНаОтгрузкуСвЮЛ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаОтгрузкуСтрТабл" EntityType="Self.ЗаказНаОтгрузкуСтрТабл" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ЗаказНаОтгрузкуТаблица" EntityType="Self.ЗаказНаОтгрузкуТаблица" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗаказНаОтгрузкуТаблДок" EntityType="Self.ЗаказНаОтгрузкуТаблДок" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаОтгрузкуУчастник" EntityType="Self.ЗаказНаОтгрузкуУчастник" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаОтгрузкуФайл" EntityType="Self.ЗаказНаОтгрузкуФайл" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ЗаказНаРазмещениеАдрес" EntityType="Self.ЗаказНаРазмещениеАдрес" Schema="dbo" store:Type="Tables" />
@@ -3799,6 +4431,7 @@
           <EntitySet Name="Клиенты" EntityType="Self.Клиенты" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="КодАВЕ" EntityType="Self.КодАВЕ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="КодНалСт" EntityType="Self.КодНалСт" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Маршрут" EntityType="Self.Маршрут" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх1Адрес" EntityType="Self.Мх1Адрес" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх1АдрИно" EntityType="Self.Мх1АдрИно" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх1АдрРФ" EntityType="Self.Мх1АдрРФ" Schema="dbo" store:Type="Tables" />
@@ -3833,10 +4466,82 @@
           <EntitySet Name="Мх3СвФЛ" EntityType="Self.Мх3СвФЛ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх3СвЮЛ" EntityType="Self.Мх3СвЮЛ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх3СтрТабл" EntityType="Self.Мх3СтрТабл" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Мх3Таблица" EntityType="Self.Мх3Таблица" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Мх3ТаблДок" EntityType="Self.Мх3ТаблДок" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх3Участник" EntityType="Self.Мх3Участник" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Мх3Файл" EntityType="Self.Мх3Файл" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="НормАдр" EntityType="Self.НормАдр" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Перевозчик" EntityType="Self.Перевозчик" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Товар" EntityType="Self.Товар" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТТН" EntityType="Self.ТТН" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТТНСопрДок" EntityType="Self.ТТНСопрДок" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ДоставкаДокумент_ДоставкаФайл" Association="Self.FK_ДоставкаДокумент_ДоставкаФайл">
+            <End Role="ДоставкаФайл" EntitySet="ДоставкаФайл" />
+            <End Role="ДоставкаДокумент" EntitySet="ДоставкаДокумент" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаКонтакт_ДоставкаОтправитель" Association="Self.FK_ДоставкаКонтакт_ДоставкаОтправитель">
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+            <End Role="ДоставкаКонтакт" EntitySet="ДоставкаКонтакт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаКонтакт_ДоставкаПолучатель" Association="Self.FK_ДоставкаКонтакт_ДоставкаПолучатель">
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+            <End Role="ДоставкаКонтакт" EntitySet="ДоставкаКонтакт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаОтправитель_ДоставкаДокумент" Association="Self.FK_ДоставкаОтправитель_ДоставкаДокумент">
+            <End Role="ДоставкаДокумент" EntitySet="ДоставкаДокумент" />
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаПараметр_ДоставкаПолучатель" Association="Self.FK_ДоставкаПараметр_ДоставкаПолучатель">
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+            <End Role="ДоставкаПараметр" EntitySet="ДоставкаПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаПолучатель_ДоставкаДокумент" Association="Self.FK_ДоставкаПолучатель_ДоставкаДокумент">
+            <End Role="ДоставкаДокумент" EntitySet="ДоставкаДокумент" />
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаСвФЛ_ДоставкаОтправитель" Association="Self.FK_ДоставкаСвФЛ_ДоставкаОтправитель">
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+            <End Role="ДоставкаСвФЛ" EntitySet="ДоставкаСвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаСвФЛ_ДоставкаПолучатель" Association="Self.FK_ДоставкаСвФЛ_ДоставкаПолучатель">
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+            <End Role="ДоставкаСвФЛ" EntitySet="ДоставкаСвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаСвЮЛ_ДоставкаОтправитель" Association="Self.FK_ДоставкаСвЮЛ_ДоставкаОтправитель">
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+            <End Role="ДоставкаСвЮЛ" EntitySet="ДоставкаСвЮЛ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаСвЮЛ_ДоставкаПолучатель" Association="Self.FK_ДоставкаСвЮЛ_ДоставкаПолучатель">
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+            <End Role="ДоставкаСвЮЛ" EntitySet="ДоставкаСвЮЛ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаСтрТабл_ДоставкаТаблДок" Association="Self.FK_ДоставкаСтрТабл_ДоставкаТаблДок">
+            <End Role="ДоставкаТаблДок" EntitySet="ДоставкаТаблДок" />
+            <End Role="ДоставкаСтрТабл" EntitySet="ДоставкаСтрТабл" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаТаблДок_ДоставкаДокумент" Association="Self.FK_ДоставкаТаблДок_ДоставкаДокумент">
+            <End Role="ДоставкаДокумент" EntitySet="ДоставкаДокумент" />
+            <End Role="ДоставкаТаблДок" EntitySet="ДоставкаТаблДок" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ЗаданиеНаДоставку_Маршрут" Association="Self.FK_ЗаданиеНаДоставку_Маршрут">
+            <End Role="Маршрут" EntitySet="Маршрут" />
+            <End Role="ЗаданиеНаДоставку" EntitySet="ЗаданиеНаДоставку" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ЗаданиеНаДоставку_Перевозчик" Association="Self.FK_ЗаданиеНаДоставку_Перевозчик">
+            <End Role="Перевозчик" EntitySet="Перевозчик" />
+            <End Role="ЗаданиеНаДоставку" EntitySet="ЗаданиеНаДоставку" />
+          </AssociationSet>
+          <AssociationSet Name="FK_НормАдр_Маршрут" Association="Self.FK_НормАдр_Маршрут">
+            <End Role="Маршрут" EntitySet="Маршрут" />
+            <End Role="НормАдр" EntitySet="НормАдр" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТТН_ЗаданиеНаДоставку" Association="Self.FK_ТТН_ЗаданиеНаДоставку">
+            <End Role="ЗаданиеНаДоставку" EntitySet="ЗаданиеНаДоставку" />
+            <End Role="ТТН" EntitySet="ТТН" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТТНСопрДок_ТТН" Association="Self.FK_ТТНСопрДок_ТТН">
+            <End Role="ТТН" EntitySet="ТТН" />
+            <End Role="ТТНСопрДок" EntitySet="ТТНСопрДок" />
+          </AssociationSet>
           <AssociationSet Name="Адрес_АдрИно" Association="Self.Адрес_АдрИно">
             <End Role="ЗаказНаРазмещениеАдрес" EntitySet="ЗаказНаРазмещениеАдрес" />
             <End Role="ЗаказНаРазмещениеАдрИно" EntitySet="ЗаказНаРазмещениеАдрИно" />
@@ -4105,6 +4810,22 @@
             <End Role="ЗаказНаРазмещениеДокумент" EntitySet="ЗаказНаРазмещениеДокумент" />
             <End Role="ЗаказНаРазмещениеТаблДок" EntitySet="ЗаказНаРазмещениеТаблДок" />
           </AssociationSet>
+          <AssociationSet Name="ДоставкаДокумент_Параметр" Association="Self.ДоставкаДокумент_Параметр">
+            <End Role="ДоставкаДокумент" EntitySet="ДоставкаДокумент" />
+            <End Role="ДоставкаПараметр" EntitySet="ДоставкаПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ДоставкаОтправитель_Адрес" Association="Self.ДоставкаОтправитель_Адрес">
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+            <End Role="ДоставкаАдрес" EntitySet="ДоставкаАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="ДоставкаОтправитель_Параметр" Association="Self.ДоставкаОтправитель_Параметр">
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+            <End Role="ДоставкаПараметр" EntitySet="ДоставкаПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ДоставкаПолучатель_Адрес" Association="Self.ДоставкаПолучатель_Адрес">
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+            <End Role="ДоставкаАдрес" EntitySet="ДоставкаАдрес" />
+          </AssociationSet>
           <AssociationSet Name="ЗаказНаОтгрузкуАдрес_АдрИно" Association="Self.ЗаказНаОтгрузкуАдрес_АдрИно">
             <End Role="ЗаказНаОтгрузкуАдрес" EntitySet="ЗаказНаОтгрузкуАдрес" />
             <End Role="ЗаказНаОтгрузкуАдрИно" EntitySet="ЗаказНаОтгрузкуАдрИно" />
@@ -4123,7 +4844,7 @@
           </AssociationSet>
           <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Таблица" Association="Self.ЗаказНаОтгрузкуДокумент_Таблица">
             <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
-            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
+            <End Role="ЗаказНаОтгрузкуТаблДок" EntitySet="ЗаказНаОтгрузкуТаблДок" />
           </AssociationSet>
           <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Участник" Association="Self.ЗаказНаОтгрузкуДокумент_Участник">
             <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
@@ -4154,11 +4875,11 @@
             <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
           </AssociationSet>
           <AssociationSet Name="ЗаказНаОтгрузкуТаблица_ИтогТабл" Association="Self.ЗаказНаОтгрузкуТаблица_ИтогТабл">
-            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
+            <End Role="ЗаказНаОтгрузкуТаблДок" EntitySet="ЗаказНаОтгрузкуТаблДок" />
             <End Role="ЗаказНаОтгрузкуИтогТабл" EntitySet="ЗаказНаОтгрузкуИтогТабл" />
           </AssociationSet>
           <AssociationSet Name="ЗаказНаОтгрузкуТаблица_СтрТабл" Association="Self.ЗаказНаОтгрузкуТаблица_СтрТабл">
-            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
+            <End Role="ЗаказНаОтгрузкуТаблДок" EntitySet="ЗаказНаОтгрузкуТаблДок" />
             <End Role="ЗаказНаОтгрузкуСтрТабл" EntitySet="ЗаказНаОтгрузкуСтрТабл" />
           </AssociationSet>
           <AssociationSet Name="ЗаказНаОтгрузкуУчастник_Адрес" Association="Self.ЗаказНаОтгрузкуУчастник_Адрес">
@@ -4351,7 +5072,7 @@
           </AssociationSet>
           <AssociationSet Name="Мх3Документ_Таблица" Association="Self.Мх3Документ_Таблица">
             <End Role="Мх3Документ" EntitySet="Мх3Документ" />
-            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
+            <End Role="Мх3ТаблДок" EntitySet="Мх3ТаблДок" />
           </AssociationSet>
           <AssociationSet Name="Мх3Документ_Участник" Association="Self.Мх3Документ_Участник">
             <End Role="Мх3Документ" EntitySet="Мх3Документ" />
@@ -4382,11 +5103,11 @@
             <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
           </AssociationSet>
           <AssociationSet Name="Мх3Таблица_ИтогТабл" Association="Self.Мх3Таблица_ИтогТабл">
-            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
+            <End Role="Мх3ТаблДок" EntitySet="Мх3ТаблДок" />
             <End Role="Мх3ИтогТабл" EntitySet="Мх3ИтогТабл" />
           </AssociationSet>
           <AssociationSet Name="Мх3Таблица_СтрТабл" Association="Self.Мх3Таблица_СтрТабл">
-            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
+            <End Role="Мх3ТаблДок" EntitySet="Мх3ТаблДок" />
             <End Role="Мх3СтрТабл" EntitySet="Мх3СтрТабл" />
           </AssociationSet>
           <AssociationSet Name="Мх3Участник_Адрес" Association="Self.Мх3Участник_Адрес">
@@ -4420,6 +5141,30 @@
           <AssociationSet Name="Мх3Файл_Документ" Association="Self.Мх3Файл_Документ">
             <End Role="Мх3Файл" EntitySet="Мх3Файл" />
             <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_АктПриемкиАдрес" Association="Self.НормАдр_АктПриемкиАдрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="АктПриемкиАдрес" EntitySet="АктПриемкиАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_ДоставкаАдрес" Association="Self.НормАдр_ДоставкаАдрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="ДоставкаАдрес" EntitySet="ДоставкаАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_ЗаказНаОтгрузкуАдрес" Association="Self.НормАдр_ЗаказНаОтгрузкуАдрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="ЗаказНаОтгрузкуАдрес" EntitySet="ЗаказНаОтгрузкуАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_ЗаказНаРазмещениеАдрес" Association="Self.НормАдр_ЗаказНаРазмещениеАдрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="ЗаказНаРазмещениеАдрес" EntitySet="ЗаказНаРазмещениеАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_Мх1Адрес" Association="Self.НормАдр_Мх1Адрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="Мх1Адрес" EntitySet="Мх1Адрес" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_Мх3Адрес" Association="Self.НормАдр_Мх3Адрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="Мх3Адрес" EntitySet="Мх3Адрес" />
           </AssociationSet>
           <AssociationSet Name="Основание_Параметр" Association="Self.Основание_Параметр">
             <End Role="ЗаказНаРазмещениеОснование" EntitySet="ЗаказНаРазмещениеОснование" />
@@ -5127,7 +5872,6 @@
           <EntitySet Name="Мх3СвФЛ" EntityType="Dme.Core.Model.Мх3СвФЛ" />
           <EntitySet Name="Мх3СвЮЛ" EntityType="Dme.Core.Model.Мх3СвЮЛ" />
           <EntitySet Name="Мх3СтрТабл" EntityType="Dme.Core.Model.Мх3СтрТабл" />
-          <EntitySet Name="Мх3Таблица" EntityType="Dme.Core.Model.Мх3Таблица" />
           <EntitySet Name="Мх3Участник" EntityType="Dme.Core.Model.Мх3Участник" />
           <EntitySet Name="Мх3Файл" EntityType="Dme.Core.Model.Мх3Файл" />
           <AssociationSet Name="Мх3Адрес_АдрИно" Association="Dme.Core.Model.Мх3Адрес_АдрИно">
@@ -5154,10 +5898,6 @@
             <End Role="Мх3Документ" EntitySet="Мх3Документ" />
             <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
           </AssociationSet>
-          <AssociationSet Name="Мх3Документ_Таблица" Association="Dme.Core.Model.Мх3Документ_Таблица">
-            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
-            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
-          </AssociationSet>
           <AssociationSet Name="Мх3Документ_Участник" Association="Dme.Core.Model.Мх3Документ_Участник">
             <End Role="Мх3Документ" EntitySet="Мх3Документ" />
             <End Role="Мх3Участник" EntitySet="Мх3Участник" />
@@ -5173,10 +5913,6 @@
           <AssociationSet Name="Мх3ИтогТабл_Параметр" Association="Dme.Core.Model.Мх3ИтогТабл_Параметр">
             <End Role="Мх3ИтогТабл" EntitySet="Мх3ИтогТабл" />
             <End Role="Мх3Параметр" EntitySet="Мх3Параметр" />
-          </AssociationSet>
-          <AssociationSet Name="Мх3Таблица_ИтогТабл" Association="Dme.Core.Model.Мх3Таблица_ИтогТабл">
-            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
-            <End Role="Мх3ИтогТабл" EntitySet="Мх3ИтогТабл" />
           </AssociationSet>
           <AssociationSet Name="Мх3Участник_Контакт" Association="Dme.Core.Model.Мх3Участник_Контакт">
             <End Role="Мх3Участник" EntitySet="Мх3Участник" />
@@ -5214,10 +5950,6 @@
             <End Role="Мх3Участник" EntitySet="Мх3Участник" />
             <End Role="Мх3СвЮЛ" EntitySet="Мх3СвЮЛ" />
           </AssociationSet>
-          <AssociationSet Name="Мх3Таблица_СтрТабл" Association="Dme.Core.Model.Мх3Таблица_СтрТабл">
-            <End Role="Мх3Таблица" EntitySet="Мх3Таблица" />
-            <End Role="Мх3СтрТабл" EntitySet="Мх3СтрТабл" />
-          </AssociationSet>
           <EntitySet Name="ЗаказНаОтгрузкуАдрес" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуАдрес" />
           <EntitySet Name="ЗаказНаОтгрузкуАдрИно" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуАдрИно" />
           <EntitySet Name="ЗаказНаОтгрузкуАдрРФ" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуАдрРФ" />
@@ -5232,7 +5964,6 @@
           <EntitySet Name="ЗаказНаОтгрузкуСвФЛ" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуСвФЛ" />
           <EntitySet Name="ЗаказНаОтгрузкуСвЮЛ" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуСвЮЛ" />
           <EntitySet Name="ЗаказНаОтгрузкуСтрТабл" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл" />
-          <EntitySet Name="ЗаказНаОтгрузкуТаблица" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуТаблица" />
           <EntitySet Name="ЗаказНаОтгрузкуУчастник" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" />
           <EntitySet Name="ЗаказНаОтгрузкуФайл" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуФайл" />
           <AssociationSet Name="ЗаказНаОтгрузкуАдрес_АдрИно" Association="Dme.Core.Model.ЗаказНаОтгрузкуАдрес_АдрИно">
@@ -5259,10 +5990,6 @@
             <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
             <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
           </AssociationSet>
-          <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Таблица" Association="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Таблица">
-            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
-            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
-          </AssociationSet>
           <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Участник" Association="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Участник">
             <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
             <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
@@ -5278,10 +6005,6 @@
           <AssociationSet Name="ЗаказНаОтгрузкуИтогТабл_Параметр" Association="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл_Параметр">
             <End Role="ЗаказНаОтгрузкуИтогТабл" EntitySet="ЗаказНаОтгрузкуИтогТабл" />
             <End Role="ЗаказНаОтгрузкуПараметр" EntitySet="ЗаказНаОтгрузкуПараметр" />
-          </AssociationSet>
-          <AssociationSet Name="ЗаказНаОтгрузкуТаблица_ИтогТабл" Association="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_ИтогТабл">
-            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
-            <End Role="ЗаказНаОтгрузкуИтогТабл" EntitySet="ЗаказНаОтгрузкуИтогТабл" />
           </AssociationSet>
           <AssociationSet Name="ЗаказНаОтгрузкуУчастник_Контакт" Association="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Контакт">
             <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
@@ -5319,9 +6042,157 @@
             <End Role="ЗаказНаОтгрузкуУчастник" EntitySet="ЗаказНаОтгрузкуУчастник" />
             <End Role="ЗаказНаОтгрузкуСвЮЛ" EntitySet="ЗаказНаОтгрузкуСвЮЛ" />
           </AssociationSet>
-          <AssociationSet Name="ЗаказНаОтгрузкуТаблица_СтрТабл" Association="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_СтрТабл">
-            <End Role="ЗаказНаОтгрузкуТаблица" EntitySet="ЗаказНаОтгрузкуТаблица" />
+          <EntitySet Name="ДоставкаАдрес" EntityType="Dme.Core.Model.ДоставкаАдрес" />
+          <EntitySet Name="ДоставкаДокумент" EntityType="Dme.Core.Model.ДоставкаДокумент" />
+          <EntitySet Name="ДоставкаКонтакт" EntityType="Dme.Core.Model.ДоставкаКонтакт" />
+          <EntitySet Name="ДоставкаОтправитель" EntityType="Dme.Core.Model.ДоставкаОтправитель" />
+          <EntitySet Name="ДоставкаПолучатель" EntityType="Dme.Core.Model.ДоставкаПолучатель" />
+          <EntitySet Name="ДоставкаСвФЛ" EntityType="Dme.Core.Model.ДоставкаСвФЛ" />
+          <EntitySet Name="ДоставкаСвЮЛ" EntityType="Dme.Core.Model.ДоставкаСвЮЛ" />
+          <EntitySet Name="ДоставкаСтрТабл" EntityType="Dme.Core.Model.ДоставкаСтрТабл" />
+          <EntitySet Name="ДоставкаТаблДок" EntityType="Dme.Core.Model.ДоставкаТаблДок" />
+          <EntitySet Name="ДоставкаФайл" EntityType="Dme.Core.Model.ДоставкаФайл" />
+          <AssociationSet Name="ДоставкаОтправитель_Адрес" Association="Dme.Core.Model.ДоставкаОтправитель_Адрес">
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+            <End Role="ДоставкаАдрес" EntitySet="ДоставкаАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="ДоставкаПолучатель_Адрес" Association="Dme.Core.Model.ДоставкаПолучатель_Адрес">
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+            <End Role="ДоставкаАдрес" EntitySet="ДоставкаАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаДокумент_ДоставкаФайл" Association="Dme.Core.Model.FK_ДоставкаДокумент_ДоставкаФайл">
+            <End Role="ДоставкаФайл" EntitySet="ДоставкаФайл" />
+            <End Role="ДоставкаДокумент" EntitySet="ДоставкаДокумент" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаОтправитель_ДоставкаДокумент" Association="Dme.Core.Model.FK_ДоставкаОтправитель_ДоставкаДокумент">
+            <End Role="ДоставкаДокумент" EntitySet="ДоставкаДокумент" />
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаПолучатель_ДоставкаДокумент" Association="Dme.Core.Model.FK_ДоставкаПолучатель_ДоставкаДокумент">
+            <End Role="ДоставкаДокумент" EntitySet="ДоставкаДокумент" />
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаТаблДок_ДоставкаДокумент" Association="Dme.Core.Model.FK_ДоставкаТаблДок_ДоставкаДокумент">
+            <End Role="ДоставкаДокумент" EntitySet="ДоставкаДокумент" />
+            <End Role="ДоставкаТаблДок" EntitySet="ДоставкаТаблДок" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаКонтакт_ДоставкаОтправитель" Association="Dme.Core.Model.FK_ДоставкаКонтакт_ДоставкаОтправитель">
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+            <End Role="ДоставкаКонтакт" EntitySet="ДоставкаКонтакт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаКонтакт_ДоставкаПолучатель" Association="Dme.Core.Model.FK_ДоставкаКонтакт_ДоставкаПолучатель">
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+            <End Role="ДоставкаКонтакт" EntitySet="ДоставкаКонтакт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаСвФЛ_ДоставкаОтправитель" Association="Dme.Core.Model.FK_ДоставкаСвФЛ_ДоставкаОтправитель">
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+            <End Role="ДоставкаСвФЛ" EntitySet="ДоставкаСвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаСвЮЛ_ДоставкаОтправитель" Association="Dme.Core.Model.FK_ДоставкаСвЮЛ_ДоставкаОтправитель">
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+            <End Role="ДоставкаСвЮЛ" EntitySet="ДоставкаСвЮЛ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаСвФЛ_ДоставкаПолучатель" Association="Dme.Core.Model.FK_ДоставкаСвФЛ_ДоставкаПолучатель">
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+            <End Role="ДоставкаСвФЛ" EntitySet="ДоставкаСвФЛ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаСвЮЛ_ДоставкаПолучатель" Association="Dme.Core.Model.FK_ДоставкаСвЮЛ_ДоставкаПолучатель">
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+            <End Role="ДоставкаСвЮЛ" EntitySet="ДоставкаСвЮЛ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаСтрТабл_ДоставкаТаблДок" Association="Dme.Core.Model.FK_ДоставкаСтрТабл_ДоставкаТаблДок">
+            <End Role="ДоставкаТаблДок" EntitySet="ДоставкаТаблДок" />
+            <End Role="ДоставкаСтрТабл" EntitySet="ДоставкаСтрТабл" />
+          </AssociationSet>
+          <EntitySet Name="ДоставкаПараметр" EntityType="Dme.Core.Model.ДоставкаПараметр" />
+          <AssociationSet Name="ДоставкаДокумент_Параметр" Association="Dme.Core.Model.ДоставкаДокумент_Параметр">
+            <End Role="ДоставкаДокумент" EntitySet="ДоставкаДокумент" />
+            <End Role="ДоставкаПараметр" EntitySet="ДоставкаПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="ДоставкаОтправитель_Параметр" Association="Dme.Core.Model.ДоставкаОтправитель_Параметр">
+            <End Role="ДоставкаОтправитель" EntitySet="ДоставкаОтправитель" />
+            <End Role="ДоставкаПараметр" EntitySet="ДоставкаПараметр" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ДоставкаПараметр_ДоставкаПолучатель" Association="Dme.Core.Model.FK_ДоставкаПараметр_ДоставкаПолучатель">
+            <End Role="ДоставкаПолучатель" EntitySet="ДоставкаПолучатель" />
+            <End Role="ДоставкаПараметр" EntitySet="ДоставкаПараметр" />
+          </AssociationSet>
+          <EntitySet Name="WfStates" EntityType="Dme.Core.Model.WfStates" />
+          <EntitySet Name="ЗаданиеНаДоставку" EntityType="Dme.Core.Model.ЗаданиеНаДоставку" />
+          <EntitySet Name="Маршрут" EntityType="Dme.Core.Model.Маршрут" />
+          <EntitySet Name="Перевозчик" EntityType="Dme.Core.Model.Перевозчик" />
+          <EntitySet Name="ТТН" EntityType="Dme.Core.Model.ТТН" />
+          <EntitySet Name="ТТНСопрДок" EntityType="Dme.Core.Model.ТТНСопрДок" />
+          <AssociationSet Name="FK_ЗаданиеНаДоставку_Маршрут" Association="Dme.Core.Model.FK_ЗаданиеНаДоставку_Маршрут">
+            <End Role="Маршрут" EntitySet="Маршрут" />
+            <End Role="ЗаданиеНаДоставку" EntitySet="ЗаданиеНаДоставку" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ЗаданиеНаДоставку_Перевозчик" Association="Dme.Core.Model.FK_ЗаданиеНаДоставку_Перевозчик">
+            <End Role="Перевозчик" EntitySet="Перевозчик" />
+            <End Role="ЗаданиеНаДоставку" EntitySet="ЗаданиеНаДоставку" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТТН_ЗаданиеНаДоставку" Association="Dme.Core.Model.FK_ТТН_ЗаданиеНаДоставку">
+            <End Role="ЗаданиеНаДоставку" EntitySet="ЗаданиеНаДоставку" />
+            <End Role="ТТН" EntitySet="ТТН" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТТНСопрДок_ТТН" Association="Dme.Core.Model.FK_ТТНСопрДок_ТТН">
+            <End Role="ТТН" EntitySet="ТТН" />
+            <End Role="ТТНСопрДок" EntitySet="ТТНСопрДок" />
+          </AssociationSet>
+          <EntitySet Name="ЗаказНаОтгрузкуТаблДок" EntityType="Dme.Core.Model.ЗаказНаОтгрузкуТаблДок" />
+          <EntitySet Name="Мх3ТаблДок" EntityType="Dme.Core.Model.Мх3ТаблДок" />
+          <EntitySet Name="НормАдр" EntityType="Dme.Core.Model.НормАдр" />
+          <AssociationSet Name="НормАдр_АктПриемкиАдрес" Association="Dme.Core.Model.НормАдр_АктПриемкиАдрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="АктПриемкиАдрес" EntitySet="АктПриемкиАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_ДоставкаАдрес" Association="Dme.Core.Model.НормАдр_ДоставкаАдрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="ДоставкаАдрес" EntitySet="ДоставкаАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_ЗаказНаОтгрузкуАдрес" Association="Dme.Core.Model.НормАдр_ЗаказНаОтгрузкуАдрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="ЗаказНаОтгрузкуАдрес" EntitySet="ЗаказНаОтгрузкуАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуДокумент_Таблица1" Association="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Таблица1">
+            <End Role="ЗаказНаОтгрузкуДокумент" EntitySet="ЗаказНаОтгрузкуДокумент" />
+            <End Role="ЗаказНаОтгрузкуТаблДок" EntitySet="ЗаказНаОтгрузкуТаблДок" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуТаблица_ИтогТабл1" Association="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_ИтогТабл1">
+            <End Role="ЗаказНаОтгрузкуТаблДок" EntitySet="ЗаказНаОтгрузкуТаблДок" />
+            <End Role="ЗаказНаОтгрузкуИтогТабл" EntitySet="ЗаказНаОтгрузкуИтогТабл" />
+          </AssociationSet>
+          <AssociationSet Name="ЗаказНаОтгрузкуТаблица_СтрТабл1" Association="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_СтрТабл1">
+            <End Role="ЗаказНаОтгрузкуТаблДок" EntitySet="ЗаказНаОтгрузкуТаблДок" />
             <End Role="ЗаказНаОтгрузкуСтрТабл" EntitySet="ЗаказНаОтгрузкуСтрТабл" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_ЗаказНаРазмещениеАдрес" Association="Dme.Core.Model.НормАдр_ЗаказНаРазмещениеАдрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="ЗаказНаРазмещениеАдрес" EntitySet="ЗаказНаРазмещениеАдрес" />
+          </AssociationSet>
+          <AssociationSet Name="FK_НормАдр_Маршрут" Association="Dme.Core.Model.FK_НормАдр_Маршрут">
+            <End Role="Маршрут" EntitySet="Маршрут" />
+            <End Role="НормАдр" EntitySet="НормАдр" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_Мх1Адрес" Association="Dme.Core.Model.НормАдр_Мх1Адрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="Мх1Адрес" EntitySet="Мх1Адрес" />
+          </AssociationSet>
+          <AssociationSet Name="НормАдр_Мх3Адрес" Association="Dme.Core.Model.НормАдр_Мх3Адрес">
+            <End Role="НормАдр" EntitySet="НормАдр" />
+            <End Role="Мх3Адрес" EntitySet="Мх3Адрес" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Документ_Таблица1" Association="Dme.Core.Model.Мх3Документ_Таблица1">
+            <End Role="Мх3Документ" EntitySet="Мх3Документ" />
+            <End Role="Мх3ТаблДок" EntitySet="Мх3ТаблДок" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Таблица_ИтогТабл1" Association="Dme.Core.Model.Мх3Таблица_ИтогТабл1">
+            <End Role="Мх3ТаблДок" EntitySet="Мх3ТаблДок" />
+            <End Role="Мх3ИтогТабл" EntitySet="Мх3ИтогТабл" />
+          </AssociationSet>
+          <AssociationSet Name="Мх3Таблица_СтрТабл1" Association="Dme.Core.Model.Мх3Таблица_СтрТабл1">
+            <End Role="Мх3ТаблДок" EntitySet="Мх3ТаблДок" />
+            <End Role="Мх3СтрТабл" EntitySet="Мх3СтрТабл" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="АктПриемкиАдрес">
@@ -5335,6 +6206,9 @@
           <NavigationProperty Name="АктПриемкиСписокАдрес" Relationship="Dme.Core.Model.АктПриемкиСписокАдрес_Адрес" FromRole="АктПриемкиАдрес" ToRole="АктПриемкиСписокАдрес" />
           <NavigationProperty Name="АктПриемкиАдрИно" Relationship="Dme.Core.Model.АктПриемкиАдрес_АдрИно" FromRole="АктПриемкиАдрес" ToRole="АктПриемкиАдрИно" />
           <NavigationProperty Name="АктПриемкиАдрРФ" Relationship="Dme.Core.Model.АктПриемкиАдрес_АдрРФ" FromRole="АктПриемкиАдрес" ToRole="АктПриемкиАдрРФ" />
+          <Property Name="Маршрут_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="НормАдр_Id" Type="Int32" />
+          <NavigationProperty Name="НормАдр" Relationship="Dme.Core.Model.НормАдр_АктПриемкиАдрес" FromRole="АктПриемкиАдрес" ToRole="НормАдр" />
         </EntityType>
         <EntityType Name="АктПриемкиБухгалтер">
           <Key>
@@ -5628,6 +6502,9 @@
           <NavigationProperty Name="ЗаказНаРазмещениеПолучатель" Relationship="Dme.Core.Model.Получатель_Адрес" FromRole="ЗаказНаРазмещениеАдрес" ToRole="ЗаказНаРазмещениеПолучатель" />
           <NavigationProperty Name="ЗаказНаРазмещениеАдрИно" Relationship="Dme.Core.Model.Адрес_АдрИно" FromRole="ЗаказНаРазмещениеАдрес" ToRole="ЗаказНаРазмещениеАдрИно" />
           <NavigationProperty Name="ЗаказНаРазмещениеАдрРФ" Relationship="Dme.Core.Model.Адрес_АдрРФ" FromRole="ЗаказНаРазмещениеАдрес" ToRole="ЗаказНаРазмещениеАдрРФ" />
+          <Property Name="Маршрут_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="НормАдр_Id" Type="Int32" />
+          <NavigationProperty Name="НормАдр" Relationship="Dme.Core.Model.НормАдр_ЗаказНаРазмещениеАдрес" FromRole="ЗаказНаРазмещениеАдрес" ToRole="НормАдр" />
         </EntityType>
         <EntityType Name="ЗаказНаРазмещениеДокумент">
           <Key>
@@ -5793,14 +6670,15 @@
           <Property Name="C_Deleted" Type="Boolean" Nullable="false" />
           <Property Name="C_DeleteDT" Type="DateTime" Precision="3" />
           <Property Name="C_DeletedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_CreatedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Мх1Адрес">
           <Key>
             <PropertyRef Name="Адрес_Id" />
           </Key>
-          <Property Name="Тип" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
-          <Property Name="Наим" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
-          <Property Name="АдрТекст" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Тип" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Наим" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="АдрТекст" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="Адрес_Id" Type="Int32" Nullable="false" />
           <Property Name="Отправитель_Id" Type="Int32" />
           <Property Name="Получатель_Id" Type="Int32" />
@@ -5808,12 +6686,14 @@
           <NavigationProperty Name="Мх1Получатель" Relationship="Dme.Core.Model.Мх1Получатель_Адрес" FromRole="Мх1Адрес" ToRole="Мх1Получатель" />
           <NavigationProperty Name="Мх1АдрИно" Relationship="Dme.Core.Model.Мх1Адрес_АдрИно" FromRole="Мх1Адрес" ToRole="Мх1АдрИно" />
           <NavigationProperty Name="Мх1АдрРФ" Relationship="Dme.Core.Model.Мх1Адрес_АдрРФ" FromRole="Мх1Адрес" ToRole="Мх1АдрРФ" />
+          <Property Name="НормАдр_Id" Type="Int32" />
+          <NavigationProperty Name="НормАдр" Relationship="Dme.Core.Model.НормАдр_Мх1Адрес" FromRole="Мх1Адрес" ToRole="НормАдр" />
         </EntityType>
         <EntityType Name="Мх1Документ">
           <Key>
             <PropertyRef Name="Документ_Id" />
           </Key>
-          <Property Name="Дата" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Дата" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
           <Property Name="Номер" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
           <Property Name="Документ_Id" Type="Int32" Nullable="false" />
           <Property Name="Файл_Id" Type="Int32" />
@@ -5844,12 +6724,12 @@
           <Key>
             <PropertyRef Name="Основание_Id" />
           </Key>
-          <Property Name="Номер" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
-          <Property Name="Дата" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Номер" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Дата" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
           <Property Name="Наим" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
           <Property Name="СуммаБезНал" Type="Single" />
           <Property Name="Сумма" Type="Single" />
-          <Property Name="Срок" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Срок" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
           <Property Name="Основание_Id" Type="Int32" Nullable="false" />
           <Property Name="Документ_Id" Type="Int32" />
           <NavigationProperty Name="Мх1Документ" Relationship="Dme.Core.Model.Мх1Документ_Основание" FromRole="Мх1Основание" ToRole="Мх1Документ" />
@@ -5860,7 +6740,7 @@
             <PropertyRef Name="Отправитель_Id" />
           </Key>
           <Property Name="Роль" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="Название" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Название" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
           <Property Name="Отправитель_Id" Type="Int32" Nullable="false" />
           <Property Name="Документ_Id" Type="Int32" />
           <NavigationProperty Name="Мх1Адрес" Relationship="Dme.Core.Model.Мх1Отправитель_Адрес" FromRole="Мх1Отправитель" ToRole="Мх1Адрес" />
@@ -6651,7 +7531,7 @@
           <Key>
             <PropertyRef Name="Параметр_Id" />
           </Key>
-          <Property Type="String" Name="Имя" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Имя" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Значение" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="СписокПараметр_Id" />
           <Property Type="Int32" Name="Параметр_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
@@ -6963,10 +7843,10 @@
           <Key>
             <PropertyRef Name="Контакт_Id" />
           </Key>
-          <Property Type="String" Name="Телефон" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Факс" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Email" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Internet" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Телефон" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Факс" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Internet" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Отправитель_Id" />
           <Property Type="Int32" Name="Получатель_Id" />
           <Property Type="Int32" Name="Контакт_Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
@@ -6991,8 +7871,8 @@
           <Key>
             <PropertyRef Name="Параметр_Id" />
           </Key>
-          <Property Type="String" Name="Имя" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Значение" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Имя" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Значение" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Основание_Id" />
           <Property Type="Int32" Name="Отправитель_Id" />
           <Property Type="Int32" Name="Получатель_Id" />
@@ -7022,11 +7902,11 @@
             <PropertyRef Name="СвФЛ_Id" />
           </Key>
           <Property Type="String" Name="ИНН" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Название" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Название" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Фамилия" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Имя" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Отчество" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Обращение" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Обращение" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Представитель_Id" />
           <Property Type="Int32" Name="Отправитель_Id" />
           <Property Type="Int32" Name="Получатель_Id" />
@@ -8083,6 +8963,9 @@
           <NavigationProperty Name="Мх3АдрИно" Relationship="Dme.Core.Model.Мх3Адрес_АдрИно" FromRole="Мх3Адрес" ToRole="Мх3АдрИно" />
           <NavigationProperty Name="Мх3АдрРФ" Relationship="Dme.Core.Model.Мх3Адрес_АдрРФ" FromRole="Мх3Адрес" ToRole="Мх3АдрРФ" />
           <NavigationProperty Name="Мх3Участник" Relationship="Dme.Core.Model.Мх3Участник_Адрес" FromRole="Мх3Адрес" ToRole="Мх3Участник" />
+          <Property Name="Маршрут_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="НормАдр_Id" Type="Int32" />
+          <NavigationProperty Name="НормАдр" Relationship="Dme.Core.Model.НормАдр_Мх3Адрес" FromRole="Мх3Адрес" ToRole="НормАдр" />
         </EntityType>
         <EntityType Name="Мх3АдрИно">
           <Key>
@@ -8135,9 +9018,11 @@
           <Property Name="Файл_Id" Type="Int32" />
           <NavigationProperty Name="Мх3Основание" Relationship="Dme.Core.Model.Мх3Документ_Основание" FromRole="Мх3Документ" ToRole="Мх3Основание" />
           <NavigationProperty Name="Мх3Параметр" Relationship="Dme.Core.Model.Мх3Документ_Параметр" FromRole="Мх3Документ" ToRole="Мх3Параметр" />
-          <NavigationProperty Name="Мх3Таблица" Relationship="Dme.Core.Model.Мх3Документ_Таблица" FromRole="Мх3Документ" ToRole="Мх3Таблица" />
           <NavigationProperty Name="Мх3Участник" Relationship="Dme.Core.Model.Мх3Документ_Участник" FromRole="Мх3Документ" ToRole="Мх3Участник" />
           <NavigationProperty Name="Мх3Файл" Relationship="Dme.Core.Model.Мх3Файл_Документ" FromRole="Мх3Документ" ToRole="Мх3Файл" />
+          <Property Name="C_WmsOrderId" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="C_WmsOrderTy" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Мх3ТаблДок" Relationship="Dme.Core.Model.Мх3Документ_Таблица1" FromRole="Мх3Документ" ToRole="Мх3ТаблДок" />
         </EntityType>
         <EntityType Name="Мх3ИтогТабл">
           <Key>
@@ -8154,7 +9039,7 @@
           <Property Name="Таблица_Id" Type="Int32" />
           <NavigationProperty Name="Мх3Налог" Relationship="Dme.Core.Model.Мх3ИтогТабл_Налог" FromRole="Мх3ИтогТабл" ToRole="Мх3Налог" />
           <NavigationProperty Name="Мх3Параметр" Relationship="Dme.Core.Model.Мх3ИтогТабл_Параметр" FromRole="Мх3ИтогТабл" ToRole="Мх3Параметр" />
-          <NavigationProperty Name="Мх3Таблица" Relationship="Dme.Core.Model.Мх3Таблица_ИтогТабл" FromRole="Мх3ИтогТабл" ToRole="Мх3Таблица" />
+          <NavigationProperty Name="Мх3ТаблДок" Relationship="Dme.Core.Model.Мх3Таблица_ИтогТабл1" FromRole="Мх3ИтогТабл" ToRole="Мх3ТаблДок" />
         </EntityType>
         <EntityType Name="Мх3Контакт">
           <Key>
@@ -8209,7 +9094,7 @@
           <Property Name="СтрТабл_Id" Type="Int32" />
           <Property Name="ИтогТабл_Id" Type="Int32" />
           <Property Name="Документ_Id" Type="Int32" />
-          <Property Name="Параметр_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Параметр_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Мх3Документ" Relationship="Dme.Core.Model.Мх3Документ_Параметр" FromRole="Мх3Параметр" ToRole="Мх3Документ" />
           <NavigationProperty Name="Мх3ИтогТабл" Relationship="Dme.Core.Model.Мх3ИтогТабл_Параметр" FromRole="Мх3Параметр" ToRole="Мх3ИтогТабл" />
           <NavigationProperty Name="Мх3Основание" Relationship="Dme.Core.Model.Мх3Основание_Параметр" FromRole="Мх3Параметр" ToRole="Мх3Основание" />
@@ -8276,19 +9161,8 @@
           <Property Name="Таблица_Id" Type="Int32" />
           <NavigationProperty Name="Мх3Налог" Relationship="Dme.Core.Model.Мх3СтрТабл_Налог" FromRole="Мх3СтрТабл" ToRole="Мх3Налог" />
           <NavigationProperty Name="Мх3Параметр" Relationship="Dme.Core.Model.Мх3СтрТабл_Параметр" FromRole="Мх3СтрТабл" ToRole="Мх3Параметр" />
-          <NavigationProperty Name="Мх3Таблица" Relationship="Dme.Core.Model.Мх3Таблица_СтрТабл" FromRole="Мх3СтрТабл" ToRole="Мх3Таблица" />
-        </EntityType>
-        <EntityType Name="Мх3Таблица">
-          <Key>
-            <PropertyRef Name="Таблица_Id" />
-          </Key>
-          <Property Name="Тип" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Наим" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Таблица_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Документ_Id" Type="Int32" />
-          <NavigationProperty Name="Мх3Документ" Relationship="Dme.Core.Model.Мх3Документ_Таблица" FromRole="Мх3Таблица" ToRole="Мх3Документ" />
-          <NavigationProperty Name="Мх3ИтогТабл" Relationship="Dme.Core.Model.Мх3Таблица_ИтогТабл" FromRole="Мх3Таблица" ToRole="Мх3ИтогТабл" />
-          <NavigationProperty Name="Мх3СтрТабл" Relationship="Dme.Core.Model.Мх3Таблица_СтрТабл" FromRole="Мх3Таблица" ToRole="Мх3СтрТабл" />
+          <Property Name="C_WmsH2LineId" Type="Int32" />
+          <NavigationProperty Name="Мх3ТаблДок" Relationship="Dme.Core.Model.Мх3Таблица_СтрТабл1" FromRole="Мх3СтрТабл" ToRole="Мх3ТаблДок" />
         </EntityType>
         <EntityType Name="Мх3Участник">
           <Key>
@@ -8323,6 +9197,7 @@
           <Property Name="C_DeleteDT" Type="DateTime" Precision="3" />
           <Property Name="C_DeletedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Мх3Документ" Relationship="Dme.Core.Model.Мх3Файл_Документ" FromRole="Мх3Файл" ToRole="Мх3Документ" />
+          <Property Name="ЗаказНаОтгрузку_Документ_Id" Type="Int32" />
         </EntityType>
         <Association Name="Мх3Адрес_АдрИно">
           <End Type="Dme.Core.Model.Мх3Адрес" Role="Мх3Адрес" Multiplicity="0..1">
@@ -8408,18 +9283,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Мх3Документ_Таблица">
-          <End Type="Dme.Core.Model.Мх3Документ" Role="Мх3Документ" Multiplicity="0..1" />
-          <End Type="Dme.Core.Model.Мх3Таблица" Role="Мх3Таблица" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Мх3Документ">
-              <PropertyRef Name="Документ_Id" />
-            </Principal>
-            <Dependent Role="Мх3Таблица">
-              <PropertyRef Name="Документ_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Мх3Документ_Участник">
           <End Type="Dme.Core.Model.Мх3Документ" Role="Мх3Документ" Multiplicity="0..1" />
           <End Type="Dme.Core.Model.Мх3Участник" Role="Мх3Участник" Multiplicity="*" />
@@ -8471,20 +9334,6 @@
             </Principal>
             <Dependent Role="Мх3Параметр">
               <PropertyRef Name="ИтогТабл_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Мх3Таблица_ИтогТабл">
-          <End Type="Dme.Core.Model.Мх3Таблица" Role="Мх3Таблица" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Dme.Core.Model.Мх3ИтогТабл" Role="Мх3ИтогТабл" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Мх3Таблица">
-              <PropertyRef Name="Таблица_Id" />
-            </Principal>
-            <Dependent Role="Мх3ИтогТабл">
-              <PropertyRef Name="Таблица_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8610,18 +9459,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Мх3Таблица_СтрТабл">
-          <End Type="Dme.Core.Model.Мх3Таблица" Role="Мх3Таблица" Multiplicity="0..1" />
-          <End Type="Dme.Core.Model.Мх3СтрТабл" Role="Мх3СтрТабл" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Мх3Таблица">
-              <PropertyRef Name="Таблица_Id" />
-            </Principal>
-            <Dependent Role="Мх3СтрТабл">
-              <PropertyRef Name="Таблица_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ЗаказНаОтгрузкуАдрес">
           <Key>
             <PropertyRef Name="Адрес_Id" />
@@ -8633,6 +9470,9 @@
           <NavigationProperty Name="ЗаказНаОтгрузкуАдрИно" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуАдрес_АдрИно" FromRole="ЗаказНаОтгрузкуАдрес" ToRole="ЗаказНаОтгрузкуАдрИно" />
           <NavigationProperty Name="ЗаказНаОтгрузкуАдрРФ" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуАдрес_АдрРФ" FromRole="ЗаказНаОтгрузкуАдрес" ToRole="ЗаказНаОтгрузкуАдрРФ" />
           <NavigationProperty Name="ЗаказНаОтгрузкуУчастник" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуУчастник_Адрес" FromRole="ЗаказНаОтгрузкуАдрес" ToRole="ЗаказНаОтгрузкуУчастник" />
+          <Property Name="Маршрут_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="НормАдр_Id" Type="Int32" />
+          <NavigationProperty Name="НормАдр" Relationship="Dme.Core.Model.НормАдр_ЗаказНаОтгрузкуАдрес" FromRole="ЗаказНаОтгрузкуАдрес" ToRole="НормАдр" />
         </EntityType>
         <EntityType Name="ЗаказНаОтгрузкуАдрИно">
           <Key>
@@ -8677,7 +9517,7 @@
           <Key>
             <PropertyRef Name="Документ_Id" />
           </Key>
-          <Property Name="Дата" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Номер" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="Примечание" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
@@ -8685,9 +9525,12 @@
           <Property Name="Файл_Id" Type="Int32" />
           <NavigationProperty Name="ЗаказНаОтгрузкуОснование" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Основание" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуОснование" />
           <NavigationProperty Name="ЗаказНаОтгрузкуПараметр" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Параметр" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуПараметр" />
-          <NavigationProperty Name="ЗаказНаОтгрузкуТаблица" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Таблица" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуТаблица" />
           <NavigationProperty Name="ЗаказНаОтгрузкуУчастник" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Участник" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуУчастник" />
           <NavigationProperty Name="ЗаказНаОтгрузкуФайл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуФайл_Документ" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуФайл" />
+          <Property Name="C_WmsOrderId" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="C_WmsOrderTy" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="C_WmsOrderDt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуТаблДок" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Таблица1" FromRole="ЗаказНаОтгрузкуДокумент" ToRole="ЗаказНаОтгрузкуТаблДок" />
         </EntityType>
         <EntityType Name="ЗаказНаОтгрузкуИтогТабл">
           <Key>
@@ -8704,7 +9547,7 @@
           <Property Name="Таблица_Id" Type="Int32" />
           <NavigationProperty Name="ЗаказНаОтгрузкуНалог" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл_Налог" FromRole="ЗаказНаОтгрузкуИтогТабл" ToRole="ЗаказНаОтгрузкуНалог" />
           <NavigationProperty Name="ЗаказНаОтгрузкуПараметр" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл_Параметр" FromRole="ЗаказНаОтгрузкуИтогТабл" ToRole="ЗаказНаОтгрузкуПараметр" />
-          <NavigationProperty Name="ЗаказНаОтгрузкуТаблица" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_ИтогТабл" FromRole="ЗаказНаОтгрузкуИтогТабл" ToRole="ЗаказНаОтгрузкуТаблица" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуТаблДок" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_ИтогТабл1" FromRole="ЗаказНаОтгрузкуИтогТабл" ToRole="ЗаказНаОтгрузкуТаблДок" />
         </EntityType>
         <EntityType Name="ЗаказНаОтгрузкуКонтакт">
           <Key>
@@ -8826,19 +9669,7 @@
           <Property Name="Таблица_Id" Type="Int32" />
           <NavigationProperty Name="ЗаказНаОтгрузкуНалог" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл_Налог" FromRole="ЗаказНаОтгрузкуСтрТабл" ToRole="ЗаказНаОтгрузкуНалог" />
           <NavigationProperty Name="ЗаказНаОтгрузкуПараметр" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл_Параметр" FromRole="ЗаказНаОтгрузкуСтрТабл" ToRole="ЗаказНаОтгрузкуПараметр" />
-          <NavigationProperty Name="ЗаказНаОтгрузкуТаблица" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_СтрТабл" FromRole="ЗаказНаОтгрузкуСтрТабл" ToRole="ЗаказНаОтгрузкуТаблица" />
-        </EntityType>
-        <EntityType Name="ЗаказНаОтгрузкуТаблица">
-          <Key>
-            <PropertyRef Name="Таблица_Id" />
-          </Key>
-          <Property Name="Тип" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Наим" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Таблица_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Документ_Id" Type="Int32" />
-          <NavigationProperty Name="ЗаказНаОтгрузкуДокумент" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Таблица" FromRole="ЗаказНаОтгрузкуТаблица" ToRole="ЗаказНаОтгрузкуДокумент" />
-          <NavigationProperty Name="ЗаказНаОтгрузкуИтогТабл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_ИтогТабл" FromRole="ЗаказНаОтгрузкуТаблица" ToRole="ЗаказНаОтгрузкуИтогТабл" />
-          <NavigationProperty Name="ЗаказНаОтгрузкуСтрТабл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_СтрТабл" FromRole="ЗаказНаОтгрузкуТаблица" ToRole="ЗаказНаОтгрузкуСтрТабл" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуТаблДок" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_СтрТабл1" FromRole="ЗаказНаОтгрузкуСтрТабл" ToRole="ЗаказНаОтгрузкуТаблДок" />
         </EntityType>
         <EntityType Name="ЗаказНаОтгрузкуУчастник">
           <Key>
@@ -8874,6 +9705,7 @@
           <Property Name="C_DeletedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ЗаказНаОтгрузкуДокумент" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуФайл_Документ" FromRole="ЗаказНаОтгрузкуФайл" ToRole="ЗаказНаОтгрузкуДокумент" />
           <Property Name="C_CreatedDT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="C_CreatedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="ЗаказНаОтгрузкуАдрес_АдрИно">
           <End Type="Dme.Core.Model.ЗаказНаОтгрузкуАдрес" Role="ЗаказНаОтгрузкуАдрес" Multiplicity="0..1">
@@ -8959,18 +9791,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ЗаказНаОтгрузкуДокумент_Таблица">
-          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуДокумент" Role="ЗаказНаОтгрузкуДокумент" Multiplicity="0..1" />
-          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуТаблица" Role="ЗаказНаОтгрузкуТаблица" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ЗаказНаОтгрузкуДокумент">
-              <PropertyRef Name="Документ_Id" />
-            </Principal>
-            <Dependent Role="ЗаказНаОтгрузкуТаблица">
-              <PropertyRef Name="Документ_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="ЗаказНаОтгрузкуДокумент_Участник">
           <End Type="Dme.Core.Model.ЗаказНаОтгрузкуДокумент" Role="ЗаказНаОтгрузкуДокумент" Multiplicity="0..1" />
           <End Type="Dme.Core.Model.ЗаказНаОтгрузкуУчастник" Role="ЗаказНаОтгрузкуУчастник" Multiplicity="*" />
@@ -9022,20 +9842,6 @@
             </Principal>
             <Dependent Role="ЗаказНаОтгрузкуПараметр">
               <PropertyRef Name="ИтогТабл_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ЗаказНаОтгрузкуТаблица_ИтогТабл">
-          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуТаблица" Role="ЗаказНаОтгрузкуТаблица" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл" Role="ЗаказНаОтгрузкуИтогТабл" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ЗаказНаОтгрузкуТаблица">
-              <PropertyRef Name="Таблица_Id" />
-            </Principal>
-            <Dependent Role="ЗаказНаОтгрузкуИтогТабл">
-              <PropertyRef Name="Таблица_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9161,14 +9967,754 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ЗаказНаОтгрузкуТаблица_СтрТабл">
-          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуТаблица" Role="ЗаказНаОтгрузкуТаблица" Multiplicity="0..1" />
+        <EntityType Name="ДоставкаАдрес">
+          <Key>
+            <PropertyRef Name="Адрес_Id" />
+          </Key>
+          <Property Name="Тип" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="АдрТекст" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Отправитель_Id" Type="Int32" />
+          <Property Name="Получатель_Id" Type="Int32" />
+          <Property Name="Адрес_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ДоставкаОтправитель" Relationship="Dme.Core.Model.ДоставкаОтправитель_Адрес" FromRole="ДоставкаАдрес" ToRole="ДоставкаОтправитель" />
+          <NavigationProperty Name="ДоставкаПолучатель" Relationship="Dme.Core.Model.ДоставкаПолучатель_Адрес" FromRole="ДоставкаАдрес" ToRole="ДоставкаПолучатель" />
+          <Property Name="Маршрут_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="НормАдр_Id" Type="Int32" />
+          <NavigationProperty Name="НормАдр" Relationship="Dme.Core.Model.НормАдр_ДоставкаАдрес" FromRole="ДоставкаАдрес" ToRole="НормАдр" />
+        </EntityType>
+        <EntityType Name="ДоставкаДокумент">
+          <Key>
+            <PropertyRef Name="Документ_Id" />
+          </Key>
+          <Property Name="Дата" Type="DateTime" Precision="3" />
+          <Property Name="Номер" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Файл_Id" Type="Int32" />
+          <Property Name="Документ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ДоставкаФайл" Relationship="Dme.Core.Model.FK_ДоставкаДокумент_ДоставкаФайл" FromRole="ДоставкаДокумент" ToRole="ДоставкаФайл" />
+          <NavigationProperty Name="ДоставкаОтправитель" Relationship="Dme.Core.Model.FK_ДоставкаОтправитель_ДоставкаДокумент" FromRole="ДоставкаДокумент" ToRole="ДоставкаОтправитель" />
+          <NavigationProperty Name="ДоставкаПолучатель" Relationship="Dme.Core.Model.FK_ДоставкаПолучатель_ДоставкаДокумент" FromRole="ДоставкаДокумент" ToRole="ДоставкаПолучатель" />
+          <NavigationProperty Name="ДоставкаТаблДок" Relationship="Dme.Core.Model.FK_ДоставкаТаблДок_ДоставкаДокумент" FromRole="ДоставкаДокумент" ToRole="ДоставкаТаблДок" />
+          <NavigationProperty Name="ДоставкаПараметр" Relationship="Dme.Core.Model.ДоставкаДокумент_Параметр" FromRole="ДоставкаДокумент" ToRole="ДоставкаПараметр" />
+        </EntityType>
+        <EntityType Name="ДоставкаКонтакт">
+          <Key>
+            <PropertyRef Name="Контакт_Id" />
+          </Key>
+          <Property Name="Телефон" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Факс" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Internet" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Отправитель_Id" Type="Int32" />
+          <Property Name="Получатель_Id" Type="Int32" />
+          <Property Name="Контакт_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ДоставкаОтправитель" Relationship="Dme.Core.Model.FK_ДоставкаКонтакт_ДоставкаОтправитель" FromRole="ДоставкаКонтакт" ToRole="ДоставкаОтправитель" />
+          <NavigationProperty Name="ДоставкаПолучатель" Relationship="Dme.Core.Model.FK_ДоставкаКонтакт_ДоставкаПолучатель" FromRole="ДоставкаКонтакт" ToRole="ДоставкаПолучатель" />
+        </EntityType>
+        <EntityType Name="ДоставкаОтправитель">
+          <Key>
+            <PropertyRef Name="Отправитель_Id" />
+          </Key>
+          <Property Name="Название" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <Property Name="Отправитель_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ДоставкаАдрес" Relationship="Dme.Core.Model.ДоставкаОтправитель_Адрес" FromRole="ДоставкаОтправитель" ToRole="ДоставкаАдрес" />
+          <NavigationProperty Name="ДоставкаДокумент" Relationship="Dme.Core.Model.FK_ДоставкаОтправитель_ДоставкаДокумент" FromRole="ДоставкаОтправитель" ToRole="ДоставкаДокумент" />
+          <NavigationProperty Name="ДоставкаКонтакт" Relationship="Dme.Core.Model.FK_ДоставкаКонтакт_ДоставкаОтправитель" FromRole="ДоставкаОтправитель" ToRole="ДоставкаКонтакт" />
+          <NavigationProperty Name="ДоставкаСвФЛ" Relationship="Dme.Core.Model.FK_ДоставкаСвФЛ_ДоставкаОтправитель" FromRole="ДоставкаОтправитель" ToRole="ДоставкаСвФЛ" />
+          <NavigationProperty Name="ДоставкаСвЮЛ" Relationship="Dme.Core.Model.FK_ДоставкаСвЮЛ_ДоставкаОтправитель" FromRole="ДоставкаОтправитель" ToRole="ДоставкаСвЮЛ" />
+          <NavigationProperty Name="ДоставкаПараметр" Relationship="Dme.Core.Model.ДоставкаОтправитель_Параметр" FromRole="ДоставкаОтправитель" ToRole="ДоставкаПараметр" />
+        </EntityType>
+        <EntityType Name="ДоставкаПолучатель">
+          <Key>
+            <PropertyRef Name="Получатель_Id" />
+          </Key>
+          <Property Name="Название" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <Property Name="Получатель_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ДоставкаАдрес" Relationship="Dme.Core.Model.ДоставкаПолучатель_Адрес" FromRole="ДоставкаПолучатель" ToRole="ДоставкаАдрес" />
+          <NavigationProperty Name="ДоставкаДокумент" Relationship="Dme.Core.Model.FK_ДоставкаПолучатель_ДоставкаДокумент" FromRole="ДоставкаПолучатель" ToRole="ДоставкаДокумент" />
+          <NavigationProperty Name="ДоставкаКонтакт" Relationship="Dme.Core.Model.FK_ДоставкаКонтакт_ДоставкаПолучатель" FromRole="ДоставкаПолучатель" ToRole="ДоставкаКонтакт" />
+          <NavigationProperty Name="ДоставкаСвФЛ" Relationship="Dme.Core.Model.FK_ДоставкаСвФЛ_ДоставкаПолучатель" FromRole="ДоставкаПолучатель" ToRole="ДоставкаСвФЛ" />
+          <NavigationProperty Name="ДоставкаСвЮЛ" Relationship="Dme.Core.Model.FK_ДоставкаСвЮЛ_ДоставкаПолучатель" FromRole="ДоставкаПолучатель" ToRole="ДоставкаСвЮЛ" />
+          <NavigationProperty Name="ДоставкаПараметр" Relationship="Dme.Core.Model.FK_ДоставкаПараметр_ДоставкаПолучатель" FromRole="ДоставкаПолучатель" ToRole="ДоставкаПараметр" />
+        </EntityType>
+        <EntityType Name="ДоставкаСвФЛ">
+          <Key>
+            <PropertyRef Name="СвФЛ_Id" />
+          </Key>
+          <Property Name="ИНН" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Название" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Фамилия" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Обращение" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Отправитель_Id" Type="Int32" />
+          <Property Name="Получатель_Id" Type="Int32" />
+          <Property Name="СвФЛ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ДоставкаОтправитель" Relationship="Dme.Core.Model.FK_ДоставкаСвФЛ_ДоставкаОтправитель" FromRole="ДоставкаСвФЛ" ToRole="ДоставкаОтправитель" />
+          <NavigationProperty Name="ДоставкаПолучатель" Relationship="Dme.Core.Model.FK_ДоставкаСвФЛ_ДоставкаПолучатель" FromRole="ДоставкаСвФЛ" ToRole="ДоставкаПолучатель" />
+        </EntityType>
+        <EntityType Name="ДоставкаСвЮЛ">
+          <Key>
+            <PropertyRef Name="СвЮЛ_Id" />
+          </Key>
+          <Property Name="Название" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ИНН" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="КПП" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="ОКДП" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ОКПО" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Отправитель_Id" Type="Int32" />
+          <Property Name="Получатель_Id" Type="Int32" />
+          <Property Name="СвЮЛ_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ДоставкаОтправитель" Relationship="Dme.Core.Model.FK_ДоставкаСвЮЛ_ДоставкаОтправитель" FromRole="ДоставкаСвЮЛ" ToRole="ДоставкаОтправитель" />
+          <NavigationProperty Name="ДоставкаПолучатель" Relationship="Dme.Core.Model.FK_ДоставкаСвЮЛ_ДоставкаПолучатель" FromRole="ДоставкаСвЮЛ" ToRole="ДоставкаПолучатель" />
+        </EntityType>
+        <EntityType Name="ДоставкаСтрТабл">
+          <Key>
+            <PropertyRef Name="СтрТабл_Id" />
+          </Key>
+          <Property Name="ПорНомер" Type="Int32" />
+          <Property Name="Название" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Кол_воМест" Type="Int32" />
+          <Property Name="НомерМеста" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Сумма" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Примечание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ТаблДок_Id" Type="Int32" />
+          <Property Name="СтрТабл_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ДоставкаТаблДок" Relationship="Dme.Core.Model.FK_ДоставкаСтрТабл_ДоставкаТаблДок" FromRole="ДоставкаСтрТабл" ToRole="ДоставкаТаблДок" />
+        </EntityType>
+        <EntityType Name="ДоставкаТаблДок">
+          <Key>
+            <PropertyRef Name="ТаблДок_Id" />
+          </Key>
+          <Property Name="Название" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Тип" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <Property Name="ТаблДок_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ДоставкаДокумент" Relationship="Dme.Core.Model.FK_ДоставкаТаблДок_ДоставкаДокумент" FromRole="ДоставкаТаблДок" ToRole="ДоставкаДокумент" />
+          <NavigationProperty Name="ДоставкаСтрТабл" Relationship="Dme.Core.Model.FK_ДоставкаСтрТабл_ДоставкаТаблДок" FromRole="ДоставкаТаблДок" ToRole="ДоставкаСтрТабл" />
+        </EntityType>
+        <EntityType Name="ДоставкаФайл">
+          <Key>
+            <PropertyRef Name="Файл_Id" />
+          </Key>
+          <Property Name="ИдФайл" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ВерсПрог" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ИдФорм" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ВерсФорм" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Сформирован" Type="DateTime" Precision="3" />
+          <Property Name="Файл_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_WfState" Type="Int32" Nullable="false" />
+          <Property Name="C_WfLastUpdateDT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="C_WfLastUpdateUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="C_DeleteDT" Type="DateTime" Precision="3" />
+          <Property Name="C_DeletedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ДоставкаДокумент" Relationship="Dme.Core.Model.FK_ДоставкаДокумент_ДоставкаФайл" FromRole="ДоставкаФайл" ToRole="ДоставкаДокумент" />
+          <Property Name="C_CreatedDT" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="C_CreatedUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="ДоставкаОтправитель_Адрес">
+          <End Type="Dme.Core.Model.ДоставкаОтправитель" Role="ДоставкаОтправитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаАдрес" Role="ДоставкаАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаОтправитель">
+              <PropertyRef Name="Отправитель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаАдрес">
+              <PropertyRef Name="Отправитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ДоставкаПолучатель_Адрес">
+          <End Type="Dme.Core.Model.ДоставкаПолучатель" Role="ДоставкаПолучатель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаАдрес" Role="ДоставкаАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаПолучатель">
+              <PropertyRef Name="Получатель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаАдрес">
+              <PropertyRef Name="Получатель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаДокумент_ДоставкаФайл">
+          <End Type="Dme.Core.Model.ДоставкаФайл" Role="ДоставкаФайл" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаДокумент" Role="ДоставкаДокумент" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаФайл">
+              <PropertyRef Name="Файл_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаДокумент">
+              <PropertyRef Name="Файл_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаОтправитель_ДоставкаДокумент">
+          <End Type="Dme.Core.Model.ДоставкаДокумент" Role="ДоставкаДокумент" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ДоставкаОтправитель" Role="ДоставкаОтправитель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаОтправитель">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаПолучатель_ДоставкаДокумент">
+          <End Type="Dme.Core.Model.ДоставкаДокумент" Role="ДоставкаДокумент" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаПолучатель" Role="ДоставкаПолучатель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаПолучатель">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаТаблДок_ДоставкаДокумент">
+          <End Type="Dme.Core.Model.ДоставкаДокумент" Role="ДоставкаДокумент" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаТаблДок" Role="ДоставкаТаблДок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаТаблДок">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаКонтакт_ДоставкаОтправитель">
+          <End Type="Dme.Core.Model.ДоставкаОтправитель" Role="ДоставкаОтправитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаКонтакт" Role="ДоставкаКонтакт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаОтправитель">
+              <PropertyRef Name="Отправитель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаКонтакт">
+              <PropertyRef Name="Отправитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаКонтакт_ДоставкаПолучатель">
+          <End Type="Dme.Core.Model.ДоставкаПолучатель" Role="ДоставкаПолучатель" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ДоставкаКонтакт" Role="ДоставкаКонтакт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаПолучатель">
+              <PropertyRef Name="Получатель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаКонтакт">
+              <PropertyRef Name="Получатель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаСвФЛ_ДоставкаОтправитель">
+          <End Type="Dme.Core.Model.ДоставкаОтправитель" Role="ДоставкаОтправитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаСвФЛ" Role="ДоставкаСвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаОтправитель">
+              <PropertyRef Name="Отправитель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаСвФЛ">
+              <PropertyRef Name="Отправитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаСвЮЛ_ДоставкаОтправитель">
+          <End Type="Dme.Core.Model.ДоставкаОтправитель" Role="ДоставкаОтправитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаСвЮЛ" Role="ДоставкаСвЮЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаОтправитель">
+              <PropertyRef Name="Отправитель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаСвЮЛ">
+              <PropertyRef Name="Отправитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаСвФЛ_ДоставкаПолучатель">
+          <End Type="Dme.Core.Model.ДоставкаПолучатель" Role="ДоставкаПолучатель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаСвФЛ" Role="ДоставкаСвФЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаПолучатель">
+              <PropertyRef Name="Получатель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаСвФЛ">
+              <PropertyRef Name="Получатель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаСвЮЛ_ДоставкаПолучатель">
+          <End Type="Dme.Core.Model.ДоставкаПолучатель" Role="ДоставкаПолучатель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаСвЮЛ" Role="ДоставкаСвЮЛ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаПолучатель">
+              <PropertyRef Name="Получатель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаСвЮЛ">
+              <PropertyRef Name="Получатель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаСтрТабл_ДоставкаТаблДок">
+          <End Type="Dme.Core.Model.ДоставкаТаблДок" Role="ДоставкаТаблДок" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаСтрТабл" Role="ДоставкаСтрТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаТаблДок">
+              <PropertyRef Name="ТаблДок_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаСтрТабл">
+              <PropertyRef Name="ТаблДок_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ДоставкаПараметр">
+          <Key>
+            <PropertyRef Name="Параметр_Id" />
+          </Key>
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Значение" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Отправитель_Id" Type="Int32" />
+          <Property Name="Получатель_Id" Type="Int32" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <Property Name="Параметр_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ДоставкаДокумент" Relationship="Dme.Core.Model.ДоставкаДокумент_Параметр" FromRole="ДоставкаПараметр" ToRole="ДоставкаДокумент" />
+          <NavigationProperty Name="ДоставкаОтправитель" Relationship="Dme.Core.Model.ДоставкаОтправитель_Параметр" FromRole="ДоставкаПараметр" ToRole="ДоставкаОтправитель" />
+          <NavigationProperty Name="ДоставкаПолучатель" Relationship="Dme.Core.Model.FK_ДоставкаПараметр_ДоставкаПолучатель" FromRole="ДоставкаПараметр" ToRole="ДоставкаПолучатель" />
+        </EntityType>
+        <Association Name="ДоставкаДокумент_Параметр">
+          <End Type="Dme.Core.Model.ДоставкаДокумент" Role="ДоставкаДокумент" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаПараметр" Role="ДоставкаПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаПараметр">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ДоставкаОтправитель_Параметр">
+          <End Type="Dme.Core.Model.ДоставкаОтправитель" Role="ДоставкаОтправитель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаПараметр" Role="ДоставкаПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаОтправитель">
+              <PropertyRef Name="Отправитель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаПараметр">
+              <PropertyRef Name="Отправитель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ДоставкаПараметр_ДоставкаПолучатель">
+          <End Type="Dme.Core.Model.ДоставкаПолучатель" Role="ДоставкаПолучатель" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ДоставкаПараметр" Role="ДоставкаПараметр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ДоставкаПолучатель">
+              <PropertyRef Name="Получатель_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаПараметр">
+              <PropertyRef Name="Получатель_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WfStates">
+          <Key>
+            <PropertyRef Name="WfName" />
+            <PropertyRef Name="WfState" />
+          </Key>
+          <Property Name="WfName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WfState" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ЗаданиеНаДоставку">
+          <Key>
+            <PropertyRef Name="ЗаданиеНаДоставку_Id" />
+          </Key>
+          <Property Name="ЗаданиеНаДоставку_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Маршрут_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Перевозчик_Id" Type="Int32" />
+          <Property Name="Номер" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="DateTime" Precision="0" />
+          <Property Name="Примечание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Вес" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Объем" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Мест" Type="Int32" />
+          <Property Name="C_WfState" Type="Int32" Nullable="false" />
+          <Property Name="C_WfLastUpdateDT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="C_WfLastUpdateUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_CreatedDT" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Сумма" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Маршрут" Relationship="Dme.Core.Model.FK_ЗаданиеНаДоставку_Маршрут" FromRole="ЗаданиеНаДоставку" ToRole="Маршрут" />
+          <NavigationProperty Name="Перевозчик" Relationship="Dme.Core.Model.FK_ЗаданиеНаДоставку_Перевозчик" FromRole="ЗаданиеНаДоставку" ToRole="Перевозчик" />
+          <NavigationProperty Name="ТТН" Relationship="Dme.Core.Model.FK_ТТН_ЗаданиеНаДоставку" FromRole="ЗаданиеНаДоставку" ToRole="ТТН" />
+        </EntityType>
+        <EntityType Name="Маршрут">
+          <Key>
+            <PropertyRef Name="Маршрут_Id" />
+          </Key>
+          <Property Name="Маршрут_Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Примечание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Ворота" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ВремяЗагрузки" Type="DateTime" Precision="3" />
+          <Property Name="ВремяОтправки" Type="DateTime" Precision="3" />
+          <Property Name="Приоритет" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ЗаданиеНаДоставку" Relationship="Dme.Core.Model.FK_ЗаданиеНаДоставку_Маршрут" FromRole="Маршрут" ToRole="ЗаданиеНаДоставку" />
+          <NavigationProperty Name="НормАдр" Relationship="Dme.Core.Model.FK_НормАдр_Маршрут" FromRole="Маршрут" ToRole="НормАдр" />
+        </EntityType>
+        <EntityType Name="Перевозчик">
+          <Key>
+            <PropertyRef Name="Перевозчик_Id" />
+          </Key>
+          <Property Name="Перевозчик_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Активен" Type="Boolean" Nullable="false" />
+          <Property Name="Название" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Тип" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ИНН" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="КПП" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="ОКДП" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ОКПО" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Тел" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Тел2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Факс" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Прмечание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="АвтоРегНомер" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="АвтоМарка" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="АвтоОбъем" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="АвтоГрузоподъемность" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="ЗаданиеНаДоставку" Relationship="Dme.Core.Model.FK_ЗаданиеНаДоставку_Перевозчик" FromRole="Перевозчик" ToRole="ЗаданиеНаДоставку" />
+        </EntityType>
+        <EntityType Name="ТТН">
+          <Key>
+            <PropertyRef Name="ТТН_Id" />
+          </Key>
+          <Property Name="ТТН_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ЗаданиеНаДоставку_Id" Type="Int32" Nullable="false" />
+          <Property Name="Номер" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Грузополучатель" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ГрузополучательАдрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ГрузополучательКонтакт" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Грузоотправитель" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ГрузоотправительАдрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ГрузоотправительКонтакт" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ГрузоотправительПрим1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ГрузоотправительПрим2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ГрузоотправительПрим3" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="НаимГруза" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Кол_воМест" Type="Int32" />
+          <Property Name="ВидУп" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Вес" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Объем" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="ПриемГрузаАдрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ПриемГрузаВремя" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="СдачаГрузаАдрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="СдачаГрузаВремя" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ЗаданиеНаДоставку" Relationship="Dme.Core.Model.FK_ТТН_ЗаданиеНаДоставку" FromRole="ТТН" ToRole="ЗаданиеНаДоставку" />
+          <NavigationProperty Name="ТТНСопрДок" Relationship="Dme.Core.Model.FK_ТТНСопрДок_ТТН" FromRole="ТТН" ToRole="ТТНСопрДок" />
+        </EntityType>
+        <EntityType Name="ТТНСопрДок">
+          <Key>
+            <PropertyRef Name="ТТНСопрДок_Id" />
+          </Key>
+          <Property Name="ТТНСопрДок_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ТТН_Id" Type="Int32" Nullable="false" />
+          <Property Name="Номер" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Тип" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Мх3Документ_Id" Type="Int32" />
+          <Property Name="ДоставкаДокумент_Id" Type="Int32" />
+          <NavigationProperty Name="ТТН" Relationship="Dme.Core.Model.FK_ТТНСопрДок_ТТН" FromRole="ТТНСопрДок" ToRole="ТТН" />
+        </EntityType>
+        <Association Name="FK_ЗаданиеНаДоставку_Маршрут">
+          <End Type="Dme.Core.Model.Маршрут" Role="Маршрут" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ЗаданиеНаДоставку" Role="ЗаданиеНаДоставку" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Маршрут">
+              <PropertyRef Name="Маршрут_Id" />
+            </Principal>
+            <Dependent Role="ЗаданиеНаДоставку">
+              <PropertyRef Name="Маршрут_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ЗаданиеНаДоставку_Перевозчик">
+          <End Type="Dme.Core.Model.Перевозчик" Role="Перевозчик" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ЗаданиеНаДоставку" Role="ЗаданиеНаДоставку" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Перевозчик">
+              <PropertyRef Name="Перевозчик_Id" />
+            </Principal>
+            <Dependent Role="ЗаданиеНаДоставку">
+              <PropertyRef Name="Перевозчик_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТТН_ЗаданиеНаДоставку">
+          <End Type="Dme.Core.Model.ЗаданиеНаДоставку" Role="ЗаданиеНаДоставку" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ТТН" Role="ТТН" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаданиеНаДоставку">
+              <PropertyRef Name="ЗаданиеНаДоставку_Id" />
+            </Principal>
+            <Dependent Role="ТТН">
+              <PropertyRef Name="ЗаданиеНаДоставку_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТТНСопрДок_ТТН">
+          <End Type="Dme.Core.Model.ТТН" Role="ТТН" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ТТНСопрДок" Role="ТТНСопрДок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТТН">
+              <PropertyRef Name="ТТН_Id" />
+            </Principal>
+            <Dependent Role="ТТНСопрДок">
+              <PropertyRef Name="ТТН_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ЗаказНаОтгрузкуТаблДок">
+          <Key>
+            <PropertyRef Name="Таблица_Id" />
+          </Key>
+          <Property Name="Тип" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Таблица_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуДокумент" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуДокумент_Таблица1" FromRole="ЗаказНаОтгрузкуТаблДок" ToRole="ЗаказНаОтгрузкуДокумент" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуИтогТабл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_ИтогТабл1" FromRole="ЗаказНаОтгрузкуТаблДок" ToRole="ЗаказНаОтгрузкуИтогТабл" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуСтрТабл" Relationship="Dme.Core.Model.ЗаказНаОтгрузкуТаблица_СтрТабл1" FromRole="ЗаказНаОтгрузкуТаблДок" ToRole="ЗаказНаОтгрузкуСтрТабл" />
+        </EntityType>
+        <EntityType Name="Мх3ТаблДок">
+          <Key>
+            <PropertyRef Name="Таблица_Id" />
+          </Key>
+          <Property Name="Тип" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Наим" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Таблица_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Документ_Id" Type="Int32" />
+          <NavigationProperty Name="Мх3Документ" Relationship="Dme.Core.Model.Мх3Документ_Таблица1" FromRole="Мх3ТаблДок" ToRole="Мх3Документ" />
+          <NavigationProperty Name="Мх3ИтогТабл" Relationship="Dme.Core.Model.Мх3Таблица_ИтогТабл1" FromRole="Мх3ТаблДок" ToRole="Мх3ИтогТабл" />
+          <NavigationProperty Name="Мх3СтрТабл" Relationship="Dme.Core.Model.Мх3Таблица_СтрТабл1" FromRole="Мх3ТаблДок" ToRole="Мх3СтрТабл" />
+        </EntityType>
+        <EntityType Name="НормАдр">
+          <Key>
+            <PropertyRef Name="НормАдр_Id" />
+          </Key>
+          <Property Name="АдрТекст" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Индекс" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="КодРегион" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Район" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Город" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="НаселПункт" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Улица" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Дом" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Корпус" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Кварт" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Коорд" Type="Geography" />
+          <Property Name="Ссылка" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="НормАдр_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Маршрут_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="АктПриемкиАдрес" Relationship="Dme.Core.Model.НормАдр_АктПриемкиАдрес" FromRole="НормАдр" ToRole="АктПриемкиАдрес" />
+          <NavigationProperty Name="ДоставкаАдрес" Relationship="Dme.Core.Model.НормАдр_ДоставкаАдрес" FromRole="НормАдр" ToRole="ДоставкаАдрес" />
+          <NavigationProperty Name="ЗаказНаОтгрузкуАдрес" Relationship="Dme.Core.Model.НормАдр_ЗаказНаОтгрузкуАдрес" FromRole="НормАдр" ToRole="ЗаказНаОтгрузкуАдрес" />
+          <NavigationProperty Name="ЗаказНаРазмещениеАдрес" Relationship="Dme.Core.Model.НормАдр_ЗаказНаРазмещениеАдрес" FromRole="НормАдр" ToRole="ЗаказНаРазмещениеАдрес" />
+          <NavigationProperty Name="Маршрут" Relationship="Dme.Core.Model.FK_НормАдр_Маршрут" FromRole="НормАдр" ToRole="Маршрут" />
+          <NavigationProperty Name="Мх1Адрес" Relationship="Dme.Core.Model.НормАдр_Мх1Адрес" FromRole="НормАдр" ToRole="Мх1Адрес" />
+          <NavigationProperty Name="Мх3Адрес" Relationship="Dme.Core.Model.НормАдр_Мх3Адрес" FromRole="НормАдр" ToRole="Мх3Адрес" />
+        </EntityType>
+        <Association Name="НормАдр_АктПриемкиАдрес">
+          <End Type="Dme.Core.Model.НормАдр" Role="НормАдр" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.АктПриемкиАдрес" Role="АктПриемкиАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="АктПриемкиАдрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_ДоставкаАдрес">
+          <End Type="Dme.Core.Model.НормАдр" Role="НормАдр" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ДоставкаАдрес" Role="ДоставкаАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="ДоставкаАдрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_ЗаказНаОтгрузкуАдрес">
+          <End Type="Dme.Core.Model.НормАдр" Role="НормАдр" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуАдрес" Role="ЗаказНаОтгрузкуАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуАдрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуДокумент_Таблица1">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуДокумент" Role="ЗаказНаОтгрузкуДокумент" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуТаблДок" Role="ЗаказНаОтгрузкуТаблДок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуДокумент">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуТаблДок">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуТаблица_ИтогТабл1">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуТаблДок" Role="ЗаказНаОтгрузкуТаблДок" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуИтогТабл" Role="ЗаказНаОтгрузкуИтогТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЗаказНаОтгрузкуТаблДок">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаОтгрузкуИтогТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗаказНаОтгрузкуТаблица_СтрТабл1">
+          <End Type="Dme.Core.Model.ЗаказНаОтгрузкуТаблДок" Role="ЗаказНаОтгрузкуТаблДок" Multiplicity="0..1" />
           <End Type="Dme.Core.Model.ЗаказНаОтгрузкуСтрТабл" Role="ЗаказНаОтгрузкуСтрТабл" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ЗаказНаОтгрузкуТаблица">
+            <Principal Role="ЗаказНаОтгрузкуТаблДок">
               <PropertyRef Name="Таблица_Id" />
             </Principal>
             <Dependent Role="ЗаказНаОтгрузкуСтрТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_ЗаказНаРазмещениеАдрес">
+          <End Type="Dme.Core.Model.НормАдр" Role="НормАдр" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.ЗаказНаРазмещениеАдрес" Role="ЗаказНаРазмещениеАдрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="ЗаказНаРазмещениеАдрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_НормАдр_Маршрут">
+          <End Type="Dme.Core.Model.Маршрут" Role="Маршрут" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.НормАдр" Role="НормАдр" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Маршрут">
+              <PropertyRef Name="Маршрут_Id" />
+            </Principal>
+            <Dependent Role="НормАдр">
+              <PropertyRef Name="Маршрут_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_Мх1Адрес">
+          <End Type="Dme.Core.Model.НормАдр" Role="НормАдр" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.Мх1Адрес" Role="Мх1Адрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="Мх1Адрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="НормАдр_Мх3Адрес">
+          <End Type="Dme.Core.Model.НормАдр" Role="НормАдр" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.Мх3Адрес" Role="Мх3Адрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="НормАдр">
+              <PropertyRef Name="НормАдр_Id" />
+            </Principal>
+            <Dependent Role="Мх3Адрес">
+              <PropertyRef Name="НормАдр_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Документ_Таблица1">
+          <End Type="Dme.Core.Model.Мх3Документ" Role="Мх3Документ" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.Мх3ТаблДок" Role="Мх3ТаблДок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3Документ">
+              <PropertyRef Name="Документ_Id" />
+            </Principal>
+            <Dependent Role="Мх3ТаблДок">
+              <PropertyRef Name="Документ_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Таблица_ИтогТабл1">
+          <End Type="Dme.Core.Model.Мх3ТаблДок" Role="Мх3ТаблДок" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Dme.Core.Model.Мх3ИтогТабл" Role="Мх3ИтогТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3ТаблДок">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="Мх3ИтогТабл">
+              <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Мх3Таблица_СтрТабл1">
+          <End Type="Dme.Core.Model.Мх3ТаблДок" Role="Мх3ТаблДок" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.Мх3СтрТабл" Role="Мх3СтрТабл" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Мх3ТаблДок">
+              <PropertyRef Name="Таблица_Id" />
+            </Principal>
+            <Dependent Role="Мх3СтрТабл">
               <PropertyRef Name="Таблица_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -9182,6 +10728,8 @@
           <EntitySetMapping Name="АктПриемкиАдрес">
             <EntityTypeMapping TypeName="Dme.Core.Model.АктПриемкиАдрес">
               <MappingFragment StoreEntitySet="АктПриемкиАдрес">
+                <ScalarProperty Name="НормАдр_Id" ColumnName="НормАдр_Id" />
+                <ScalarProperty Name="Маршрут_Id" ColumnName="Маршрут_Id" />
                 <ScalarProperty Name="Тип" ColumnName="Тип" />
                 <ScalarProperty Name="АдрТекст" ColumnName="АдрТекст" />
                 <ScalarProperty Name="Адрес_Id" ColumnName="Адрес_Id" />
@@ -9402,6 +10950,8 @@
           <EntitySetMapping Name="ЗаказНаРазмещениеАдрес">
             <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаРазмещениеАдрес">
               <MappingFragment StoreEntitySet="ЗаказНаРазмещениеАдрес">
+                <ScalarProperty Name="НормАдр_Id" ColumnName="НормАдр_Id" />
+                <ScalarProperty Name="Маршрут_Id" ColumnName="Маршрут_Id" />
                 <ScalarProperty Name="Тип" ColumnName="Тип" />
                 <ScalarProperty Name="Наим" ColumnName="Наим" />
                 <ScalarProperty Name="АдрТекст" ColumnName="АдрТекст" />
@@ -9528,6 +11078,7 @@
           <EntitySetMapping Name="ЗаказНаРазмещениеФайл">
             <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаРазмещениеФайл">
               <MappingFragment StoreEntitySet="ЗаказНаРазмещениеФайл">
+                <ScalarProperty Name="C_CreatedUser" ColumnName="_CreatedUser" />
                 <ScalarProperty Name="C_DeletedUser" ColumnName="_DeletedUser" />
                 <ScalarProperty Name="C_DeleteDT" ColumnName="_DeleteDT" />
                 <ScalarProperty Name="C_Deleted" ColumnName="_Deleted" />
@@ -9547,6 +11098,7 @@
           <EntitySetMapping Name="Мх1Адрес">
             <EntityTypeMapping TypeName="Dme.Core.Model.Мх1Адрес">
               <MappingFragment StoreEntitySet="Мх1Адрес">
+                <ScalarProperty Name="НормАдр_Id" ColumnName="НормАдр_Id" />
                 <ScalarProperty Name="Тип" ColumnName="Тип" />
                 <ScalarProperty Name="Наим" ColumnName="Наим" />
                 <ScalarProperty Name="АдрТекст" ColumnName="АдрТекст" />
@@ -10230,6 +11782,8 @@
           <EntitySetMapping Name="Мх3Адрес">
             <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Адрес">
               <MappingFragment StoreEntitySet="Мх3Адрес">
+                <ScalarProperty Name="НормАдр_Id" ColumnName="НормАдр_Id" />
+                <ScalarProperty Name="Маршрут_Id" ColumnName="Маршрут_Id" />
                 <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
                 <ScalarProperty Name="Адрес_Id" ColumnName="Адрес_Id" />
                 <ScalarProperty Name="Наим" ColumnName="Наим" />
@@ -10279,6 +11833,8 @@
           <EntitySetMapping Name="Мх3Документ">
             <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Документ">
               <MappingFragment StoreEntitySet="Мх3Документ">
+                <ScalarProperty Name="C_WmsOrderTy" ColumnName="_WmsOrderTy" />
+                <ScalarProperty Name="C_WmsOrderId" ColumnName="_WmsOrderId" />
                 <ScalarProperty Name="Файл_Id" ColumnName="Файл_Id" />
                 <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
                 <ScalarProperty Name="Примечание" ColumnName="Примечание" />
@@ -10399,6 +11955,7 @@
           <EntitySetMapping Name="Мх3СтрТабл">
             <EntityTypeMapping TypeName="Dme.Core.Model.Мх3СтрТабл">
               <MappingFragment StoreEntitySet="Мх3СтрТабл">
+                <ScalarProperty Name="C_WmsH2LineId" ColumnName="_WmsH2LineId" />
                 <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
                 <ScalarProperty Name="СтрТабл_Id" ColumnName="СтрТабл_Id" />
                 <ScalarProperty Name="Ид" ColumnName="Ид" />
@@ -10415,16 +11972,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Мх3Таблица">
-            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Таблица">
-              <MappingFragment StoreEntitySet="Мх3Таблица">
-                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
-                <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
-                <ScalarProperty Name="Наим" ColumnName="Наим" />
-                <ScalarProperty Name="Тип" ColumnName="Тип" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Мх3Участник">
             <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Участник">
               <MappingFragment StoreEntitySet="Мх3Участник">
@@ -10437,6 +11984,7 @@
           <EntitySetMapping Name="Мх3Файл">
             <EntityTypeMapping TypeName="Dme.Core.Model.Мх3Файл">
               <MappingFragment StoreEntitySet="Мх3Файл">
+                <ScalarProperty Name="ЗаказНаОтгрузку_Документ_Id" ColumnName="ЗаказНаОтгрузку_Документ_Id" />
                 <ScalarProperty Name="C_DeletedUser" ColumnName="_DeletedUser" />
                 <ScalarProperty Name="C_DeleteDT" ColumnName="_DeleteDT" />
                 <ScalarProperty Name="C_Deleted" ColumnName="_Deleted" />
@@ -10455,6 +12003,8 @@
           <EntitySetMapping Name="ЗаказНаОтгрузкуАдрес">
             <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуАдрес">
               <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуАдрес">
+                <ScalarProperty Name="НормАдр_Id" ColumnName="НормАдр_Id" />
+                <ScalarProperty Name="Маршрут_Id" ColumnName="Маршрут_Id" />
                 <ScalarProperty Name="Участник_Id" ColumnName="Участник_Id" />
                 <ScalarProperty Name="Адрес_Id" ColumnName="Адрес_Id" />
                 <ScalarProperty Name="Наим" ColumnName="Наим" />
@@ -10504,6 +12054,9 @@
           <EntitySetMapping Name="ЗаказНаОтгрузкуДокумент">
             <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуДокумент">
               <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуДокумент">
+                <ScalarProperty Name="C_WmsOrderDt" ColumnName="_WmsOrderDt" />
+                <ScalarProperty Name="C_WmsOrderTy" ColumnName="_WmsOrderTy" />
+                <ScalarProperty Name="C_WmsOrderId" ColumnName="_WmsOrderId" />
                 <ScalarProperty Name="Файл_Id" ColumnName="Файл_Id" />
                 <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
                 <ScalarProperty Name="Примечание" ColumnName="Примечание" />
@@ -10640,16 +12193,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ЗаказНаОтгрузкуТаблица">
-            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуТаблица">
-              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуТаблица">
-                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
-                <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
-                <ScalarProperty Name="Наим" ColumnName="Наим" />
-                <ScalarProperty Name="Тип" ColumnName="Тип" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ЗаказНаОтгрузкуУчастник">
             <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуУчастник">
               <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуУчастник">
@@ -10662,6 +12205,7 @@
           <EntitySetMapping Name="ЗаказНаОтгрузкуФайл">
             <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуФайл">
               <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуФайл">
+                <ScalarProperty Name="C_CreatedUser" ColumnName="_CreatedUser" />
                 <ScalarProperty Name="C_CreatedDT" ColumnName="_CreatedDT" />
                 <ScalarProperty Name="C_DeletedUser" ColumnName="_DeletedUser" />
                 <ScalarProperty Name="C_DeleteDT" ColumnName="_DeleteDT" />
@@ -10675,6 +12219,290 @@
                 <ScalarProperty Name="ИдФорм" ColumnName="ИдФорм" />
                 <ScalarProperty Name="ВерсПрог" ColumnName="ВерсПрог" />
                 <ScalarProperty Name="ИдФайл" ColumnName="ИдФайл" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаАдрес">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаАдрес">
+              <MappingFragment StoreEntitySet="ДоставкаАдрес">
+                <ScalarProperty Name="НормАдр_Id" ColumnName="НормАдр_Id" />
+                <ScalarProperty Name="Маршрут_Id" ColumnName="Маршрут_Id" />
+                <ScalarProperty Name="Адрес_Id" ColumnName="Адрес_Id" />
+                <ScalarProperty Name="Получатель_Id" ColumnName="Получатель_Id" />
+                <ScalarProperty Name="Отправитель_Id" ColumnName="Отправитель_Id" />
+                <ScalarProperty Name="АдрТекст" ColumnName="АдрТекст" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаДокумент">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаДокумент">
+              <MappingFragment StoreEntitySet="ДоставкаДокумент">
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Файл_Id" ColumnName="Файл_Id" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаКонтакт">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаКонтакт">
+              <MappingFragment StoreEntitySet="ДоставкаКонтакт">
+                <ScalarProperty Name="Контакт_Id" ColumnName="Контакт_Id" />
+                <ScalarProperty Name="Получатель_Id" ColumnName="Получатель_Id" />
+                <ScalarProperty Name="Отправитель_Id" ColumnName="Отправитель_Id" />
+                <ScalarProperty Name="Internet" ColumnName="Internet" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Факс" ColumnName="Факс" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаОтправитель">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаОтправитель">
+              <MappingFragment StoreEntitySet="ДоставкаОтправитель">
+                <ScalarProperty Name="Отправитель_Id" ColumnName="Отправитель_Id" />
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаПолучатель">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаПолучатель">
+              <MappingFragment StoreEntitySet="ДоставкаПолучатель">
+                <ScalarProperty Name="Получатель_Id" ColumnName="Получатель_Id" />
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаСвФЛ">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаСвФЛ">
+              <MappingFragment StoreEntitySet="ДоставкаСвФЛ">
+                <ScalarProperty Name="СвФЛ_Id" ColumnName="СвФЛ_Id" />
+                <ScalarProperty Name="Получатель_Id" ColumnName="Получатель_Id" />
+                <ScalarProperty Name="Отправитель_Id" ColumnName="Отправитель_Id" />
+                <ScalarProperty Name="Обращение" ColumnName="Обращение" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="ИНН" ColumnName="ИНН" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаСвЮЛ">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаСвЮЛ">
+              <MappingFragment StoreEntitySet="ДоставкаСвЮЛ">
+                <ScalarProperty Name="СвЮЛ_Id" ColumnName="СвЮЛ_Id" />
+                <ScalarProperty Name="Получатель_Id" ColumnName="Получатель_Id" />
+                <ScalarProperty Name="Отправитель_Id" ColumnName="Отправитель_Id" />
+                <ScalarProperty Name="ОКПО" ColumnName="ОКПО" />
+                <ScalarProperty Name="ОКДП" ColumnName="ОКДП" />
+                <ScalarProperty Name="КПП" ColumnName="КПП" />
+                <ScalarProperty Name="ИНН" ColumnName="ИНН" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаСтрТабл">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаСтрТабл">
+              <MappingFragment StoreEntitySet="ДоставкаСтрТабл">
+                <ScalarProperty Name="СтрТабл_Id" ColumnName="СтрТабл_Id" />
+                <ScalarProperty Name="ТаблДок_Id" ColumnName="ТаблДок_Id" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="НомерМеста" ColumnName="НомерМеста" />
+                <ScalarProperty Name="Кол_воМест" ColumnName="Кол_воМест" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="ПорНомер" ColumnName="ПорНомер" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаТаблДок">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаТаблДок">
+              <MappingFragment StoreEntitySet="ДоставкаТаблДок">
+                <ScalarProperty Name="ТаблДок_Id" ColumnName="ТаблДок_Id" />
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаФайл">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаФайл">
+              <MappingFragment StoreEntitySet="ДоставкаФайл">
+                <ScalarProperty Name="C_CreatedUser" ColumnName="_CreatedUser" />
+                <ScalarProperty Name="C_CreatedDT" ColumnName="_CreatedDT" />
+                <ScalarProperty Name="C_DeletedUser" ColumnName="_DeletedUser" />
+                <ScalarProperty Name="C_DeleteDT" ColumnName="_DeleteDT" />
+                <ScalarProperty Name="C_Deleted" ColumnName="_Deleted" />
+                <ScalarProperty Name="C_WfLastUpdateUser" ColumnName="_WfLastUpdateUser" />
+                <ScalarProperty Name="C_WfLastUpdateDT" ColumnName="_WfLastUpdateDT" />
+                <ScalarProperty Name="C_WfState" ColumnName="_WfState" />
+                <ScalarProperty Name="Файл_Id" ColumnName="Файл_Id" />
+                <ScalarProperty Name="Сформирован" ColumnName="Сформирован" />
+                <ScalarProperty Name="ВерсФорм" ColumnName="ВерсФорм" />
+                <ScalarProperty Name="ИдФорм" ColumnName="ИдФорм" />
+                <ScalarProperty Name="ВерсПрог" ColumnName="ВерсПрог" />
+                <ScalarProperty Name="ИдФайл" ColumnName="ИдФайл" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ДоставкаПараметр">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ДоставкаПараметр">
+              <MappingFragment StoreEntitySet="ДоставкаПараметр">
+                <ScalarProperty Name="Параметр_Id" ColumnName="Параметр_Id" />
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Получатель_Id" ColumnName="Получатель_Id" />
+                <ScalarProperty Name="Отправитель_Id" ColumnName="Отправитель_Id" />
+                <ScalarProperty Name="Значение" ColumnName="Значение" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WfStates">
+            <EntityTypeMapping TypeName="Dme.Core.Model.WfStates">
+              <MappingFragment StoreEntitySet="WfStates">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WfState" ColumnName="WfState" />
+                <ScalarProperty Name="WfName" ColumnName="WfName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаданиеНаДоставку">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаданиеНаДоставку">
+              <MappingFragment StoreEntitySet="ЗаданиеНаДоставку">
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="C_CreatedDT" ColumnName="_CreatedDT" />
+                <ScalarProperty Name="C_WfLastUpdateUser" ColumnName="_WfLastUpdateUser" />
+                <ScalarProperty Name="C_WfLastUpdateDT" ColumnName="_WfLastUpdateDT" />
+                <ScalarProperty Name="C_WfState" ColumnName="_WfState" />
+                <ScalarProperty Name="Мест" ColumnName="Мест" />
+                <ScalarProperty Name="Объем" ColumnName="Объем" />
+                <ScalarProperty Name="Вес" ColumnName="Вес" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Перевозчик_Id" ColumnName="Перевозчик_Id" />
+                <ScalarProperty Name="Маршрут_Id" ColumnName="Маршрут_Id" />
+                <ScalarProperty Name="ЗаданиеНаДоставку_Id" ColumnName="ЗаданиеНаДоставку_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Маршрут">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Маршрут">
+              <MappingFragment StoreEntitySet="Маршрут">
+                <ScalarProperty Name="Приоритет" ColumnName="Приоритет" />
+                <ScalarProperty Name="ВремяОтправки" ColumnName="ВремяОтправки" />
+                <ScalarProperty Name="ВремяЗагрузки" ColumnName="ВремяЗагрузки" />
+                <ScalarProperty Name="Ворота" ColumnName="Ворота" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Маршрут_Id" ColumnName="Маршрут_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Перевозчик">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Перевозчик">
+              <MappingFragment StoreEntitySet="Перевозчик">
+                <ScalarProperty Name="АвтоГрузоподъемность" ColumnName="АвтоГрузоподъемность" />
+                <ScalarProperty Name="АвтоОбъем" ColumnName="АвтоОбъем" />
+                <ScalarProperty Name="АвтоМарка" ColumnName="АвтоМарка" />
+                <ScalarProperty Name="АвтоРегНомер" ColumnName="АвтоРегНомер" />
+                <ScalarProperty Name="Прмечание" ColumnName="Прмечание" />
+                <ScalarProperty Name="Факс" ColumnName="Факс" />
+                <ScalarProperty Name="Тел2" ColumnName="Тел2" />
+                <ScalarProperty Name="Тел" ColumnName="Тел" />
+                <ScalarProperty Name="ОКПО" ColumnName="ОКПО" />
+                <ScalarProperty Name="ОКДП" ColumnName="ОКДП" />
+                <ScalarProperty Name="КПП" ColumnName="КПП" />
+                <ScalarProperty Name="ИНН" ColumnName="ИНН" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Активен" ColumnName="Активен" />
+                <ScalarProperty Name="Перевозчик_Id" ColumnName="Перевозчик_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ТТН">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ТТН">
+              <MappingFragment StoreEntitySet="ТТН">
+                <ScalarProperty Name="СдачаГрузаВремя" ColumnName="СдачаГрузаВремя" />
+                <ScalarProperty Name="СдачаГрузаАдрес" ColumnName="СдачаГрузаАдрес" />
+                <ScalarProperty Name="ПриемГрузаВремя" ColumnName="ПриемГрузаВремя" />
+                <ScalarProperty Name="ПриемГрузаАдрес" ColumnName="ПриемГрузаАдрес" />
+                <ScalarProperty Name="Объем" ColumnName="Объем" />
+                <ScalarProperty Name="Вес" ColumnName="Вес" />
+                <ScalarProperty Name="ВидУп" ColumnName="ВидУп" />
+                <ScalarProperty Name="Кол_воМест" ColumnName="Кол_воМест" />
+                <ScalarProperty Name="НаимГруза" ColumnName="НаимГруза" />
+                <ScalarProperty Name="ГрузоотправительПрим3" ColumnName="ГрузоотправительПрим3" />
+                <ScalarProperty Name="ГрузоотправительПрим2" ColumnName="ГрузоотправительПрим2" />
+                <ScalarProperty Name="ГрузоотправительПрим1" ColumnName="ГрузоотправительПрим1" />
+                <ScalarProperty Name="ГрузоотправительКонтакт" ColumnName="ГрузоотправительКонтакт" />
+                <ScalarProperty Name="ГрузоотправительАдрес" ColumnName="ГрузоотправительАдрес" />
+                <ScalarProperty Name="Грузоотправитель" ColumnName="Грузоотправитель" />
+                <ScalarProperty Name="ГрузополучательКонтакт" ColumnName="ГрузополучательКонтакт" />
+                <ScalarProperty Name="ГрузополучательАдрес" ColumnName="ГрузополучательАдрес" />
+                <ScalarProperty Name="Грузополучатель" ColumnName="Грузополучатель" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="ЗаданиеНаДоставку_Id" ColumnName="ЗаданиеНаДоставку_Id" />
+                <ScalarProperty Name="ТТН_Id" ColumnName="ТТН_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ТТНСопрДок">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ТТНСопрДок">
+              <MappingFragment StoreEntitySet="ТТНСопрДок">
+                <ScalarProperty Name="ДоставкаДокумент_Id" ColumnName="ДоставкаДокумент_Id" />
+                <ScalarProperty Name="Мх3Документ_Id" ColumnName="Мх3Документ_Id" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="ТТН_Id" ColumnName="ТТН_Id" />
+                <ScalarProperty Name="ТТНСопрДок_Id" ColumnName="ТТНСопрДок_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗаказНаОтгрузкуТаблДок">
+            <EntityTypeMapping TypeName="Dme.Core.Model.ЗаказНаОтгрузкуТаблДок">
+              <MappingFragment StoreEntitySet="ЗаказНаОтгрузкуТаблДок">
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Мх3ТаблДок">
+            <EntityTypeMapping TypeName="Dme.Core.Model.Мх3ТаблДок">
+              <MappingFragment StoreEntitySet="Мх3ТаблДок">
+                <ScalarProperty Name="Документ_Id" ColumnName="Документ_Id" />
+                <ScalarProperty Name="Таблица_Id" ColumnName="Таблица_Id" />
+                <ScalarProperty Name="Наим" ColumnName="Наим" />
+                <ScalarProperty Name="Тип" ColumnName="Тип" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="НормАдр">
+            <EntityTypeMapping TypeName="Dme.Core.Model.НормАдр">
+              <MappingFragment StoreEntitySet="НормАдр">
+                <ScalarProperty Name="Маршрут_Id" ColumnName="Маршрут_Id" />
+                <ScalarProperty Name="НормАдр_Id" ColumnName="НормАдр_Id" />
+                <ScalarProperty Name="Ссылка" ColumnName="Ссылка" />
+                <ScalarProperty Name="Коорд" ColumnName="Коорд" />
+                <ScalarProperty Name="Кварт" ColumnName="Кварт" />
+                <ScalarProperty Name="Корпус" ColumnName="Корпус" />
+                <ScalarProperty Name="Дом" ColumnName="Дом" />
+                <ScalarProperty Name="Улица" ColumnName="Улица" />
+                <ScalarProperty Name="НаселПункт" ColumnName="НаселПункт" />
+                <ScalarProperty Name="Город" ColumnName="Город" />
+                <ScalarProperty Name="Район" ColumnName="Район" />
+                <ScalarProperty Name="КодРегион" ColumnName="КодРегион" />
+                <ScalarProperty Name="Индекс" ColumnName="Индекс" />
+                <ScalarProperty Name="АдрТекст" ColumnName="АдрТекст" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

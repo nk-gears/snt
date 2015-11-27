@@ -61,6 +61,21 @@ namespace Dme.Core.Xml
                 }
 
             });
+            //Мх3Файл
+            _Config.Add(typeof(Мх3Файл), new WellKnownEntityConfig
+            {
+                OnFilter = (sender, e) =>
+                {
+                    if (Regex.IsMatch(e.XPath, @"@.+_Id$"))
+                        e.Skip = true;
+                },
+                OnRename = (sender, e) =>
+                {
+                    if (Regex.IsMatch(e.XPath, @"[/]" + e.Name + "$"))
+                        e.Name = "Мх3" + e.Name;
+                }
+
+            });
             //ЗаказНаРазмещениеФайл
             _Config.Add(typeof(ЗаказНаРазмещениеФайл), new WellKnownEntityConfig
             {
@@ -73,6 +88,21 @@ namespace Dme.Core.Xml
                 {
                     if (Regex.IsMatch(e.XPath, @"[/]" + e.Name + "$"))
                         e.Name = "ЗаказНаРазмещение" + e.Name;
+                }
+
+            });
+            //ЗаказНаОтгрузкуФайл
+            _Config.Add(typeof(ЗаказНаОтгрузкуФайл), new WellKnownEntityConfig
+            {
+                OnFilter = (sender, e) =>
+                {
+                    if (Regex.IsMatch(e.XPath, @"@.+_Id$"))
+                        e.Skip = true;
+                },
+                OnRename = (sender, e) =>
+                {
+                    if (Regex.IsMatch(e.XPath, @"[/]" + e.Name + "$"))
+                        e.Name = "ЗаказНаОтгрузкуФайл" + e.Name;
                 }
 
             });

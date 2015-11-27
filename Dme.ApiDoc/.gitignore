@@ -19,4 +19,5 @@
 *.suo
 *.ccproj.user
 *.csproj.user
+*.pubxml
 .gitattributes

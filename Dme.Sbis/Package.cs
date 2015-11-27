@@ -35,6 +35,8 @@ namespace Dme.Sbis
         public void Save(string fileName)
         {
             XmlDocument doc = new XmlDocument();
+            XmlNode declNode = doc.CreateXmlDeclaration("1.0", "utf-8", null);
+            doc.AppendChild(declNode);
             var regNode = doc.CreateElement(@"Реестр");
             doc.AppendChild(regNode);
             var packNode = doc.CreateElement(@"Пакет");

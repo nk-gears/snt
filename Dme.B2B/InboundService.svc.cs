@@ -53,9 +53,10 @@ namespace Dme.B2B
             var result = new Dme.Core.ЗаказНаРазмещениеФайл();
             result.C_WfState = 0;
             result.C_CreatedDT = DateTime.Now;
+            result.C_CreatedUser = Helper.GetUserName();
             result.C_WfLastUpdateDT = result.C_CreatedDT;
-            result.C_WfLastUpdateUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            result.ВерсПрог = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            result.C_WfLastUpdateUser = Helper.GetUserName();
+            result.ВерсПрог = Helper.GetAppVersion();
             result.ВерсияФормата = "1.0";
             result.Имя = файл == null ? Guid.NewGuid().ToString() : файл.Имя;
             result.Формат = "ЗаказНаРазмещение";

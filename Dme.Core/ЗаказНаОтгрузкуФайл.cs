@@ -32,6 +32,7 @@ namespace Dme.Core
         public Nullable<System.DateTime> C_DeleteDT { get; set; }
         public string C_DeletedUser { get; set; }
         public System.DateTime C_CreatedDT { get; set; }
+        public string C_CreatedUser { get; set; }
     
         public virtual ICollection<ЗаказНаОтгрузкуДокумент> ЗаказНаОтгрузкуДокумент { get; set; }
     }

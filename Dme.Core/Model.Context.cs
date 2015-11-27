@@ -117,7 +117,6 @@ namespace Dme.Core
         public DbSet<Мх3СвФЛ> Мх3СвФЛ { get; set; }
         public DbSet<Мх3СвЮЛ> Мх3СвЮЛ { get; set; }
         public DbSet<Мх3СтрТабл> Мх3СтрТабл { get; set; }
-        public DbSet<Мх3Таблица> Мх3Таблица { get; set; }
         public DbSet<Мх3Участник> Мх3Участник { get; set; }
         public DbSet<Мх3Файл> Мх3Файл { get; set; }
         public DbSet<ЗаказНаОтгрузкуАдрес> ЗаказНаОтгрузкуАдрес { get; set; }
@@ -134,8 +133,27 @@ namespace Dme.Core
         public DbSet<ЗаказНаОтгрузкуСвФЛ> ЗаказНаОтгрузкуСвФЛ { get; set; }
         public DbSet<ЗаказНаОтгрузкуСвЮЛ> ЗаказНаОтгрузкуСвЮЛ { get; set; }
         public DbSet<ЗаказНаОтгрузкуСтрТабл> ЗаказНаОтгрузкуСтрТабл { get; set; }
-        public DbSet<ЗаказНаОтгрузкуТаблица> ЗаказНаОтгрузкуТаблица { get; set; }
         public DbSet<ЗаказНаОтгрузкуУчастник> ЗаказНаОтгрузкуУчастник { get; set; }
         public DbSet<ЗаказНаОтгрузкуФайл> ЗаказНаОтгрузкуФайл { get; set; }
+        public DbSet<ДоставкаАдрес> ДоставкаАдрес { get; set; }
+        public DbSet<ДоставкаДокумент> ДоставкаДокумент { get; set; }
+        public DbSet<ДоставкаКонтакт> ДоставкаКонтакт { get; set; }
+        public DbSet<ДоставкаОтправитель> ДоставкаОтправитель { get; set; }
+        public DbSet<ДоставкаПолучатель> ДоставкаПолучатель { get; set; }
+        public DbSet<ДоставкаСвФЛ> ДоставкаСвФЛ { get; set; }
+        public DbSet<ДоставкаСвЮЛ> ДоставкаСвЮЛ { get; set; }
+        public DbSet<ДоставкаСтрТабл> ДоставкаСтрТабл { get; set; }
+        public DbSet<ДоставкаТаблДок> ДоставкаТаблДок { get; set; }
+        public DbSet<ДоставкаФайл> ДоставкаФайл { get; set; }
+        public DbSet<ДоставкаПараметр> ДоставкаПараметр { get; set; }
+        public DbSet<WfStates> WfStates { get; set; }
+        public DbSet<ЗаданиеНаДоставку> ЗаданиеНаДоставку { get; set; }
+        public DbSet<Маршрут> Маршрут { get; set; }
+        public DbSet<Перевозчик> Перевозчик { get; set; }
+        public DbSet<ТТН> ТТН { get; set; }
+        public DbSet<ТТНСопрДок> ТТНСопрДок { get; set; }
+        public DbSet<ЗаказНаОтгрузкуТаблДок> ЗаказНаОтгрузкуТаблДок { get; set; }
+        public DbSet<Мх3ТаблДок> Мх3ТаблДок { get; set; }
+        public DbSet<НормАдр> НормАдр { get; set; }
     }
 }

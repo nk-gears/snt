@@ -41,9 +41,10 @@ namespace Dme.B2B
             Dme.Core.ЗаказНаОтгрузкуФайл result = new Dme.Core.ЗаказНаОтгрузкуФайл();
             result.C_WfState = 0;
             result.C_CreatedDT = DateTime.Now;
+            result.C_CreatedUser = Helper.GetUserName();
             result.C_WfLastUpdateDT = result.C_CreatedDT;
-            result.C_WfLastUpdateUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            result.ВерсПрог = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            result.C_WfLastUpdateUser = Helper.GetUserName();
+            result.ВерсПрог = Helper.GetAppVersion();
             result.ВерсФорм = "1.0";
             result.ИдФайл = файл==null ? Guid.NewGuid().ToString() : файл.ИдФайл;
             result.Сформирован = result.C_CreatedDT.ToString("dd.MM.yyyy hh:mm:ss");

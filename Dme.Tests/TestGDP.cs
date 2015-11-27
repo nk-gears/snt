@@ -26,7 +26,20 @@ namespace Dme.Tests
                 }
             }
         }
-
+        [TestMethod]
+        public void GDP_Мх3()
+        {
+            using (var context = new Dme.Core.DmeEntities())
+            {
+                var files = (from f in context.Мх3Файл
+                             select f).Take(10);
+                foreach (var file in files)
+                {
+                    using (var output = System.IO.File.Create(System.IO.Path.Combine(@"C:\temp\snt\out", "Мх3_" + file.Файл_Id.ToString() + ".xml")))
+                        Dme.Core.Xml.SerializerFactory.Default.Create<Мх3Файл>().Execute(file, output);
+                }
+            }
+        }
         [TestMethod]
         public void GDP_АктПриемки()
         {

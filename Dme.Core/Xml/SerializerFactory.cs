@@ -63,6 +63,22 @@ namespace Dme.Core.Xml
                 }
 
             });
+            //Мх3Файл
+            _Config.Add(typeof(Мх3Файл), new WellKnownEntityConfig
+            {
+                OnFilter = (sender, e) =>
+                {
+                    if (Regex.IsMatch(e.PropInfo.Name, @"_Id$"))
+                        e.Skip = true;
+                    else if (Regex.IsMatch(e.PropInfo.Name, @"^C[_]"))
+                        e.Skip = true;
+                },
+                OnRename = (sender, e) =>
+                {
+                    e.Name = Regex.Replace(e.Name, @"^Мх3", "");
+                }
+
+            });
             //ЗаказНаРазмещениеФайл
             _Config.Add(typeof(ЗаказНаРазмещениеФайл), new WellKnownEntityConfig
             {
@@ -79,8 +95,24 @@ namespace Dme.Core.Xml
                 }
 
             });
+            //ЗаказНаОтгрузкуФайл
+            _Config.Add(typeof(ЗаказНаОтгрузкуФайл), new WellKnownEntityConfig
+            {
+                OnFilter = (sender, e) =>
+                {
+                    if (Regex.IsMatch(e.PropInfo.Name, @"_Id$"))
+                        e.Skip = true;
+                    else if (Regex.IsMatch(e.PropInfo.Name, @"^C[_]"))
+                        e.Skip = true;
+                },
+                OnRename = (sender, e) =>
+                {
+                    e.Name = Regex.Replace(e.Name, @"^ЗаказНаОтгрузку", "");
+                }
+
+            });
         }
-        
+
 
         public Serializer Create<T>()
         {

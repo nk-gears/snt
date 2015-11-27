@@ -14,5 +14,8 @@
     <Setting Name="RecipientID" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">2</Value>
     </Setting>
+    <Setting Name="Mx3FileNameFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">МХ3_{0}.xml</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

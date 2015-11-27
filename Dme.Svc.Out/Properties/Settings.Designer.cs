@@ -58,5 +58,14 @@ namespace Dme.Svc.Out.Properties {
                 return ((int)(this["RecipientID"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("МХ3_{0}.xml")]
+        public string Mx3FileNameFormat {
+            get {
+                return ((string)(this["Mx3FileNameFormat"]));
+            }
+        }
     }
 }

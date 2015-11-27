@@ -18,8 +18,8 @@ namespace Dme.Core
         {
             this.ЗаказНаОтгрузкуОснование = new HashSet<ЗаказНаОтгрузкуОснование>();
             this.ЗаказНаОтгрузкуПараметр = new HashSet<ЗаказНаОтгрузкуПараметр>();
-            this.ЗаказНаОтгрузкуТаблица = new HashSet<ЗаказНаОтгрузкуТаблица>();
             this.ЗаказНаОтгрузкуУчастник = new HashSet<ЗаказНаОтгрузкуУчастник>();
+            this.ЗаказНаОтгрузкуТаблДок = new HashSet<ЗаказНаОтгрузкуТаблДок>();
         }
     
         public string Дата { get; set; }
@@ -28,11 +28,14 @@ namespace Dme.Core
         public string Примечание { get; set; }
         public int Документ_Id { get; set; }
         public Nullable<int> Файл_Id { get; set; }
+        public string C_WmsOrderId { get; set; }
+        public string C_WmsOrderTy { get; set; }
+        public Nullable<System.DateTime> C_WmsOrderDt { get; set; }
     
         public virtual ICollection<ЗаказНаОтгрузкуОснование> ЗаказНаОтгрузкуОснование { get; set; }
         public virtual ICollection<ЗаказНаОтгрузкуПараметр> ЗаказНаОтгрузкуПараметр { get; set; }
-        public virtual ICollection<ЗаказНаОтгрузкуТаблица> ЗаказНаОтгрузкуТаблица { get; set; }
         public virtual ICollection<ЗаказНаОтгрузкуУчастник> ЗаказНаОтгрузкуУчастник { get; set; }
         public virtual ЗаказНаОтгрузкуФайл ЗаказНаОтгрузкуФайл { get; set; }
+        public virtual ICollection<ЗаказНаОтгрузкуТаблДок> ЗаказНаОтгрузкуТаблДок { get; set; }
     }
 }

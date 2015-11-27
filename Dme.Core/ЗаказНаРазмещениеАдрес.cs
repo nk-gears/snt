@@ -26,10 +26,13 @@ namespace Dme.Core
         public int Адрес_Id { get; set; }
         public Nullable<int> Отправитель_Id { get; set; }
         public Nullable<int> Получатель_Id { get; set; }
+        public string Маршрут_Id { get; set; }
+        public Nullable<int> НормАдр_Id { get; set; }
     
         public virtual ЗаказНаРазмещениеОтправитель ЗаказНаРазмещениеОтправитель { get; set; }
         public virtual ЗаказНаРазмещениеПолучатель ЗаказНаРазмещениеПолучатель { get; set; }
         public virtual ICollection<ЗаказНаРазмещениеАдрИно> ЗаказНаРазмещениеАдрИно { get; set; }
         public virtual ICollection<ЗаказНаРазмещениеАдрРФ> ЗаказНаРазмещениеАдрРФ { get; set; }
+        public virtual НормАдр НормАдр { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace Dme.Svc.Out
         static log4net.ILog log = log4net.LogManager.GetLogger(typeof(Mx1Export));
         const int WF_STATE_IN = 1;
         const int WF_STATE_OUT = 2;
+        const int DELAY = 15000;
 
         public static async Task Run(CancellationToken cancellationToken)
         {
@@ -23,39 +24,45 @@ namespace Dme.Svc.Out
 
             using (var context = new Dme.Core.DmeEntities())
             {
-                var files = await(from f in context.АктПриемкиФайл
-                                  where f.C_WfState == WF_STATE_IN && !f.C_Deleted
-                                  select f).ToListAsync(cancellationToken);
-                if (cancellationToken.IsCancellationRequested)
-                    return;
-                foreach (var file in files)
+                while (!cancellationToken.IsCancellationRequested)
                 {
+                    var files = await (from f in context.АктПриемкиФайл
+                                       where f.C_WfState == WF_STATE_IN && !f.C_Deleted
+                                       select f).ToListAsync(cancellationToken);
                     if (cancellationToken.IsCancellationRequested)
-                        break;
-                    try
+                        return;
+                    foreach (var file in files)
                     {
-                        // выгрузка файла документа
-                        string fileName = System.IO.Path.Combine(
-                            Dme.Svc.Out.Properties.Settings.Default.SbisOutputFolder,
-                            String.Format(Dme.Svc.Out.Properties.Settings.Default.ActAccFileNameFormat, file.Файл_Id));
-                        using (var output = System.IO.File.Create(fileName))
-                            await Dme.Core.Xml.SerializerFactory.Default
-                                .Create<АктПриемкиФайл>()
-                                .ExecuteAsync(file, output);
-                        // выгрузка реестра .sbis.xml
-                        packageBuilder.Begin();
-                        packageBuilder.AddFile(fileName);
-                        packageBuilder.Flush();
-                        // помечаем файл как выгруженный
-                        file.C_WfState = WF_STATE_OUT;
-                        file.C_WfLastUpdateUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-                        file.C_WfLastUpdateDT = DateTime.Now;
-                        await context.SaveChangesAsync();
+                        if (cancellationToken.IsCancellationRequested)
+                            break;
+                        try
+                        {
+                            // выгрузка файла документа
+                            string fileName = System.IO.Path.Combine(
+                                Dme.Svc.Out.Properties.Settings.Default.SbisOutputFolder,
+                                String.Format(Dme.Svc.Out.Properties.Settings.Default.ActAccFileNameFormat, file.Файл_Id));
+                            using (var output = System.IO.File.Create(fileName))
+                                await Dme.Core.Xml.SerializerFactory.Default
+                                    .Create<АктПриемкиФайл>()
+                                    .ExecuteAsync(file, output);
+                            // выгрузка реестра .sbis.xml
+                            packageBuilder.Begin();
+                            packageBuilder.AddFile(fileName);
+                            packageBuilder.Flush();
+                            // помечаем файл как выгруженный
+                            file.C_WfState = WF_STATE_OUT;
+                            file.C_WfLastUpdateUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                            file.C_WfLastUpdateDT = DateTime.Now;
+                            await context.SaveChangesAsync();
+                        }
+                        catch (Exception e)
+                        {
+                            log.Error(e);
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        log.Error(e);
-                    }
+                    if (cancellationToken.IsCancellationRequested)
+                        return;
+                    await Task.Delay(DELAY);
                 }
             }
         }

@@ -12,24 +12,19 @@ namespace Dme.Core
     using System;
     using System.Collections.Generic;
     
-    public partial class АктПриемкиАдрес
+    public partial class ДоставкаАдрес
     {
-        public АктПриемкиАдрес()
-        {
-            this.АктПриемкиАдрИно = new HashSet<АктПриемкиАдрИно>();
-            this.АктПриемкиАдрРФ = new HashSet<АктПриемкиАдрРФ>();
-        }
-    
         public string Тип { get; set; }
+        public string Наим { get; set; }
         public string АдрТекст { get; set; }
+        public Nullable<int> Отправитель_Id { get; set; }
+        public Nullable<int> Получатель_Id { get; set; }
         public int Адрес_Id { get; set; }
-        public Nullable<int> СписокАдрес_Id { get; set; }
         public string Маршрут_Id { get; set; }
         public Nullable<int> НормАдр_Id { get; set; }
     
-        public virtual АктПриемкиСписокАдрес АктПриемкиСписокАдрес { get; set; }
-        public virtual ICollection<АктПриемкиАдрИно> АктПриемкиАдрИно { get; set; }
-        public virtual ICollection<АктПриемкиАдрРФ> АктПриемкиАдрРФ { get; set; }
+        public virtual ДоставкаОтправитель ДоставкаОтправитель { get; set; }
+        public virtual ДоставкаПолучатель ДоставкаПолучатель { get; set; }
         public virtual НормАдр НормАдр { get; set; }
     }
 }

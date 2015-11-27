@@ -24,9 +24,12 @@ namespace Dme.Core
         public string Наим { get; set; }
         public int Адрес_Id { get; set; }
         public Nullable<int> Участник_Id { get; set; }
+        public string Маршрут_Id { get; set; }
+        public Nullable<int> НормАдр_Id { get; set; }
     
         public virtual ICollection<Мх3АдрИно> Мх3АдрИно { get; set; }
         public virtual ICollection<Мх3АдрРФ> Мх3АдрРФ { get; set; }
         public virtual Мх3Участник Мх3Участник { get; set; }
+        public virtual НормАдр НормАдр { get; set; }
     }
 }

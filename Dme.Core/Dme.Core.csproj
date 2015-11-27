@@ -56,6 +56,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -83,6 +84,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sbis\PackageBuilder.cs" />
+    <Compile Include="WfStates.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Xml\Deserializer.cs" />
     <Compile Include="Xml\DeserializerFactory.cs" />
     <Compile Include="Xml\DeserializerFilterEventArgs.cs" />
@@ -184,6 +188,42 @@
     <Compile Include="АктПриемкиХарактеристика.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ДоставкаАдрес.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ДоставкаДокумент.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ДоставкаКонтакт.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ДоставкаОтправитель.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ДоставкаПараметр.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ДоставкаПолучатель.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ДоставкаСвФЛ.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ДоставкаСвЮЛ.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ДоставкаСтрТабл.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ДоставкаТаблДок.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ДоставкаФайл.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаданиеНаДоставку.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="ЗаказНаОтгрузкуАдрес.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -226,7 +266,7 @@
     <Compile Include="ЗаказНаОтгрузкуСтрТабл.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ЗаказНаОтгрузкуТаблица.cs">
+    <Compile Include="ЗаказНаОтгрузкуТаблДок.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ЗаказНаОтгрузкуУчастник.cs">
@@ -311,6 +351,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="КодНалСт.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Маршрут.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Мх1Адрес.cs">
@@ -415,7 +458,7 @@
     <Compile Include="Мх3СтрТабл.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Мх3Таблица.cs">
+    <Compile Include="Мх3ТаблДок.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Мх3Участник.cs">
@@ -424,7 +467,19 @@
     <Compile Include="Мх3Файл.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="НормАдр.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Перевозчик.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Товар.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ТТН.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ТТНСопрДок.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
   </ItemGroup>

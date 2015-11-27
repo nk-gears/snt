@@ -33,9 +33,10 @@ namespace Dme.Core
         public string Ид { get; set; }
         public int СтрТабл_Id { get; set; }
         public Nullable<int> Таблица_Id { get; set; }
+        public Nullable<int> C_WmsH2LineId { get; set; }
     
         public virtual ICollection<Мх3Налог> Мх3Налог { get; set; }
         public virtual ICollection<Мх3Параметр> Мх3Параметр { get; set; }
-        public virtual Мх3Таблица Мх3Таблица { get; set; }
+        public virtual Мх3ТаблДок Мх3ТаблДок { get; set; }
     }
 }

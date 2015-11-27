@@ -7,9 +7,9 @@ using System.Threading;
 
 namespace Dme.Svc.Out
 {
-    class Mx1Export
+    class Mx3Export
     {
-        static log4net.ILog log = log4net.LogManager.GetLogger(typeof(Mx1Export));
+        static log4net.ILog log = log4net.LogManager.GetLogger(typeof(Mx3Export));
         const int WF_STATE_IN = 0;
         const int WF_STATE_OUT = 1;
         const int DELAY = 15000;
@@ -26,7 +26,7 @@ namespace Dme.Svc.Out
             {
                 while (!cancellationToken.IsCancellationRequested)
                 {
-                    var files = await (from f in context.Мх1Файл
+                    var files = await (from f in context.Мх3Файл
                                        where f.C_WfState == WF_STATE_IN && !f.C_Deleted
                                        select f).ToListAsync(cancellationToken);
                     if (cancellationToken.IsCancellationRequested)
@@ -40,10 +40,10 @@ namespace Dme.Svc.Out
                             // выгрузка файла документа
                             string fileName = System.IO.Path.Combine(
                                 Dme.Svc.Out.Properties.Settings.Default.SbisOutputFolder,
-                                String.Format(Dme.Svc.Out.Properties.Settings.Default.Mx1FileNameFormat, file.Файл_Id));
+                                String.Format(Dme.Svc.Out.Properties.Settings.Default.Mx3FileNameFormat, file.Файл_Id));
                             using (var output = System.IO.File.Create(fileName))
                                 await Dme.Core.Xml.SerializerFactory.Default
-                                    .Create<Мх1Файл>()
+                                    .Create<Мх3Файл>()
                                     .ExecuteAsync(file, output);
                             // выгрузка реестра .sbis.xml
                             packageBuilder.Begin();

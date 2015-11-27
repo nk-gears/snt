@@ -31,6 +31,7 @@ namespace Dme.Core
         public bool C_Deleted { get; set; }
         public Nullable<System.DateTime> C_DeleteDT { get; set; }
         public string C_DeletedUser { get; set; }
+        public Nullable<int> ЗаказНаОтгрузку_Документ_Id { get; set; }
     
         public virtual ICollection<Мх3Документ> Мх3Документ { get; set; }
     }

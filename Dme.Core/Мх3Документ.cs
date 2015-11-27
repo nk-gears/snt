@@ -18,8 +18,8 @@ namespace Dme.Core
         {
             this.Мх3Основание = new HashSet<Мх3Основание>();
             this.Мх3Параметр = new HashSet<Мх3Параметр>();
-            this.Мх3Таблица = new HashSet<Мх3Таблица>();
             this.Мх3Участник = new HashSet<Мх3Участник>();
+            this.Мх3ТаблДок = new HashSet<Мх3ТаблДок>();
         }
     
         public string Дата { get; set; }
@@ -28,11 +28,13 @@ namespace Dme.Core
         public string Примечание { get; set; }
         public int Документ_Id { get; set; }
         public Nullable<int> Файл_Id { get; set; }
+        public string C_WmsOrderId { get; set; }
+        public string C_WmsOrderTy { get; set; }
     
         public virtual ICollection<Мх3Основание> Мх3Основание { get; set; }
         public virtual ICollection<Мх3Параметр> Мх3Параметр { get; set; }
-        public virtual ICollection<Мх3Таблица> Мх3Таблица { get; set; }
         public virtual ICollection<Мх3Участник> Мх3Участник { get; set; }
         public virtual Мх3Файл Мх3Файл { get; set; }
+        public virtual ICollection<Мх3ТаблДок> Мх3ТаблДок { get; set; }
     }
 }

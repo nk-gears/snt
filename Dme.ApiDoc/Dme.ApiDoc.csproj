@@ -33,6 +33,7 @@
     <Content Include="packages.config" />
     <None Include=".gitignore" />
     <None Include=".nojekyll" />
+    <None Include="b2b.doc wh-app-01.pubxml" />
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
