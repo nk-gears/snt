@@ -520,12 +520,16 @@
           <Property Name="Примечание" Type="nvarchar" MaxLength="250" />
           <Property Name="Вес" Type="decimal" Precision="15" Scale="2" />
           <Property Name="Объем" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="Мест" Type="int" />
+          <Property Name="Кол_воМест" Type="int" />
           <Property Name="_WfState" Type="int" Nullable="false" />
           <Property Name="_WfLastUpdateDT" Type="datetime" Nullable="false" />
           <Property Name="_WfLastUpdateUser" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="_CreatedDT" Type="date" Nullable="false" />
           <Property Name="Сумма" Type="money" />
+          <Property Name="Ворота" Type="nvarchar" MaxLength="20" />
+          <Property Name="ВремяЗагрузки" Type="datetime" />
+          <Property Name="ВремяОтправки" Type="datetime" />
+          <Property Name="Приоритет" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="ЗаказНаОтгрузкуАдрес">
           <Key>
@@ -1092,6 +1096,7 @@
           <Property Name="ВремяЗагрузки" Type="datetime" />
           <Property Name="ВремяОтправки" Type="datetime" />
           <Property Name="Приоритет" Type="smallint" Nullable="false" />
+          <Property Name="Перевозчик_Id" Type="int" />
         </EntityType>
         <EntityType Name="Мх1Адрес">
           <Key>
@@ -1550,7 +1555,7 @@
           <Key>
             <PropertyRef Name="НормАдр_Id" />
           </Key>
-          <Property Name="АдрТекст" Type="nvarchar" MaxLength="100" />
+          <Property Name="АдрТекст" Type="nvarchar" MaxLength="250" />
           <Property Name="Индекс" Type="nvarchar" MaxLength="20" />
           <Property Name="КодРегион" Type="nvarchar" MaxLength="50" />
           <Property Name="Район" Type="nvarchar" MaxLength="50" />
@@ -1560,10 +1565,11 @@
           <Property Name="Дом" Type="nvarchar" MaxLength="20" />
           <Property Name="Корпус" Type="nvarchar" MaxLength="20" />
           <Property Name="Кварт" Type="nvarchar" MaxLength="20" />
-          <Property Name="Коорд" Type="geography" />
           <Property Name="Ссылка" Type="nvarchar" MaxLength="250" />
           <Property Name="НормАдр_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Маршрут_Id" Type="nvarchar" MaxLength="10" />
+          <Property Name="НормАдрТекст" Type="nvarchar" MaxLength="250" />
+          <Property Name="ПорНомер" Type="int" />
         </EntityType>
         <EntityType Name="Перевозчик">
           <Key>
@@ -1625,12 +1631,12 @@
           </Key>
           <Property Name="ТТН_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ЗаданиеНаДоставку_Id" Type="int" Nullable="false" />
-          <Property Name="Номер" Type="nvarchar" MaxLength="20" />
-          <Property Name="Грузополучатель" Type="nvarchar" MaxLength="50" />
-          <Property Name="ГрузополучательАдрес" Type="nvarchar" MaxLength="150" />
+          <Property Name="Номер" Type="nvarchar" MaxLength="20" StoreGeneratedPattern="Computed" />
+          <Property Name="Грузополучатель" Type="nvarchar" MaxLength="100" />
+          <Property Name="ГрузополучательАдрес" Type="nvarchar" MaxLength="100" />
           <Property Name="ГрузополучательКонтакт" Type="nvarchar" MaxLength="50" />
-          <Property Name="Грузоотправитель" Type="nvarchar" MaxLength="50" />
-          <Property Name="ГрузоотправительАдрес" Type="nvarchar" MaxLength="150" />
+          <Property Name="Грузоотправитель" Type="nvarchar" MaxLength="100" />
+          <Property Name="ГрузоотправительАдрес" Type="nvarchar" MaxLength="100" />
           <Property Name="ГрузоотправительКонтакт" Type="nvarchar" MaxLength="50" />
           <Property Name="ГрузоотправительПрим1" Type="nvarchar" MaxLength="150" />
           <Property Name="ГрузоотправительПрим2" Type="nvarchar" MaxLength="150" />
@@ -1638,12 +1644,13 @@
           <Property Name="НаимГруза" Type="nvarchar" MaxLength="50" />
           <Property Name="Кол_воМест" Type="int" />
           <Property Name="ВидУп" Type="nvarchar" MaxLength="15" />
-          <Property Name="Вес" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="Объем" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Вес" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="Объем" Type="decimal" Precision="15" Scale="4" />
           <Property Name="ПриемГрузаАдрес" Type="nvarchar" MaxLength="150" />
           <Property Name="ПриемГрузаВремя" Type="nvarchar" MaxLength="30" />
           <Property Name="СдачаГрузаАдрес" Type="nvarchar" MaxLength="150" />
           <Property Name="СдачаГрузаВремя" Type="nvarchar" MaxLength="30" />
+          <Property Name="ПорНомер" Type="int" />
         </EntityType>
         <EntityType Name="ТТНСопрДок">
           <Key>
@@ -1656,6 +1663,9 @@
           <Property Name="Тип" Type="nvarchar" MaxLength="20" />
           <Property Name="Мх3Документ_Id" Type="int" />
           <Property Name="ДоставкаДокумент_Id" Type="int" />
+          <Property Name="Кол_воМест" Type="int" />
+          <Property Name="Примечание" Type="nvarchar" MaxLength="250" />
+          <Property Name="ПосылкаНомер" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_ДоставкаДокумент_ДоставкаФайл">
           <End Role="ДоставкаФайл" Type="Self.ДоставкаФайл" Multiplicity="0..1">
@@ -1839,6 +1849,18 @@
               <PropertyRef Name="Перевозчик_Id" />
             </Principal>
             <Dependent Role="ЗаданиеНаДоставку">
+              <PropertyRef Name="Перевозчик_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Маршрут_Перевозчик">
+          <End Role="Перевозчик" Type="Self.Перевозчик" Multiplicity="0..1" />
+          <End Role="Маршрут" Type="Self.Маршрут" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Перевозчик">
+              <PropertyRef Name="Перевозчик_Id" />
+            </Principal>
+            <Dependent Role="Маршрут">
               <PropertyRef Name="Перевозчик_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -4530,6 +4552,10 @@
             <End Role="Перевозчик" EntitySet="Перевозчик" />
             <End Role="ЗаданиеНаДоставку" EntitySet="ЗаданиеНаДоставку" />
           </AssociationSet>
+          <AssociationSet Name="FK_Маршрут_Перевозчик" Association="Self.FK_Маршрут_Перевозчик">
+            <End Role="Перевозчик" EntitySet="Перевозчик" />
+            <End Role="Маршрут" EntitySet="Маршрут" />
+          </AssociationSet>
           <AssociationSet Name="FK_НормАдр_Маршрут" Association="Self.FK_НормАдр_Маршрут">
             <End Role="Маршрут" EntitySet="Маршрут" />
             <End Role="НормАдр" EntitySet="НормАдр" />
@@ -6193,6 +6219,10 @@
           <AssociationSet Name="Мх3Таблица_СтрТабл1" Association="Dme.Core.Model.Мх3Таблица_СтрТабл1">
             <End Role="Мх3ТаблДок" EntitySet="Мх3ТаблДок" />
             <End Role="Мх3СтрТабл" EntitySet="Мх3СтрТабл" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Маршрут_Перевозчик" Association="Dme.Core.Model.FK_Маршрут_Перевозчик">
+            <End Role="Перевозчик" EntitySet="Перевозчик" />
+            <End Role="Маршрут" EntitySet="Маршрут" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="АктПриемкиАдрес">
@@ -10370,7 +10400,6 @@
           <Property Name="Примечание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Вес" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="Объем" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Мест" Type="Int32" />
           <Property Name="C_WfState" Type="Int32" Nullable="false" />
           <Property Name="C_WfLastUpdateDT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="C_WfLastUpdateUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -10379,6 +10408,11 @@
           <NavigationProperty Name="Маршрут" Relationship="Dme.Core.Model.FK_ЗаданиеНаДоставку_Маршрут" FromRole="ЗаданиеНаДоставку" ToRole="Маршрут" />
           <NavigationProperty Name="Перевозчик" Relationship="Dme.Core.Model.FK_ЗаданиеНаДоставку_Перевозчик" FromRole="ЗаданиеНаДоставку" ToRole="Перевозчик" />
           <NavigationProperty Name="ТТН" Relationship="Dme.Core.Model.FK_ТТН_ЗаданиеНаДоставку" FromRole="ЗаданиеНаДоставку" ToRole="ТТН" />
+          <Property Name="Кол_воМест" Type="Int32" />
+          <Property Name="Ворота" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ВремяЗагрузки" Type="DateTime" Precision="3" />
+          <Property Name="ВремяОтправки" Type="DateTime" Precision="3" />
+          <Property Name="Приоритет" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Маршрут">
           <Key>
@@ -10392,6 +10426,8 @@
           <Property Name="Приоритет" Type="Int16" Nullable="false" />
           <NavigationProperty Name="ЗаданиеНаДоставку" Relationship="Dme.Core.Model.FK_ЗаданиеНаДоставку_Маршрут" FromRole="Маршрут" ToRole="ЗаданиеНаДоставку" />
           <NavigationProperty Name="НормАдр" Relationship="Dme.Core.Model.FK_НормАдр_Маршрут" FromRole="Маршрут" ToRole="НормАдр" />
+          <Property Name="Перевозчик_Id" Type="Int32" />
+          <NavigationProperty Name="Перевозчик" Relationship="Dme.Core.Model.FK_Маршрут_Перевозчик" FromRole="Маршрут" ToRole="Перевозчик" />
         </EntityType>
         <EntityType Name="Перевозчик">
           <Key>
@@ -10415,6 +10451,7 @@
           <Property Name="АвтоОбъем" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="АвтоГрузоподъемность" Type="Decimal" Precision="15" Scale="2" />
           <NavigationProperty Name="ЗаданиеНаДоставку" Relationship="Dme.Core.Model.FK_ЗаданиеНаДоставку_Перевозчик" FromRole="Перевозчик" ToRole="ЗаданиеНаДоставку" />
+          <NavigationProperty Name="Маршрут" Relationship="Dme.Core.Model.FK_Маршрут_Перевозчик" FromRole="Перевозчик" ToRole="Маршрут" />
         </EntityType>
         <EntityType Name="ТТН">
           <Key>
@@ -10423,11 +10460,11 @@
           <Property Name="ТТН_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ЗаданиеНаДоставку_Id" Type="Int32" Nullable="false" />
           <Property Name="Номер" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Грузополучатель" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ГрузополучательАдрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Грузополучатель" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ГрузополучательАдрес" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ГрузополучательКонтакт" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Грузоотправитель" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ГрузоотправительАдрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Грузоотправитель" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ГрузоотправительАдрес" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ГрузоотправительКонтакт" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ГрузоотправительПрим1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="ГрузоотправительПрим2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
@@ -10435,14 +10472,15 @@
           <Property Name="НаимГруза" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Кол_воМест" Type="Int32" />
           <Property Name="ВидУп" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Вес" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Объем" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Вес" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="Объем" Type="Decimal" Precision="15" Scale="4" />
           <Property Name="ПриемГрузаАдрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="ПриемГрузаВремя" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="СдачаГрузаАдрес" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="СдачаГрузаВремя" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ЗаданиеНаДоставку" Relationship="Dme.Core.Model.FK_ТТН_ЗаданиеНаДоставку" FromRole="ТТН" ToRole="ЗаданиеНаДоставку" />
           <NavigationProperty Name="ТТНСопрДок" Relationship="Dme.Core.Model.FK_ТТНСопрДок_ТТН" FromRole="ТТН" ToRole="ТТНСопрДок" />
+          <Property Name="ПорНомер" Type="Int32" />
         </EntityType>
         <EntityType Name="ТТНСопрДок">
           <Key>
@@ -10456,6 +10494,9 @@
           <Property Name="Мх3Документ_Id" Type="Int32" />
           <Property Name="ДоставкаДокумент_Id" Type="Int32" />
           <NavigationProperty Name="ТТН" Relationship="Dme.Core.Model.FK_ТТНСопрДок_ТТН" FromRole="ТТНСопрДок" ToRole="ТТН" />
+          <Property Name="Кол_воМест" Type="Int32" />
+          <Property Name="Примечание" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ПосылкаНомер" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ЗаданиеНаДоставку_Маршрут">
           <End Type="Dme.Core.Model.Маршрут" Role="Маршрут" Multiplicity="0..1" />
@@ -10537,7 +10578,7 @@
           <Key>
             <PropertyRef Name="НормАдр_Id" />
           </Key>
-          <Property Name="АдрТекст" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="АдрТекст" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Индекс" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="КодРегион" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Район" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -10547,7 +10588,6 @@
           <Property Name="Дом" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Корпус" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Кварт" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Коорд" Type="Geography" />
           <Property Name="Ссылка" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="НормАдр_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Маршрут_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -10558,6 +10598,8 @@
           <NavigationProperty Name="Маршрут" Relationship="Dme.Core.Model.FK_НормАдр_Маршрут" FromRole="НормАдр" ToRole="Маршрут" />
           <NavigationProperty Name="Мх1Адрес" Relationship="Dme.Core.Model.НормАдр_Мх1Адрес" FromRole="НормАдр" ToRole="Мх1Адрес" />
           <NavigationProperty Name="Мх3Адрес" Relationship="Dme.Core.Model.НормАдр_Мх3Адрес" FromRole="НормАдр" ToRole="Мх3Адрес" />
+          <Property Name="НормАдрТекст" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ПорНомер" Type="Int32" />
         </EntityType>
         <Association Name="НормАдр_АктПриемкиАдрес">
           <End Type="Dme.Core.Model.НормАдр" Role="НормАдр" Multiplicity="0..1" />
@@ -10716,6 +10758,18 @@
             </Principal>
             <Dependent Role="Мх3СтрТабл">
               <PropertyRef Name="Таблица_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Маршрут_Перевозчик">
+          <End Type="Dme.Core.Model.Перевозчик" Role="Перевозчик" Multiplicity="0..1" />
+          <End Type="Dme.Core.Model.Маршрут" Role="Маршрут" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Перевозчик">
+              <PropertyRef Name="Перевозчик_Id" />
+            </Principal>
+            <Dependent Role="Маршрут">
+              <PropertyRef Name="Перевозчик_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -12374,12 +12428,16 @@
           <EntitySetMapping Name="ЗаданиеНаДоставку">
             <EntityTypeMapping TypeName="Dme.Core.Model.ЗаданиеНаДоставку">
               <MappingFragment StoreEntitySet="ЗаданиеНаДоставку">
+                <ScalarProperty Name="Приоритет" ColumnName="Приоритет" />
+                <ScalarProperty Name="ВремяОтправки" ColumnName="ВремяОтправки" />
+                <ScalarProperty Name="ВремяЗагрузки" ColumnName="ВремяЗагрузки" />
+                <ScalarProperty Name="Ворота" ColumnName="Ворота" />
+                <ScalarProperty Name="Кол_воМест" ColumnName="Кол_воМест" />
                 <ScalarProperty Name="Сумма" ColumnName="Сумма" />
                 <ScalarProperty Name="C_CreatedDT" ColumnName="_CreatedDT" />
                 <ScalarProperty Name="C_WfLastUpdateUser" ColumnName="_WfLastUpdateUser" />
                 <ScalarProperty Name="C_WfLastUpdateDT" ColumnName="_WfLastUpdateDT" />
                 <ScalarProperty Name="C_WfState" ColumnName="_WfState" />
-                <ScalarProperty Name="Мест" ColumnName="Мест" />
                 <ScalarProperty Name="Объем" ColumnName="Объем" />
                 <ScalarProperty Name="Вес" ColumnName="Вес" />
                 <ScalarProperty Name="Примечание" ColumnName="Примечание" />
@@ -12394,6 +12452,7 @@
           <EntitySetMapping Name="Маршрут">
             <EntityTypeMapping TypeName="Dme.Core.Model.Маршрут">
               <MappingFragment StoreEntitySet="Маршрут">
+                <ScalarProperty Name="Перевозчик_Id" ColumnName="Перевозчик_Id" />
                 <ScalarProperty Name="Приоритет" ColumnName="Приоритет" />
                 <ScalarProperty Name="ВремяОтправки" ColumnName="ВремяОтправки" />
                 <ScalarProperty Name="ВремяЗагрузки" ColumnName="ВремяЗагрузки" />
@@ -12429,6 +12488,7 @@
           <EntitySetMapping Name="ТТН">
             <EntityTypeMapping TypeName="Dme.Core.Model.ТТН">
               <MappingFragment StoreEntitySet="ТТН">
+                <ScalarProperty Name="ПорНомер" ColumnName="ПорНомер" />
                 <ScalarProperty Name="СдачаГрузаВремя" ColumnName="СдачаГрузаВремя" />
                 <ScalarProperty Name="СдачаГрузаАдрес" ColumnName="СдачаГрузаАдрес" />
                 <ScalarProperty Name="ПриемГрузаВремя" ColumnName="ПриемГрузаВремя" />
@@ -12456,6 +12516,9 @@
           <EntitySetMapping Name="ТТНСопрДок">
             <EntityTypeMapping TypeName="Dme.Core.Model.ТТНСопрДок">
               <MappingFragment StoreEntitySet="ТТНСопрДок">
+                <ScalarProperty Name="ПосылкаНомер" ColumnName="ПосылкаНомер" />
+                <ScalarProperty Name="Примечание" ColumnName="Примечание" />
+                <ScalarProperty Name="Кол_воМест" ColumnName="Кол_воМест" />
                 <ScalarProperty Name="ДоставкаДокумент_Id" ColumnName="ДоставкаДокумент_Id" />
                 <ScalarProperty Name="Мх3Документ_Id" ColumnName="Мх3Документ_Id" />
                 <ScalarProperty Name="Тип" ColumnName="Тип" />
@@ -12489,10 +12552,11 @@
           <EntitySetMapping Name="НормАдр">
             <EntityTypeMapping TypeName="Dme.Core.Model.НормАдр">
               <MappingFragment StoreEntitySet="НормАдр">
+                <ScalarProperty Name="ПорНомер" ColumnName="ПорНомер" />
+                <ScalarProperty Name="НормАдрТекст" ColumnName="НормАдрТекст" />
                 <ScalarProperty Name="Маршрут_Id" ColumnName="Маршрут_Id" />
                 <ScalarProperty Name="НормАдр_Id" ColumnName="НормАдр_Id" />
                 <ScalarProperty Name="Ссылка" ColumnName="Ссылка" />
-                <ScalarProperty Name="Коорд" ColumnName="Коорд" />
                 <ScalarProperty Name="Кварт" ColumnName="Кварт" />
                 <ScalarProperty Name="Корпус" ColumnName="Корпус" />
                 <ScalarProperty Name="Дом" ColumnName="Дом" />

@@ -26,8 +26,10 @@ namespace Dme.Core
         public Nullable<System.DateTime> ВремяЗагрузки { get; set; }
         public Nullable<System.DateTime> ВремяОтправки { get; set; }
         public short Приоритет { get; set; }
+        public Nullable<int> Перевозчик_Id { get; set; }
     
         public virtual ICollection<ЗаданиеНаДоставку> ЗаданиеНаДоставку { get; set; }
         public virtual ICollection<НормАдр> НормАдр { get; set; }
+        public virtual Перевозчик Перевозчик { get; set; }
     }
 }

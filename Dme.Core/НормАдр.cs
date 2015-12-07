@@ -34,10 +34,11 @@ namespace Dme.Core
         public string Дом { get; set; }
         public string Корпус { get; set; }
         public string Кварт { get; set; }
-        public System.Data.Spatial.DbGeography Коорд { get; set; }
         public string Ссылка { get; set; }
         public int НормАдр_Id { get; set; }
         public string Маршрут_Id { get; set; }
+        public string НормАдрТекст { get; set; }
+        public Nullable<int> ПорНомер { get; set; }
     
         public virtual ICollection<АктПриемкиАдрес> АктПриемкиАдрес { get; set; }
         public virtual ICollection<ДоставкаАдрес> ДоставкаАдрес { get; set; }

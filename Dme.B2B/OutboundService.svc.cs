@@ -70,7 +70,7 @@ namespace Dme.B2B
             _Context.ЗаказНаОтгрузкуФайл.Add(файл);
             _Context.SaveChanges();
             _Context.Database.ExecuteSqlCommand(
-                "EXEC [dbo].[OnCreatedЗаказНаОтгрузкуФайл] @Файл_Id", 
+                "EXEC [dbo].[ЗаказНаОтгрузкуФайл_Создан] @Файл_Id", 
                 new object[] { new SqlParameter("@Файл_Id", System.Data.SqlDbType.Int) { Value = файл.Файл_Id } });
             _Context.Entry(файл).Reload();
             return файл;

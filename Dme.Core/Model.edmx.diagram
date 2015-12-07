@@ -333,6 +333,7 @@
         <AssociationConnector Association="Dme.Core.Model.Мх3Документ_Таблица1" />
         <AssociationConnector Association="Dme.Core.Model.Мх3Таблица_ИтогТабл1" />
         <AssociationConnector Association="Dme.Core.Model.Мх3Таблица_СтрТабл1" />
+        <AssociationConnector Association="Dme.Core.Model.FK_Маршрут_Перевозчик" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

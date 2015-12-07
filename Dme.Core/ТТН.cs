@@ -40,6 +40,7 @@ namespace Dme.Core
         public string ПриемГрузаВремя { get; set; }
         public string СдачаГрузаАдрес { get; set; }
         public string СдачаГрузаВремя { get; set; }
+        public Nullable<int> ПорНомер { get; set; }
     
         public virtual ЗаданиеНаДоставку ЗаданиеНаДоставку { get; set; }
         public virtual ICollection<ТТНСопрДок> ТТНСопрДок { get; set; }

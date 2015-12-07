@@ -8,6 +8,7 @@ using Dme.B2B.Inbound;
 using System.Reflection;
 using AutoMapper;
 using System.Data.SqlClient;
+using System.Data.Entity.Validation;
 
 namespace Dme.B2B
 {
@@ -23,17 +24,37 @@ namespace Dme.B2B
         }
         public Inbound.Файл ЗаказНаРазмещениеДокумент(Inbound.Документ документ)
         {
-            Dme.Core.ЗаказНаРазмещениеФайл target = CreateЗаказНаРазмещениеФайл(null);
-            CopyДокумент(target, документ);
-            return CopyЗаказНаРазмещениеФайл(SaveЗаказНаРазмещениеФайл(target));
+            try
+            {
+                Dme.Core.ЗаказНаРазмещениеФайл target = CreateЗаказНаРазмещениеФайл(null);
+                CopyДокумент(target, документ);
+                return CopyЗаказНаРазмещениеФайл(SaveЗаказНаРазмещениеФайл(target));
+            }
+            catch (Exception e)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(e.Message);
+                sb.AppendLine(e.StackTrace);
+                throw new Exception(sb.ToString());
+            }
         }
 
         public Inbound.Файл ЗаказНаРазмещениеФайл(Inbound.Файл файл)
         {
-            Dme.Core.ЗаказНаРазмещениеФайл target = CreateЗаказНаРазмещениеФайл(файл);
-            foreach (var o in файл.Документ)
-                CopyДокумент(target, o);
-            return CopyЗаказНаРазмещениеФайл(SaveЗаказНаРазмещениеФайл(target));
+            try
+            {
+                Dme.Core.ЗаказНаРазмещениеФайл target = CreateЗаказНаРазмещениеФайл(файл);
+                foreach (var o in файл.Документ)
+                    CopyДокумент(target, o);
+                return CopyЗаказНаРазмещениеФайл(SaveЗаказНаРазмещениеФайл(target));
+            }
+            catch (Exception e)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(e.Message);
+                sb.AppendLine(e.StackTrace);
+                throw new Exception(sb.ToString());
+            }
         }
         private void CopyДокумент(Dme.Core.ЗаказНаРазмещениеФайл файл, Inbound.Документ s)
         {
@@ -66,9 +87,31 @@ namespace Dme.B2B
         private Dme.Core.ЗаказНаРазмещениеФайл SaveЗаказНаРазмещениеФайл(Dme.Core.ЗаказНаРазмещениеФайл файл)
         {
             _Context.ЗаказНаРазмещениеФайл.Add(файл);
-            _Context.SaveChanges();
+            try
+            {
+                _Context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); 
+            }
             _Context.Database.ExecuteSqlCommand(
-                "EXEC [dbo].[OnCreatedЗаказНаРазмещениеФайл] @Файл_Id",
+                "EXEC [dbo].[ЗаказНаРазмещениеФайл_Создан] @Файл_Id",
                 new object[] { new SqlParameter("@Файл_Id", System.Data.SqlDbType.Int) { Value = файл.Файл_Id } });
             _Context.Entry(файл).Reload();
             return файл;

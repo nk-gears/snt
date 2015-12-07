@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dme.B2B
 {
-    public static class Helper
+    static class Helper
     {
         public static string GetUserName()
         {

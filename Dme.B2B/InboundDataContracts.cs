@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Dme.B2B.Inbound
 {
@@ -14,14 +15,19 @@ namespace Dme.B2B.Inbound
 		public partial class Файл
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String ВерсПрог { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String ВерсияФормата { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Имя { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Формат { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String КодФормы { get; set; }
 				[DataMember]
 				public ДокументКоллекция Документ { get; set; }
@@ -35,8 +41,10 @@ namespace Dme.B2B.Inbound
 		public partial class Документ
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Дата { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Номер { get; set; }
 				[DataMember]
 				public ОснованиеКоллекция Основание { get; set; }
@@ -58,16 +66,22 @@ namespace Dme.B2B.Inbound
 		public partial class Основание
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Номер { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Дата { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Наим { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Single? СуммаБезНал { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Single? Сумма { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Срок { get; set; }
 				[DataMember]
 				public ПараметрКоллекция Параметр { get; set; }
@@ -81,8 +95,10 @@ namespace Dme.B2B.Inbound
 		public partial class Отправитель
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Роль { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Название { get; set; }
 				[DataMember]
 				public АдресКоллекция Адрес { get; set; }
@@ -110,6 +126,7 @@ namespace Dme.B2B.Inbound
 		public partial class Получатель
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Название { get; set; }
 				[DataMember]
 				public АдресКоллекция Адрес { get; set; }
@@ -135,8 +152,10 @@ namespace Dme.B2B.Inbound
 		public partial class ТаблДок
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Название { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Тип { get; set; }
 				[DataMember]
 				public ИтогТаблКоллекция ИтогТабл { get; set; }
@@ -152,8 +171,10 @@ namespace Dme.B2B.Inbound
 		public partial class Параметр
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Имя { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Значение { get; set; }
 		}
 
@@ -165,10 +186,13 @@ namespace Dme.B2B.Inbound
 		public partial class Адрес
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Тип { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Наим { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String АдрТекст { get; set; }
 				[DataMember]
 				public АдрИноКоллекция АдрИно { get; set; }
@@ -184,8 +208,10 @@ namespace Dme.B2B.Inbound
 		public partial class Представитель
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Должность { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Роль { get; set; }
 				[DataMember]
 				public СвФЛКоллекция СвФЛ { get; set; }
@@ -199,12 +225,16 @@ namespace Dme.B2B.Inbound
 		public partial class БанкРекв
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String НаимБанк { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String БИК { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String РСчет { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String КСчет { get; set; }
 		}
 
@@ -216,12 +246,16 @@ namespace Dme.B2B.Inbound
 		public partial class Контакт
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Телефон { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Факс { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Email { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Internet { get; set; }
 		}
 
@@ -233,8 +267,10 @@ namespace Dme.B2B.Inbound
 		public partial class Подразделение
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Название { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Идентификатор { get; set; }
 		}
 
@@ -246,16 +282,22 @@ namespace Dme.B2B.Inbound
 		public partial class СвФЛ
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String ИНН { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Название { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Фамилия { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Имя { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Отчество { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Обращение { get; set; }
 		}
 
@@ -267,14 +309,19 @@ namespace Dme.B2B.Inbound
 		public partial class СвЮЛ
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Название { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String ИНН { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String КПП { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String ОКДП { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String ОКПО { get; set; }
 		}
 
@@ -286,14 +333,19 @@ namespace Dme.B2B.Inbound
 		public partial class ИтогТабл
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Тип { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Single? Нетто { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Single? СуммаБезНал { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Single? Кол_во { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Single? Сумма { get; set; }
 				[DataMember]
 				public НДСКоллекция НДС { get; set; }
@@ -311,54 +363,79 @@ namespace Dme.B2B.Inbound
 		public partial class СтрТабл
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String ПорНомер { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Название { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int32? Кол_во { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String ЕдИзм { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String ОКЕИ { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Код { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Цена { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Decimal? СуммаБезНал { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Decimal? Сумма { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Примечание { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Описание { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Серия { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public DateTime? СрокГодности { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public DateTime? ДатаИзг { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String ШтрихКод { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Качество { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String ТемпРежим { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String КлассОпасн { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Производитель { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Boolean? Стекло { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Boolean? Пку { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String ОригПорНомер { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? МинЗаказ { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? КратнЗаказ { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Маркер { get; set; }
 				[DataMember]
 				public НДСКоллекция НДС { get; set; }
@@ -380,8 +457,10 @@ namespace Dme.B2B.Inbound
 		public partial class АдрИно
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String КодСтр { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String АдрТекст { get; set; }
 		}
 
@@ -393,22 +472,31 @@ namespace Dme.B2B.Inbound
 		public partial class АдрРФ
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Индекс { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String КодРегион { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Район { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Город { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String НаселПункт { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Улица { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Дом { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Корпус { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Кварт { get; set; }
 		}
 
@@ -420,12 +508,16 @@ namespace Dme.B2B.Inbound
 		public partial class НДС
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Наим { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Ставка { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String ТипСтавки { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Сумма { get; set; }
 		}
 
@@ -437,8 +529,10 @@ namespace Dme.B2B.Inbound
 		public partial class Характеристика
 		{
 				[DataMember]
+				[XmlAttribute]
 				public String Имя { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public String Значение { get; set; }
 		}
 
@@ -450,16 +544,22 @@ namespace Dme.B2B.Inbound
 		public partial class РазмерКоробки
 		{
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Кол_воУп { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Ширина { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Длина { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Высота { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Вес { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Объем { get; set; }
 		}
 
@@ -471,16 +571,22 @@ namespace Dme.B2B.Inbound
 		public partial class РазмерМалСтандарт
 		{
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Кол_воУп { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Ширина { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Длина { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Высота { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Вес { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Объем { get; set; }
 		}
 
@@ -492,14 +598,19 @@ namespace Dme.B2B.Inbound
 		public partial class РазмерУпаковки
 		{
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Ширина { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Длина { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Высота { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Вес { get; set; }
 				[DataMember]
+				[XmlAttribute]
 				public Int64? Объем { get; set; }
 		}
 

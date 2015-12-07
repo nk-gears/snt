@@ -17,6 +17,7 @@ namespace Dme.Core
         public Перевозчик()
         {
             this.ЗаданиеНаДоставку = new HashSet<ЗаданиеНаДоставку>();
+            this.Маршрут = new HashSet<Маршрут>();
         }
     
         public int Перевозчик_Id { get; set; }
@@ -38,5 +39,6 @@ namespace Dme.Core
         public Nullable<decimal> АвтоГрузоподъемность { get; set; }
     
         public virtual ICollection<ЗаданиеНаДоставку> ЗаданиеНаДоставку { get; set; }
+        public virtual ICollection<Маршрут> Маршрут { get; set; }
     }
 }

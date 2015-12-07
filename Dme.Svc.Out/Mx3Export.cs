@@ -22,9 +22,9 @@ namespace Dme.Svc.Out
                     Dme.Svc.Out.Properties.Settings.Default.RecipientID
                 );
 
-            using (var context = new Dme.Core.DmeEntities())
+            while (!cancellationToken.IsCancellationRequested)
             {
-                while (!cancellationToken.IsCancellationRequested)
+                using (var context = new Dme.Core.DmeEntities())
                 {
                     var files = await (from f in context.Мх3Файл
                                        where f.C_WfState == WF_STATE_IN && !f.C_Deleted
@@ -60,10 +60,10 @@ namespace Dme.Svc.Out
                             log.Error(e);
                         }
                     }
-                    if (cancellationToken.IsCancellationRequested)
-                        return;
-                    await Task.Delay(DELAY);
                 }
+                if (cancellationToken.IsCancellationRequested)
+                    return;
+                await Task.Delay(DELAY);
             }
         }
     }

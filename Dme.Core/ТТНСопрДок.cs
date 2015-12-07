@@ -21,6 +21,9 @@ namespace Dme.Core
         public string Тип { get; set; }
         public Nullable<int> Мх3Документ_Id { get; set; }
         public Nullable<int> ДоставкаДокумент_Id { get; set; }
+        public Nullable<int> Кол_воМест { get; set; }
+        public string Примечание { get; set; }
+        public string ПосылкаНомер { get; set; }
     
         public virtual ТТН ТТН { get; set; }
     }

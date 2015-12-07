@@ -14,6 +14,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Dme.B2B.Inbound
 {
@@ -94,6 +95,7 @@ GenerateAll();
 <#+ 
         private void GenerateProperty(Type tp, System.Reflection.PropertyInfo propInfo)
         {
+			bool isCollection = false;
             string propType = propInfo.PropertyType.Name;
             if (propInfo.PropertyType.Name.IndexOf("ICollection`") == 0)
             {
@@ -101,6 +103,7 @@ GenerateAll();
                 propType = tpCollection.Name + "Коллекция";
                 if (!_TypesTodo.Contains(tpCollection) && !_TypesDone.Contains(tpCollection))
                     _TypesTodo.Add(tpCollection);
+				isCollection = true;
             }
             else if (propInfo.PropertyType.Name.IndexOf("Nullable`") == 0)
             {
@@ -115,6 +118,8 @@ GenerateAll();
                 || propInfo.PropertyType == typeof(int)))
                 return;
 			WriteLine(CurrentIndent + "[DataMember]");
+			if(!isCollection)
+			WriteLine(CurrentIndent + "[XmlAttribute]");
             WriteLine(CurrentIndent + "public " + RemovePrefixes(propType) + " "+ RemovePrefixes(propInfo.Name) +" { get; set; }");
 
         }

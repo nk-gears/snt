@@ -27,12 +27,16 @@ namespace Dme.Core
         public string Примечание { get; set; }
         public Nullable<decimal> Вес { get; set; }
         public Nullable<decimal> Объем { get; set; }
-        public Nullable<int> Мест { get; set; }
         public int C_WfState { get; set; }
         public System.DateTime C_WfLastUpdateDT { get; set; }
         public string C_WfLastUpdateUser { get; set; }
         public System.DateTime C_CreatedDT { get; set; }
         public Nullable<decimal> Сумма { get; set; }
+        public Nullable<int> Кол_воМест { get; set; }
+        public string Ворота { get; set; }
+        public Nullable<System.DateTime> ВремяЗагрузки { get; set; }
+        public Nullable<System.DateTime> ВремяОтправки { get; set; }
+        public short Приоритет { get; set; }
     
         public virtual Маршрут Маршрут { get; set; }
         public virtual Перевозчик Перевозчик { get; set; }

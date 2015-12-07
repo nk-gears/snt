@@ -84,6 +84,7 @@
       <LastGenOutput>InboundDataContracts.cs</LastGenOutput>
     </Content>
     <Content Include="InboundService.svc" />
+    <Content Include="InventoryService.svc" />
     <Content Include="OutboundDataContracts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OutboundDataContracts.cs</LastGenOutput>
@@ -102,6 +103,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="IInventoryService.cs" />
     <Compile Include="InboundDataContracts.cs">
       <DependentUpon>InboundDataContracts.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -109,6 +111,9 @@
     </Compile>
     <Compile Include="InboundService.svc.cs">
       <DependentUpon>InboundService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryService.svc.cs">
+      <DependentUpon>InventoryService.svc</DependentUpon>
     </Compile>
     <Compile Include="OutboundDataContracts.cs">
       <AutoGen>True</AutoGen>
@@ -121,6 +126,7 @@
     <Compile Include="IOutboundService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Запас.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

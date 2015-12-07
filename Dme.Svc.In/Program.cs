@@ -16,7 +16,7 @@ namespace Dme.Svc
                 x.RunAsLocalService();
                 x.SetDescription("EDI Input for DME WH");
                 x.SetDisplayName("DME EDI Input Service");
-                x.SetServiceName("dme");
+                x.SetServiceName("dmei");
                 x.UseLog4Net();
             });
         }

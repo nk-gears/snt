@@ -15,9 +15,9 @@ namespace Dme.Svc.Out
             {
                 x.Service<OutputService>();
                 x.RunAsLocalService();
-                x.SetDescription("EDI Input for DME WH");
-                x.SetDisplayName("DME EDI Input Service");
-                x.SetServiceName("dme");
+                x.SetDescription("EDI Output for DME WH");
+                x.SetDisplayName("DME EDI Output Service");
+                x.SetServiceName("dmeo");
                 x.UseLog4Net();
             });
         }
