@@ -11,9 +11,19 @@ namespace Dme.B2B
     // NOTE: In order to launch WCF Test Client for testing this service, please select InventoryService.svc or InventoryService.svc.cs at the Solution Explorer and start debugging.
     public class InventoryService : IInventoryService
     {
-        public ЗапасКоллекция ПолучитьТекущий()
+        Dme.Core.DmeEntities _Context = null;
+        public InventoryService()
         {
-            return null;
+            _Context = new Core.DmeEntities();
+        }
+        
+        public Inventory.ЗапасКоллекция ПолучитьТекущий()
+        {
+            var qinv = _Context.Database.SqlQuery<Inventory.Запас>(@"EXEC [dbo].[Запас_ПолучитьТекущий];", new object[] { });
+            Inventory.ЗапасКоллекция result = new Inventory.ЗапасКоллекция();
+            foreach (var i in qinv)
+                result.Add(i);
+            return result;
         }
     }
 }

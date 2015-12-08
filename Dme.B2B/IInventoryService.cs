@@ -12,6 +12,6 @@ namespace Dme.B2B
     public interface IInventoryService
     {
         [OperationContract]
-        ЗапасКоллекция ПолучитьТекущий();
+        Inventory.ЗапасКоллекция ПолучитьТекущий();
     }
 }

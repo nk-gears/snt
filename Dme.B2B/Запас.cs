@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dme.B2B
+namespace Dme.B2B.Inventory
 {
     [DataContract]
     public class Запас

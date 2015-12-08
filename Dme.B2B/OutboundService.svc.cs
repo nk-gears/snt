@@ -68,7 +68,7 @@ namespace Dme.B2B
         private Dme.Core.ЗаказНаОтгрузкуФайл SaveFileAndProcess(Dme.Core.ЗаказНаОтгрузкуФайл файл)
         {
             _Context.ЗаказНаОтгрузкуФайл.Add(файл);
-            _Context.SaveChanges();
+            Dme.Core.Helper.Entities.SaveChanges(_Context);
             _Context.Database.ExecuteSqlCommand(
                 "EXEC [dbo].[ЗаказНаОтгрузкуФайл_Создан] @Файл_Id", 
                 new object[] { new SqlParameter("@Файл_Id", System.Data.SqlDbType.Int) { Value = файл.Файл_Id } });

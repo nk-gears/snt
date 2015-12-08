@@ -28,7 +28,9 @@ namespace Dme.Svc.Out
                 {
                     var files = await (from f in context.Мх1Файл
                                        where f.C_WfState == WF_STATE_IN && !f.C_Deleted
-                                       select f).ToListAsync(cancellationToken);
+                                       select f)
+                                       .Include(f=>f.Мх1Документ.Select(d=>d.Мх1ТаблДок.Select(td=>td.Мх1СтрТабл.Select(st=>st.Мх1Характеристика))))
+                                       .ToListAsync(cancellationToken);
                     if (cancellationToken.IsCancellationRequested)
                         return;
                     foreach (var file in files)
@@ -63,7 +65,14 @@ namespace Dme.Svc.Out
                 }
                 if (cancellationToken.IsCancellationRequested)
                     return;
-                await Task.Delay(DELAY);
+                try
+                {
+                    await Task.Delay(DELAY, cancellationToken);
+                }
+                catch (TaskCanceledException)
+                {
+                    return;
+                }
             }
         }
     }

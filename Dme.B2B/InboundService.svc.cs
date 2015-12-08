@@ -87,29 +87,7 @@ namespace Dme.B2B
         private Dme.Core.ЗаказНаРазмещениеФайл SaveЗаказНаРазмещениеФайл(Dme.Core.ЗаказНаРазмещениеФайл файл)
         {
             _Context.ЗаказНаРазмещениеФайл.Add(файл);
-            try
-            {
-                _Context.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                StringBuilder sb = new StringBuilder();
-
-                foreach (var failure in ex.EntityValidationErrors)
-                {
-                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
-                    foreach (var error in failure.ValidationErrors)
-                    {
-                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
-                        sb.AppendLine();
-                    }
-                }
-
-                throw new DbEntityValidationException(
-                    "Entity Validation Failed - errors follow:\n" +
-                    sb.ToString(), ex
-                ); 
-            }
+            Dme.Core.Helper.Entities.SaveChanges(_Context);
             _Context.Database.ExecuteSqlCommand(
                 "EXEC [dbo].[ЗаказНаРазмещениеФайл_Создан] @Файл_Id",
                 new object[] { new SqlParameter("@Файл_Id", System.Data.SqlDbType.Int) { Value = файл.Файл_Id } });

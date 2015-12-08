@@ -63,7 +63,14 @@ namespace Dme.Svc.Out
                 }
                 if (cancellationToken.IsCancellationRequested)
                     return;
-                await Task.Delay(DELAY);
+                try
+                {
+                    await Task.Delay(DELAY, cancellationToken);
+                }
+                catch (TaskCanceledException)
+                {
+                    return;
+                }
             }
         }
     }
