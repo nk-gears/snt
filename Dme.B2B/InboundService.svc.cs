@@ -20,21 +20,29 @@ namespace Dme.B2B
         public InboundService()
         {
             _Context = new Core.DmeEntities();
-            Inbound.DataContractMapperCfg.Initialize();
         }
         public Inbound.Файл ЗаказНаРазмещениеДокумент(Inbound.Документ документ)
         {
             try
             {
-                Dme.Core.ЗаказНаРазмещениеФайл target = CreateЗаказНаРазмещениеФайл(null);
-                CopyДокумент(target, документ);
-                return CopyЗаказНаРазмещениеФайл(SaveЗаказНаРазмещениеФайл(target));
+                var result = new Inbound.Файл();
+                result.Документ = new ДокументКоллекция();
+                ProcessInbound(документ);
+                result.Документ.Add(документ);
+                Dme.Core.Helper.Entities.SaveChanges(_Context);
+                return result;
             }
             catch (Exception e)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine(e.Message);
-                sb.AppendLine(e.StackTrace);
+                for (Exception err = e; err != null; err = err.InnerException)
+                {
+                    sb
+                        .Append(err.Message)
+                        .AppendLine(err.StackTrace)
+                        .AppendLine("===========================")
+                        .AppendLine();
+                }
                 throw new Exception(sb.ToString());
             }
         }
@@ -42,59 +50,155 @@ namespace Dme.B2B
         public Inbound.Файл ЗаказНаРазмещениеФайл(Inbound.Файл файл)
         {
             try
-            {
-                Dme.Core.ЗаказНаРазмещениеФайл target = CreateЗаказНаРазмещениеФайл(файл);
-                foreach (var o in файл.Документ)
-                    CopyДокумент(target, o);
-                return CopyЗаказНаРазмещениеФайл(SaveЗаказНаРазмещениеФайл(target));
+            { 
+                foreach (Inbound.Документ s in файл.Документ)
+                    ProcessInbound(s);
+                Dme.Core.Helper.Entities.SaveChanges(_Context);
+                return файл;
             }
             catch (Exception e)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine(e.Message);
-                sb.AppendLine(e.StackTrace);
+                for (Exception err = e; err != null; err = err.InnerException)
+                {
+                    sb.AppendLine(err.Message);
+                    sb.AppendLine(err.StackTrace);
+                    sb.AppendLine("===========================");
+                    sb.AppendLine();
+                }
                 throw new Exception(sb.ToString());
             }
         }
-        private void CopyДокумент(Dme.Core.ЗаказНаРазмещениеФайл файл, Inbound.Документ s)
+
+
+        public void ProcessInbound(Inbound.Документ s)
         {
-            var t = new Core.ЗаказНаРазмещениеДокумент();
-            Mapper.Map<Inbound.Документ, Core.ЗаказНаРазмещениеДокумент>(s, t);
-            файл.ЗаказНаРазмещениеДокумент.Add(t);
+            var userID = Helper.GetUserName();
+            var userB2B = _Context.B2BUser.First(r => r.B2BUserID == userID);
+            // Заказ
+            var o = new Dme.Core.Order();
+            o.UserID = userID;
+            o.DT = DateTime.Now;
+            o.CustOrderID = s.Номер;
+            o.CustOrderDT = s.Дата;
+            string orderTypeName = GetParameter(s, "Тип") ?? "Поставка";
+            o.OrderType = _Context.OrderType.Where(ot=>ot.Name==orderTypeName && ot.Sign=="+").FirstOrDefault();
+            if (o.OrderType == null)
+                throw new Exception("Неизвестный тип документа");
+            o.CustomerID = userB2B.CustomerID;
+            var t = s.ТаблДок.First();
+            // Отправитель
+            o.Supplier = GetSupplier(s.Отправитель.First().СвЮЛ.First());
+            // Строки
+            int rowNo = 1;
+            foreach (var r in t.СтрТабл)
+            {
+                var i = new Core.OrderDocRow();
+                i.Partm = GetPartm(r);
+                i.BatchNo = r.Серия;
+                i.InvQual = r.Качество ?? "N";
+                i.SpecInvID = r.Маркер;
+                i.ExpireDT = r.СрокГодности;
+                i.Qty = r.Кол_во;
+                i.Price = r.Цена;
+                i.RowNo = rowNo;
+                o.OrderDocRow.Add(i);
+                rowNo++;
+            }
+            // сохраняем изменения
+            _Context.Order.Add(o);
         }
-        private Inbound.Файл CopyЗаказНаРазмещениеФайл(Dme.Core.ЗаказНаРазмещениеФайл source)
+        /// <summary>
+        /// Возвращает товар из справочника. Если такого нет, то создает новую запись
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        private Dme.Core.Partm GetPartm(Inbound.СтрТабл r)
         {
-            Inbound.Файл result = new Inbound.Файл();
-            Mapper.Map<Core.ЗаказНаРазмещениеФайл, Inbound.Файл>(source, result);
+            Dme.Core.Partm p;
+            int partID = 0;
+            string id1 = r.Код;
+            if (id1 == null || id1 == string.Empty)
+            {
+                var y = r.Характеристика.Where(x => x.Имя == "КодСантэнс").FirstOrDefault();
+                if (y == null)
+                    throw new Exception("Поле \"Код\" должно быть заполнено");
+                else
+                    partID = Int32.Parse(y.Значение);
+            }
+            if (partID > 0)
+            {
+                p = _Context.Partm.FirstOrDefault(i => i.PartID == partID);
+                if (p == null)
+                    throw new Exception(String.Format("Поле \"КодСантэнс\" содержит недопустимое значение {0}", partID));
+            }
+            else
+            {
+                p = _Context.Partm.FirstOrDefault(i => i.id1 == id1);
+                if (p == null)
+                {
+                    p = new Core.Partm();
+                    p.PartID = GetPartmNewID();
+                    p.partdsc = r.Название;
+                    p.partdsc2 = r.Производитель;
+                    p.id1 = id1;
+                    p.tempcl = r.ТемпРежим ?? "general";
+                    p.glass = r.Стекло ?? false;
+                    p.specaccount = r.Пку ?? false;
+                    p.hazcl = r.КлассОпасн ?? "general";
+                    p.minorder = r.МинЗаказ ?? 1;
+                    p.mulorder = r.КратнЗаказ ?? 1;
+                    _Context.Partm.Add(p);
+                    _Context.SaveChanges();
+                }
+            }
+            return p;
+        }
+        string GetParameter(Inbound.Документ s, string name, bool throwException = false)
+        {
+            var par = s.Параметр==null ? null : s.Параметр.FirstOrDefault(p => p.Имя == name);
+            if (par == null)
+            {
+                if (throwException)
+                    throw new Exception(String.Format("Ожидается параметр документа \"{0}\"", name));
+                else
+                    return null;
+            }
+            string result = par.Значение;
             return result;
         }
-
-        private Dme.Core.ЗаказНаРазмещениеФайл CreateЗаказНаРазмещениеФайл(Inbound.Файл файл)
+        /// <summary>
+        /// Генерирует код для новой записи в справочнике товаров
+        /// </summary>
+        /// <returns></returns>
+        private int GetPartmNewID()
         {
-            var result = new Dme.Core.ЗаказНаРазмещениеФайл();
-            result.C_WfState = 0;
-            result.C_CreatedDT = DateTime.Now;
-            result.C_CreatedUser = Helper.GetUserName();
-            result.C_WfLastUpdateDT = result.C_CreatedDT;
-            result.C_WfLastUpdateUser = Helper.GetUserName();
-            result.ВерсПрог = Helper.GetAppVersion();
-            result.ВерсияФормата = "1.0";
-            result.Имя = файл == null ? Guid.NewGuid().ToString() : файл.Имя;
-            result.Формат = "ЗаказНаРазмещение";
-            return result;
+            int maxID = _Context.Partm.Max(i => i.PartID);
+            if (maxID < 100000)
+                maxID = 100000;
+            return maxID + 1;
         }
-
-        private Dme.Core.ЗаказНаРазмещениеФайл SaveЗаказНаРазмещениеФайл(Dme.Core.ЗаказНаРазмещениеФайл файл)
+        /// <summary>
+        /// Возвращает запись поставщика из справочника. Если такой нет, то создает новую
+        /// </summary>
+        /// <param name="suppl"></param>
+        /// <returns></returns>
+        private Core.Customer GetSupplier(Inbound.СвЮЛ suppl)
         {
-            _Context.ЗаказНаРазмещениеФайл.Add(файл);
-            Dme.Core.Helper.Entities.SaveChanges(_Context);
-            _Context.Database.ExecuteSqlCommand(
-                "EXEC [dbo].[ЗаказНаРазмещениеФайл_Создан] @Файл_Id",
-                new object[] { new SqlParameter("@Файл_Id", System.Data.SqlDbType.Int) { Value = файл.Файл_Id } });
-            _Context.Entry(файл).Reload();
-            return файл;
+            Core.Customer cust = _Context.Customer.Where(c=>c.INN == suppl.ИНН).FirstOrDefault();
+            if (cust == null)
+            {
+                cust = new Core.Customer();
+                cust.INN = suppl.ИНН;
+                cust.KPP = suppl.КПП;
+                cust.OKDP = suppl.ОКДП;
+                cust.OKPO = suppl.ОКПО;
+                cust.Name = suppl.Название;
+                _Context.Customer.Add(cust);
+                _Context.SaveChanges();
+            }
+            return cust;
         }
-
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls

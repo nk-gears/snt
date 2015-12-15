@@ -34,37 +34,10 @@ namespace Dme.Svc.Out.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("МХ1_{0}.xml")]
-        public string Mx1FileNameFormat {
-            get {
-                return ((string)(this["Mx1FileNameFormat"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("АктПриемки_{0}.xml")]
-        public string ActAccFileNameFormat {
-            get {
-                return ((string)(this["ActAccFileNameFormat"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int RecipientID {
             get {
                 return ((int)(this["RecipientID"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("МХ3_{0}.xml")]
-        public string Mx3FileNameFormat {
-            get {
-                return ((string)(this["Mx3FileNameFormat"]));
             }
         }
     }

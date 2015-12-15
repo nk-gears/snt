@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Dme.Sbis
 {
@@ -17,6 +19,7 @@ namespace Dme.Sbis
         Package _Package;
         string _FolderName;
         int _Id = 0;
+        int _FileNo = 1;
 
         public string SenderINN { get; set; }
         public string SenderKPP { get; set; }
@@ -42,16 +45,15 @@ namespace Dme.Sbis
             _Name = String.Format("{0}_{1}_{2}", 
                 DateTime.Now.ToString("ddMMyyyyHHmmssfffff"),
                 _Rnd.Next(MAX_RND), NextId());
+            _FileNo = 1;
             _Package = new Package(SenderINN, SenderKPP, RecipientINN, RecipientKPP);
         }
 
-        public void AddFile(string fileName)
+        public XmlWriter AddFile()
         {
-            string folder = System.IO.Path.GetDirectoryName(fileName);
-            if(String.Compare(folder, _FolderName, true) == 0)
-                _Package.Attachments.Add(System.IO.Path.GetFileName(fileName));
-            else
-                _Package.Attachments.Add(fileName);
+            string fileName = _Name+"."+ NextFileNo().ToString() + ".xml";
+            _Package.Attachments.Add(fileName);
+            return XmlWriter.Create(System.IO.Path.Combine(_FolderName, fileName));
         }
 
         public void Flush()
@@ -65,6 +67,11 @@ namespace Dme.Sbis
             if (_Id > MAX_ID)
                 _Id = 1;
             return _Id;
+        }
+        private int NextFileNo()
+        {
+            _FileNo++;
+            return _FileNo;
         }
     }
 }

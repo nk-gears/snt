@@ -20,9 +20,8 @@ namespace Dme.Svc
         /// <returns></returns>
         public override void Init(List<Task> microServices, CancellationToken cancellationToken)
         {
-            microServices.Add(Out.Mx1Export.Run(cancellationToken));
-            microServices.Add(Out.Mx3Export.Run(cancellationToken));
-            microServices.Add(Out.АктПриемкиExport.Run(cancellationToken));
+            microServices.Add(Out.InboundExport.Run(cancellationToken));
+            microServices.Add(Out.OutboundExport.Run(cancellationToken));
         }
     }
 }

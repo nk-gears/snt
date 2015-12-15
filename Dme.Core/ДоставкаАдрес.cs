@@ -25,6 +25,5 @@ namespace Dme.Core
     
         public virtual ДоставкаОтправитель ДоставкаОтправитель { get; set; }
         public virtual ДоставкаПолучатель ДоставкаПолучатель { get; set; }
-        public virtual НормАдр НормАдр { get; set; }
     }
 }

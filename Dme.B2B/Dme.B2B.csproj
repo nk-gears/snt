@@ -74,52 +74,22 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DeliveryDataContracts.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DeliveryDataContracts.cs</LastGenOutput>
-    </Content>
-    <Content Include="DeliveryService.svc" />
-    <Content Include="InboundDataContracts.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>InboundDataContracts.cs</LastGenOutput>
-    </Content>
     <Content Include="InboundService.svc" />
     <Content Include="InventoryService.svc" />
-    <Content Include="OutboundDataContracts.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OutboundDataContracts.cs</LastGenOutput>
-    </Content>
     <Content Include="OutboundService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeliveryService.svc.cs">
-      <DependentUpon>DeliveryService.svc</DependentUpon>
-    </Compile>
-    <Compile Include="IDeliveryService.cs" />
     <Compile Include="IInboundService.cs" />
-    <Compile Include="DeliveryDataContracts.cs">
-      <DependentUpon>DeliveryDataContracts.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="IInventoryService.cs" />
-    <Compile Include="InboundDataContracts.cs">
-      <DependentUpon>InboundDataContracts.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <Compile Include="InboundDataContracts.cs" />
     <Compile Include="InboundService.svc.cs">
       <DependentUpon>InboundService.svc</DependentUpon>
     </Compile>
     <Compile Include="InventoryService.svc.cs">
       <DependentUpon>InventoryService.svc</DependentUpon>
     </Compile>
-    <Compile Include="OutboundDataContracts.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OutboundDataContracts.tt</DependentUpon>
-    </Compile>
+    <Compile Include="OutboundDataContracts.cs" />
     <Compile Include="OutboundService.svc.cs">
       <DependentUpon>OutboundService.svc</DependentUpon>
     </Compile>

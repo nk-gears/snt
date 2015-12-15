@@ -21,11 +21,12 @@ namespace Dme.Svc
                     if (_Formats == null)
                     {
                         _Formats = new List<InputProcessorRec>();
+                        /*
                         _Formats.Add(new InputProcessorRec
                         {
                             Test = (xml) => { return xml.DocumentElement.Attributes["Формат"].Value == "ЗаказНаРазмещение"; },
                             Processor = new InputProcessor_ЗаказНаРазмещение()
-                        });
+                        }); */
                     }
                 }
             return _Formats;
